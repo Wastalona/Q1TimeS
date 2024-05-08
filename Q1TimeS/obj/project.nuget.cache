@@ -1,0 +1,21 @@
+{
+  "version": 2,
+  "dgSpecHash": "prjEeEP1wmb4H9rtfumERKjrnn3hV1WsDaFLmoaGUzUyx2YUqHlOkZA8EO/MEKrta5ioL07et6ZkQFp2bquJKA==",
+  "success": true,
+  "projectFilePath": "D:\\@college\\Project\\Q1TimeS\\Q1TimeS\\Q1TimeS.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\poker\\.nuget\\packages\\microsoft.aspnetcore.authentication.negotiate\\7.0.4\\microsoft.aspnetcore.authentication.negotiate.7.0.4.nupkg.sha512",
+    "C:\\Users\\poker\\.nuget\\packages\\microsoft.aspnetcore.connections.abstractions\\7.0.4\\microsoft.aspnetcore.connections.abstractions.7.0.4.nupkg.sha512",
+    "C:\\Users\\poker\\.nuget\\packages\\microsoft.extensions.caching.abstractions\\7.0.0\\microsoft.extensions.caching.abstractions.7.0.0.nupkg.sha512",
+    "C:\\Users\\poker\\.nuget\\packages\\microsoft.extensions.caching.memory\\7.0.0\\microsoft.extensions.caching.memory.7.0.0.nupkg.sha512",
+    "C:\\Users\\poker\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\7.0.0\\microsoft.extensions.dependencyinjection.abstractions.7.0.0.nupkg.sha512",
+    "C:\\Users\\poker\\.nuget\\packages\\microsoft.extensions.features\\7.0.4\\microsoft.extensions.features.7.0.4.nupkg.sha512",
+    "C:\\Users\\poker\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\7.0.0\\microsoft.extensions.logging.abstractions.7.0.0.nupkg.sha512",
+    "C:\\Users\\poker\\.nuget\\packages\\microsoft.extensions.options\\7.0.0\\microsoft.extensions.options.7.0.0.nupkg.sha512",
+    "C:\\Users\\poker\\.nuget\\packages\\microsoft.extensions.primitives\\7.0.0\\microsoft.extensions.primitives.7.0.0.nupkg.sha512",
+    "C:\\Users\\poker\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.17.2\\microsoft.visualstudio.azure.containers.tools.targets.1.17.2.nupkg.sha512",
+    "C:\\Users\\poker\\.nuget\\packages\\system.directoryservices.protocols\\7.0.0\\system.directoryservices.protocols.7.0.0.nupkg.sha512",
+    "C:\\Users\\poker\\.nuget\\packages\\system.io.pipelines\\7.0.0\\system.io.pipelines.7.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

@@ -1,0 +1,32 @@
+.choose-action-block {
+    display: flex;
+    justify-content: center;
+}
+
+.action-block {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    margin-top: 15%;
+    min-width: 130px;
+    max-width: 400px;
+    min-height: 230px;
+    max-height: 500px;
+    width: calc(100% - 50%);
+    height: auto;
+    border-radius: 20px;
+    transition: all 0.5s ease-out;
+}
+
+.action-block a {
+    font-family: Impact;
+    font-size: 2rem;
+    text-align: center;
+    color: #2c2727;
+}
+
+.action-block:hover {
+    transform: translateY(-20px);
+    box-shadow: #de232b 8px 8px 20px;
+}
