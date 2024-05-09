@@ -13283,7 +13283,7 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": -432,
+											"left": -528,
 											"top": 40,
 											"height": 13
 										},
@@ -13294,11 +13294,11 @@
 												"$ref": "AAAAAAGPTjip58+RJeY="
 											},
 											"font": "Arial;13;1",
-											"left": 413,
+											"left": 365,
 											"top": 103,
-											"width": 152.9404296875,
+											"width": 215.845703125,
 											"height": 13,
-											"text": "Получить данные из бд"
+											"text": "Получить значение из окружения"
 										},
 										{
 											"_type": "LabelView",
@@ -13308,7 +13308,7 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": -432,
+											"left": -528,
 											"top": 40,
 											"width": 92.6884765625,
 											"height": 13,
@@ -13322,16 +13322,16 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": -432,
+											"left": -528,
 											"top": 40,
 											"height": 13,
 											"horizontalAlignment": 1
 										}
 									],
 									"font": "Arial;13;0",
-									"left": 408,
+									"left": 360,
 									"top": 96,
-									"width": 162.9404296875,
+									"width": 225.845703125,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAGPTjip58+SJ9k="
@@ -13352,9 +13352,9 @@
 							},
 							"font": "Arial;13;0",
 							"containerChangeable": true,
-							"left": 408,
+							"left": 360,
 							"top": 96,
-							"width": 162.9404296875,
+							"width": 225.845703125,
 							"height": 41,
 							"nameCompartment": {
 								"$ref": "AAAAAAGPTjip58+RJeY="
@@ -13708,7 +13708,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 604,
+									"left": 593,
 									"top": 113,
 									"height": 13,
 									"alpha": 1.5707963267948966,
@@ -13729,7 +13729,7 @@
 									},
 									"visible": null,
 									"font": "Arial;13;0",
-									"left": 589,
+									"left": 578,
 									"top": 113,
 									"height": 13,
 									"alpha": 1.5707963267948966,
@@ -13750,7 +13750,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 633,
+									"left": 622,
 									"top": 114,
 									"height": 13,
 									"alpha": -1.5707963267948966,
@@ -13768,7 +13768,7 @@
 							"tail": {
 								"$ref": "AAAAAAGPTjip5s+Q+aU="
 							},
-							"points": "570:120;619:120;619:98",
+							"points": "585:120;608:120;608:98",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAGPTjwnddAY+u4="
@@ -14559,7 +14559,7 @@
 							},
 							"font": "Arial;13;0",
 							"containerChangeable": true,
-							"left": 344,
+							"left": 320,
 							"top": 104,
 							"width": 20,
 							"height": 20
@@ -14585,7 +14585,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 385,
+									"left": 349,
 									"top": 93,
 									"height": 13,
 									"alpha": 1.5707963267948966,
@@ -14606,7 +14606,7 @@
 									},
 									"visible": null,
 									"font": "Arial;13;0",
-									"left": 385,
+									"left": 349,
 									"top": 78,
 									"height": 13,
 									"alpha": 1.5707963267948966,
@@ -14627,7 +14627,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 385,
+									"left": 349,
 									"top": 123,
 									"height": 13,
 									"alpha": -1.5707963267948966,
@@ -14645,7 +14645,7 @@
 							"tail": {
 								"$ref": "AAAAAAGPTo6MvtH5KCg="
 							},
-							"points": "363:114;408:114",
+							"points": "339:114;360:114",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAGPTo61RdH/8ks="
@@ -19889,7 +19889,7 @@
 											"visible": false,
 											"font": "Arial;13;0",
 											"top": -32,
-											"width": 79.44091796875,
+											"width": 79.78369140625,
 											"height": 13,
 											"text": "(from Activity)"
 										},
@@ -20083,7 +20083,7 @@
 											"font": "Arial;13;0",
 											"left": -80,
 											"top": -32,
-											"width": 79.44091796875,
+											"width": 79.78369140625,
 											"height": 13,
 											"text": "(from Activity)"
 										},
@@ -20185,7 +20185,7 @@
 											"font": "Arial;13;0",
 											"left": -144,
 											"top": -112,
-											"width": 79.44091796875,
+											"width": 79.78369140625,
 											"height": 13,
 											"text": "(from Activity)"
 										},
@@ -20283,7 +20283,7 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"width": 79.44091796875,
+											"width": 79.78369140625,
 											"height": 13,
 											"text": "(from Activity)"
 										},
@@ -21099,7 +21099,7 @@
 											"font": "Arial;13;0",
 											"left": -32,
 											"top": 16,
-											"width": 79.44091796875,
+											"width": 79.78369140625,
 											"height": 13,
 											"text": "(from Activity)"
 										},
@@ -21499,7 +21499,7 @@
 											"font": "Arial;13;1",
 											"left": 661,
 											"top": 247,
-											"width": 155.58740234375,
+											"width": 169.28564453125,
 											"height": 13,
 											"text": "Получить данные из БД"
 										},
@@ -21513,7 +21513,7 @@
 											"font": "Arial;13;0",
 											"left": -96,
 											"top": 336,
-											"width": 79.44091796875,
+											"width": 79.78369140625,
 											"height": 13,
 											"text": "(from Activity)"
 										},
@@ -21534,7 +21534,7 @@
 									"font": "Arial;13;0",
 									"left": 656,
 									"top": 240,
-									"width": 165.58740234375,
+									"width": 179.28564453125,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAGPWg26uoPpoDU="
@@ -21554,7 +21554,7 @@
 							"containerChangeable": true,
 							"left": 656,
 							"top": 240,
-							"width": 165.58740234375,
+							"width": 179.28564453125,
 							"height": 41,
 							"nameCompartment": {
 								"$ref": "AAAAAAGPWg26uoPolAg="
@@ -21734,7 +21734,7 @@
 							"tail": {
 								"$ref": "AAAAAAGPWg4JtoQE0Ho="
 							},
-							"points": "952:336;952:320;910:320",
+							"points": "952:336;952:320;917:320",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAGPWg4J94QzDE4="
@@ -21802,7 +21802,7 @@
 											"font": "Arial;13;0",
 											"left": -188,
 											"top": 332,
-											"width": 79.44091796875,
+											"width": 79.78369140625,
 											"height": 13,
 											"text": "(from Activity)"
 										},
@@ -22003,7 +22003,7 @@
 											"font": "Arial;13;1",
 											"left": 773,
 											"top": 311,
-											"width": 133.47216796875,
+											"width": 139.9404296875,
 											"height": 13,
 											"text": "Добавить ключ в БД"
 										},
@@ -22038,7 +22038,7 @@
 									"font": "Arial;13;0",
 									"left": 768,
 									"top": 304,
-									"width": 143.47216796875,
+									"width": 149.9404296875,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAGPWg4J4IQcS8c="
@@ -22061,7 +22061,7 @@
 							"containerChangeable": true,
 							"left": 768,
 							"top": 304,
-							"width": 143.47216796875,
+							"width": 149.9404296875,
 							"height": 41,
 							"nameCompartment": {
 								"$ref": "AAAAAAGPWg4J4IQbmGM="
@@ -22227,7 +22227,7 @@
 											"font": "Arial;13;0",
 											"left": -128,
 											"top": -16,
-											"width": 79.44091796875,
+											"width": 79.78369140625,
 											"height": 13,
 											"text": "(from Activity)"
 										},
@@ -22329,7 +22329,7 @@
 											"font": "Arial;13;0",
 											"left": -32,
 											"top": 48,
-											"width": 79.44091796875,
+											"width": 79.78369140625,
 											"height": 13,
 											"text": "(from Activity)"
 										},
@@ -22431,7 +22431,7 @@
 											"font": "Arial;13;0",
 											"left": -96,
 											"top": 16,
-											"width": 79.44091796875,
+											"width": 79.78369140625,
 											"height": 13,
 											"text": "(from Activity)"
 										},
@@ -22533,7 +22533,7 @@
 											"font": "Arial;13;0",
 											"left": -80,
 											"top": 32,
-											"width": 79.44091796875,
+											"width": 79.78369140625,
 											"height": 13,
 											"text": "(from Activity)"
 										},
@@ -22845,7 +22845,7 @@
 											"font": "Arial;13;0",
 											"left": -128,
 											"top": -48,
-											"width": 79.44091796875,
+											"width": 79.78369140625,
 											"height": 13,
 											"text": "(from Activity)"
 										},
@@ -23052,7 +23052,7 @@
 											"font": "Arial;13;0",
 											"left": -256,
 											"top": -32,
-											"width": 79.44091796875,
+											"width": 79.78369140625,
 											"height": 13,
 											"text": "(from Activity)"
 										},
@@ -23170,7 +23170,7 @@
 											"font": "Arial;13;0",
 											"left": 32,
 											"top": -48,
-											"width": 79.44091796875,
+											"width": 79.78369140625,
 											"height": 13,
 											"text": "(from Activity)"
 										},
@@ -23377,7 +23377,7 @@
 											"font": "Arial;13;0",
 											"left": -16,
 											"top": -16,
-											"width": 79.44091796875,
+											"width": 79.78369140625,
 											"height": 13,
 											"text": "(from Activity)"
 										},
@@ -23479,7 +23479,7 @@
 											"font": "Arial;13;0",
 											"left": -16,
 											"top": -16,
-											"width": 79.44091796875,
+											"width": 79.78369140625,
 											"height": 13,
 											"text": "(from Activity)"
 										},
@@ -23581,7 +23581,7 @@
 											"font": "Arial;13;0",
 											"left": -96,
 											"top": -32,
-											"width": 79.44091796875,
+											"width": 79.78369140625,
 											"height": 13,
 											"text": "(from Activity)"
 										},
@@ -23788,7 +23788,7 @@
 											"font": "Arial;13;0",
 											"left": -128,
 											"top": -16,
-											"width": 79.44091796875,
+											"width": 79.78369140625,
 											"height": 13,
 											"text": "(from Activity)"
 										},
@@ -24898,7 +24898,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 834,
+									"left": 841,
 									"top": 239,
 									"height": 13,
 									"alpha": 1.5707963267948966,
@@ -24919,7 +24919,7 @@
 									},
 									"visible": null,
 									"font": "Arial;13;0",
-									"left": 834,
+									"left": 841,
 									"top": 224,
 									"height": 13,
 									"alpha": 1.5707963267948966,
@@ -24940,7 +24940,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 834,
+									"left": 841,
 									"top": 269,
 									"height": 13,
 									"alpha": -1.5707963267948966,
@@ -24958,7 +24958,7 @@
 							"tail": {
 								"$ref": "AAAAAAGPWg26uoPnU/c="
 							},
-							"points": "821:260;848:260",
+							"points": "834:260;848:260",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAGPWiRgOJ1kEc4="
@@ -27587,7 +27587,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGPTjS1y88neq0="
 							},
-							"name": "Получить данные из бд"
+							"name": "Получить значение из окружения"
 						},
 						{
 							"_type": "UMLDecisionNode",
