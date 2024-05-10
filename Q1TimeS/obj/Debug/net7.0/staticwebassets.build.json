@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "9M1hqaHeui3tMdRv4Oy3uwUiQoRNvj67jvdAe/0t1c0=",
+  "Hash": "E2qjBuYeCA2wDYcTErRiFUqwURbPOiJrU5FNZBtoEaQ=",
   "Source": "Q1TimeS",
   "BasePath": "_content/Q1TimeS",
   "Mode": "Default",
@@ -68,6 +68,23 @@
       "OriginalItemSpec": "wwwroot\\css\\auth.css"
     },
     {
+      "Identity": "D:\\@college\\Project\\Q1TimeS\\Q1TimeS\\wwwroot\\css\\errors.css",
+      "SourceId": "Q1TimeS",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\@college\\Project\\Q1TimeS\\Q1TimeS\\wwwroot\\",
+      "BasePath": "_content/Q1TimeS",
+      "RelativePath": "css/errors.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\errors.css"
+    },
+    {
       "Identity": "D:\\@college\\Project\\Q1TimeS\\Q1TimeS\\wwwroot\\css\\site.css",
       "SourceId": "Q1TimeS",
       "SourceType": "Discovered",
@@ -83,23 +100,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\site.css"
-    },
-    {
-      "Identity": "D:\\@college\\Project\\Q1TimeS\\Q1TimeS\\wwwroot\\fav.ico",
-      "SourceId": "Q1TimeS",
-      "SourceType": "Discovered",
-      "ContentRoot": "D:\\@college\\Project\\Q1TimeS\\Q1TimeS\\wwwroot\\",
-      "BasePath": "_content/Q1TimeS",
-      "RelativePath": "fav.ico",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\fav.ico"
     },
     {
       "Identity": "D:\\@college\\Project\\Q1TimeS\\Q1TimeS\\wwwroot\\favicon.ico",
