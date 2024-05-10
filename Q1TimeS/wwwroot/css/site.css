@@ -1,5 +1,6 @@
 html {
-  font-size: 14px;
+    font-size: 14px;
+    background: #1f201f;
 }
 
 @media (min-width: 768px) {
@@ -19,5 +20,45 @@ html {
 
 body {
     margin-bottom: 60px;
-    background: #f6f5f0;
+    background: #1f201f;
+    color: #fff;
+    font-family: 'Cascadia Mono';
+    font-size: 1.5rem;
+}
+
+.nav-link {
+    color: #00bfff; /* Common color */
+    position: relative;
+    cursor: pointer;
+    text-decoration: none; /* Delete underline */
+    transition: all 0.3s ease;
+    margin-right: 30px;
+}
+
+.nav-link:after {
+    content: "";
+    display: block;
+    position: absolute;
+    right: 0;
+    bottom: -3px;
+    width: 0;
+    height: 2px;
+    background-color: whitesmoke; /* Underline color when the line disappears*/
+    transition: width 0.5s;
+}
+
+.nav-link:hover:after {
+    content: "";
+    width: 100%;
+    display: block;
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+    height: 2px;
+    background-color: #15d1e5;
+    transition: width 0.5s;
+}
+
+.nav-link:hover{
+    transform: translateY(-5px);
 }

@@ -45,14 +45,6 @@ namespace Q1TimeS.Controllers
             return View();
         }
 
-        public IActionResult AuthPage()
-        /* Administrator auth */
-        {
-            return View();
-        }
-        
-
-
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

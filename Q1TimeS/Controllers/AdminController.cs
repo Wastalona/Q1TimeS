@@ -5,6 +5,11 @@ namespace Q1TimeS.Controllers
 {
     public class AdminController : Controller
     {
+        public ActionResult Auth()
+        {
+            return View();
+        }
+
         // GET: AdminController
         public ActionResult Index()
         {

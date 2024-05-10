@@ -5,6 +5,12 @@ namespace Q1TimeS.Controllers
 {
     public class GeneralController : Controller
     {
+        public IActionResult SurveysPage()
+        /* Display of all surveys */
+        {
+            return View();
+        }
+
         // GET: GeneralController
         public ActionResult Index()
         {
