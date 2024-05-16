@@ -90,9 +90,9 @@ i{
 .action-block::before {
     position: absolute;
     content: '';
-    height: 180%; 
-    width: 50%; 
-    background: #fff;
+    height: 180%;
+    width: 50%;
+    background: #fcfe37;
     border-radius: 20px;
     transform: rotate(45deg);
     transition: all 0.5s ease;
@@ -107,13 +107,13 @@ i{
 
     .action-block:hover::before {
         animation: animate 4s linear infinite;
-        background: #fff;
+        background: #fcfe37;
     }
 }
 
 @media(hover:none) {
     .action-block:active {
-        background: #fff;
+        background: #fcfe37;
     }
 }
 

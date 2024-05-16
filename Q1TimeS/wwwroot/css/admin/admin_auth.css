@@ -1,0 +1,32 @@
+﻿.password-input {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.password-input input[type="password"] {
+    padding: 10px;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.password-toggle {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.password-toggle i {
+    font-size: 20px;
+    color: #777;
+}
+
+.admin-auth-container{
+    display:flex;
+    justify-content:center;
+    align-items: center;
+    flex-direction: column;
+}

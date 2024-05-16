@@ -1,88 +1,34 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Q1TimeS.Controllers
 {
     public class AdminController : Controller
     {
-        public ActionResult Auth()
+        [HttpGet, HttpPost]
+        public IActionResult Auth()
         {
             return View();
         }
 
-        // GET: AdminController
-        public ActionResult Index()
+        [Authorize]
+        [HttpGet, HttpPost]
+        public IActionResult Workshop()
         {
             return View();
         }
 
-        // GET: AdminController/Details/5
-        public ActionResult Details(int id)
+        [Authorize]
+        public IActionResult CreateSurvey()
+        /* Page used to create a new survey */
         {
             return View();
         }
 
-        // GET: AdminController/Create
-        public ActionResult Create()
+        public IActionResult SurveyPage()
+        /* Basic survey page used for the template */
         {
             return View();
-        }
-
-        // POST: AdminController/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: AdminController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: AdminController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: AdminController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: AdminController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
         }
     }
 }

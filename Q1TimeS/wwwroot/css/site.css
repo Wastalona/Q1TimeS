@@ -1,6 +1,6 @@
 html {
     font-size: 14px;
-    background: #1f201f;
+    background: #fffaf5;
 }
 
 @media (min-width: 768px) {
@@ -20,8 +20,8 @@ html {
 
 body {
     margin-bottom: 60px;
-    background: #1f201f;
-    color: #fff;
+    background: #fffaf5;
+    color: #302833;
     font-family: 'Cascadia Mono';
     font-size: 1.5rem;
 }
@@ -61,4 +61,8 @@ body {
 
 .nav-link:hover{
     transform: translateY(-5px);
+}
+
+.gb-black {
+    background-color: #222;
 }
