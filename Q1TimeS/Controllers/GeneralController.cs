@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Q1TimeS.Models;
 
 namespace Q1TimeS.Controllers
 {
@@ -8,6 +9,16 @@ namespace Q1TimeS.Controllers
         public IActionResult SurveysPage()
         /* Display of all surveys */
         {
+            HttpContext.Session.SetString("user_session_key", HttpContext.Session.Id);
+
+            List<Survey> surveys = new List<Survey>();
+
+            return View(surveys);
+        }
+
+        public IActionResult SurveyInfoPage()
+        /* Display info about the selected survey */
+        {
             return View();
         }
 
@@ -15,75 +26,6 @@ namespace Q1TimeS.Controllers
         public ActionResult Index()
         {
             return View();
-        }
-
-        // GET: GeneralController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: GeneralController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: GeneralController/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: GeneralController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: GeneralController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: GeneralController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: GeneralController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
         }
     }
 }

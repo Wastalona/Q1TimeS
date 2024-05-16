@@ -1,6 +1,26 @@
-﻿@*
-    
-*@
-@{
+﻿@{
+    ViewData["Title"] = "Авторизация";
+    ViewData["StyleName"] = "admin/admin_auth.css";
+    ViewData["ScriptName"] = "admin_login.js";
 }
-<h1>Admin auth page</h1>
+
+<h1 style="text-align:center;margin-top:8vh;">Подтверждение личности</h1>
+<form class="admin-auth-container" method="post">
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="input-group mb-3">
+                    <input type="password" class="form-control" id="password" placeholder="Введите пароль">
+                    <button class="btn btn-outline-secondary" type="button" id="toggleButton" onclick="togglePasswordVisibility()">
+                        <i class='bx bx-show'></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <button class="btn btn-primary" type="button" name="submit-btn" id="admin-complete-block" onclick="submitLogin()">Отправить</button>
+        </div>
+    </div>
+</form>

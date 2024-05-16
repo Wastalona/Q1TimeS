@@ -39,9 +39,23 @@ button.accept-policy[b-mibfbpsac9] {
 }
 
 .footer[b-mibfbpsac9] {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  line-height: 60px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    line-height: 60px;
+    background-color: #222;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    font-size: 1.2rem;
+}
+
+footer a[b-mibfbpsac9] {
+    color: #fff;
+    text-decoration: none;
+}
+
+footer a:hover[b-mibfbpsac9] {
+    text-decoration: underline;
 }

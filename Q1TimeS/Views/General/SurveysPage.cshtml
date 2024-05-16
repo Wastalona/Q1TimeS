@@ -1,6 +1,43 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model List<Survey>
 @{
+    ViewData["Title"] = "Опросы";
+    ViewData["StyleName"] = "surveys.css";
+    string clientSessionValue = Context.Session.GetString("user_session_key");
 }
-<h1>Surveys</h1>
+
+@if (!string.IsNullOrEmpty(clientSessionValue))
+{
+    <h1>Подключено как пользователь</h1>
+    <p>User Session Key: @clientSessionValue</p>
+}
+
+@if (Model != null && Model.Any())
+{
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Название</th>
+                <th>Время проведения</th>
+                <th>Количество мест</th>
+                <th>Статус опроса</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var survey in Model)
+            {
+                <tr>
+                    <td>@survey.SurveyId</td>
+                    <td>@survey.Title</td>
+                    <td>@survey.CutOffTime</td>
+                    <td>0 / @survey.PeopleLimit</td>
+                    <td>@survey.SurveyStatus</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Нет данных для отображения</p>
+}
