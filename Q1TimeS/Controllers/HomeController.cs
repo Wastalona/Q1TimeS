@@ -13,34 +13,8 @@ namespace Q1TimeS.Controllers
             _logger = logger;
         }
 
-        // General Views
-        public IActionResult SurveysPage()
-        /* Display of all surveys */
-        {
-            return View();
-        }        
-
-        public IActionResult SurveyInfoPage()
-        /* Display info about the selected survey */
-        {
-            return View();
-        }
-
         public IActionResult Index()
         /* Choice between administrator and user */
-        {
-            return View();
-        }
-
-        // Admin Views
-        public IActionResult CreateSurveyPage()
-        /* Page used to create a new survey */
-        {
-            return View();
-        }
-
-        public IActionResult SurveyPage()
-        /* Basic survey page used for the template */
         {
             return View();
         }

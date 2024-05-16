@@ -44,12 +44,14 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2024 - Q1TimeS
+            <p>&copy; <span id="year"></span> QuizCompany. Все права защищены.</p>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/@ViewData["ScriptName"]" asp-append-version="true"></script>
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

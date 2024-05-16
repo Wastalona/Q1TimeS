@@ -1,16 +1,17 @@
 ﻿@{
     ViewData["Title"] = "За гранью";
     ViewData["StyleName"] = "auth.css";
+    ViewData["ScriptName"] = "quindecim.js";
 }
 
 <form class="text-center" method="post">
     <h1 class="choose-title">Потребитель или создатель?</h1>
     <div class="choose-action-block">
-        <div class="action-block" id="general-block">
+        <div class="action-block" id="general-block" name="general-block">
             <i class='bx bx-server bx-lg'></i>
         </div>
-        <div class="action-block" id="admin-block">
-            <i class='bx bx-shield-quarter bx-lg'></i>
+        <div class="action-block" id="admin-block" name="admin-block">
+            <i class='bx bx-shield-quarter bx-lg' undefined></i>
         </div>
     </div>
 </form>
