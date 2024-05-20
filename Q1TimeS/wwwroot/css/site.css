@@ -22,47 +22,51 @@ body {
     margin-bottom: 60px;
     background: #fffaf5;
     color: #302833;
-    font-family: 'Cascadia Mono';
+    font-family: "Alegreya", serif;
     font-size: 1.5rem;
 }
 
+.navbar-brand {
+    font-weight: 500;
+    color: #2ef18b;
+    font-size: 24px;
+    transition: 0.3s color;
+}
+
 .nav-link {
-    color: #00bfff; /* Common color */
+    color: #00bfff;
+    font-weight: 500;
     position: relative;
-    cursor: pointer;
-    text-decoration: none; /* Delete underline */
-    transition: all 0.3s ease;
-    margin-right: 30px;
 }
 
-.nav-link:after {
-    content: "";
-    display: block;
-    position: absolute;
-    right: 0;
-    bottom: -3px;
-    width: 0;
-    height: 2px;
-    background-color: whitesmoke; /* Underline color when the line disappears*/
-    transition: width 0.5s;
+.nav-link:hover, .nav-link.active {
+    color: #2ef18b;
 }
 
-.nav-link:hover:after {
-    content: "";
-    width: 100%;
-    display: block;
-    position: absolute;
-    left: 0;
-    bottom: -3px;
-    height: 2px;
-    background-color: #15d1e5;
-    transition: width 0.5s;
-}
+@media(min-width: 991px){
+    .nav-link::before {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0;
+        height: 2px;
+        background-color: #2ef18b;
+        visibility: hidden;
+        transition: 0.3s ease-in-out;
+    }
 
-.nav-link:hover{
-    transform: translateY(-5px);
+    .nav-link:hover::before, .nav-link.active::before {
+        width: 100%;
+        visibility: visible;
+    }
 }
 
 .gb-black {
     background-color: #222;
+}
+
+.container{
+    margin-top: 10vh;
 }

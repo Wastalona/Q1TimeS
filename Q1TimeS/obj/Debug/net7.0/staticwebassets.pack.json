@@ -13,6 +13,14 @@
       "PackagePath": "staticwebassets\\css\\admin\\admin_auth.css"
     },
     {
+      "Id": "D:\\@college\\Project\\Q1TimeS\\Q1TimeS\\wwwroot\\css\\admin\\surveys.css",
+      "PackagePath": "staticwebassets\\css\\admin\\surveys.css"
+    },
+    {
+      "Id": "D:\\@college\\Project\\Q1TimeS\\Q1TimeS\\wwwroot\\css\\admin\\surveys_designer.css",
+      "PackagePath": "staticwebassets\\css\\admin\\surveys_designer.css"
+    },
+    {
       "Id": "D:\\@college\\Project\\Q1TimeS\\Q1TimeS\\wwwroot\\css\\auth.css",
       "PackagePath": "staticwebassets\\css\\auth.css"
     },
@@ -25,8 +33,12 @@
       "PackagePath": "staticwebassets\\css\\site.css"
     },
     {
-      "Id": "D:\\@college\\Project\\Q1TimeS\\Q1TimeS\\wwwroot\\css\\surveys.css",
-      "PackagePath": "staticwebassets\\css\\surveys.css"
+      "Id": "D:\\@college\\Project\\Q1TimeS\\Q1TimeS\\wwwroot\\fav-without-back.png",
+      "PackagePath": "staticwebassets\\fav-without-back.png"
+    },
+    {
+      "Id": "D:\\@college\\Project\\Q1TimeS\\Q1TimeS\\wwwroot\\fav.png",
+      "PackagePath": "staticwebassets\\fav.png"
     },
     {
       "Id": "D:\\@college\\Project\\Q1TimeS\\Q1TimeS\\wwwroot\\favicon.ico",
@@ -47,6 +59,10 @@
     {
       "Id": "D:\\@college\\Project\\Q1TimeS\\Q1TimeS\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
+    },
+    {
+      "Id": "D:\\@college\\Project\\Q1TimeS\\Q1TimeS\\wwwroot\\js\\surveys_designer.js",
+      "PackagePath": "staticwebassets\\js\\surveys_designer.js"
     },
     {
       "Id": "D:\\@college\\Project\\Q1TimeS\\Q1TimeS\\wwwroot\\lib\\bootstrap\\LICENSE",

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "8O/9gVPRBlt9d3Y4+9QZUMVYDKu+onulHQq/M4mMeCQ=",
+  "Hash": "F0y0X3VbpULM/p2mCvLzCL0lIOnd0JEhQNFgSvC4TYw=",
   "Source": "Q1TimeS",
   "BasePath": "_content/Q1TimeS",
   "Mode": "Default",
@@ -85,6 +85,40 @@
       "OriginalItemSpec": "wwwroot\\css\\admin\\admin_auth.css"
     },
     {
+      "Identity": "D:\\@college\\Project\\Q1TimeS\\Q1TimeS\\wwwroot\\css\\admin\\surveys.css",
+      "SourceId": "Q1TimeS",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\@college\\Project\\Q1TimeS\\Q1TimeS\\wwwroot\\",
+      "BasePath": "_content/Q1TimeS",
+      "RelativePath": "css/admin/surveys.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\admin\\surveys.css"
+    },
+    {
+      "Identity": "D:\\@college\\Project\\Q1TimeS\\Q1TimeS\\wwwroot\\css\\admin\\surveys_designer.css",
+      "SourceId": "Q1TimeS",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\@college\\Project\\Q1TimeS\\Q1TimeS\\wwwroot\\",
+      "BasePath": "_content/Q1TimeS",
+      "RelativePath": "css/admin/surveys_designer.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\admin\\surveys_designer.css"
+    },
+    {
       "Identity": "D:\\@college\\Project\\Q1TimeS\\Q1TimeS\\wwwroot\\css\\auth.css",
       "SourceId": "Q1TimeS",
       "SourceType": "Discovered",
@@ -136,12 +170,12 @@
       "OriginalItemSpec": "wwwroot\\css\\site.css"
     },
     {
-      "Identity": "D:\\@college\\Project\\Q1TimeS\\Q1TimeS\\wwwroot\\css\\surveys.css",
+      "Identity": "D:\\@college\\Project\\Q1TimeS\\Q1TimeS\\wwwroot\\fav.png",
       "SourceId": "Q1TimeS",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\@college\\Project\\Q1TimeS\\Q1TimeS\\wwwroot\\",
       "BasePath": "_content/Q1TimeS",
-      "RelativePath": "css/surveys.css",
+      "RelativePath": "fav.png",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -150,7 +184,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\css\\surveys.css"
+      "OriginalItemSpec": "wwwroot\\fav.png"
     },
     {
       "Identity": "D:\\@college\\Project\\Q1TimeS\\Q1TimeS\\wwwroot\\favicon.ico",
@@ -168,6 +202,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "D:\\@college\\Project\\Q1TimeS\\Q1TimeS\\wwwroot\\fav-without-back.png",
+      "SourceId": "Q1TimeS",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\@college\\Project\\Q1TimeS\\Q1TimeS\\wwwroot\\",
+      "BasePath": "_content/Q1TimeS",
+      "RelativePath": "fav-without-back.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\fav-without-back.png"
     },
     {
       "Identity": "D:\\@college\\Project\\Q1TimeS\\Q1TimeS\\wwwroot\\img\\errors\\404.png",
@@ -236,6 +287,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\site.js"
+    },
+    {
+      "Identity": "D:\\@college\\Project\\Q1TimeS\\Q1TimeS\\wwwroot\\js\\surveys_designer.js",
+      "SourceId": "Q1TimeS",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\@college\\Project\\Q1TimeS\\Q1TimeS\\wwwroot\\",
+      "BasePath": "_content/Q1TimeS",
+      "RelativePath": "js/surveys_designer.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\surveys_designer.js"
     },
     {
       "Identity": "D:\\@college\\Project\\Q1TimeS\\Q1TimeS\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
