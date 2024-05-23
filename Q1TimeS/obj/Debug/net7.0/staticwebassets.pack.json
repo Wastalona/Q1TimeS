@@ -33,6 +33,10 @@
       "PackagePath": "staticwebassets\\css\\site.css"
     },
     {
+      "Id": "D:\\@college\\Project\\Q1TimeS\\Q1TimeS\\wwwroot\\fav-2.png",
+      "PackagePath": "staticwebassets\\fav-2.png"
+    },
+    {
       "Id": "D:\\@college\\Project\\Q1TimeS\\Q1TimeS\\wwwroot\\fav-without-back.png",
       "PackagePath": "staticwebassets\\fav-without-back.png"
     },

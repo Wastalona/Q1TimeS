@@ -18,11 +18,11 @@
             <div class="set-row">
                 <div class="set-item">
                     <label for="s-timeout" class="fi"><b>Таймаут</b></label>
-                    <input type="text" class="small-input" id="s-timeout" required>
+                    <input type="text" class="small-input" id="s-timeout" maxlength="5" required>
                 </div>
                 <div class="set-item">
                     <label for="s-limit" class="fi"><b>Лимит человек</b></label>
-                    <input type="text" class="small-input" id="s-limit" required>
+                    <input type="text" class="small-input" id="s-limit" maxlength="4" required>
                 </div>
                 <div class="set-item">
                     <label for="s-limit" class="fi"><b>Пароль</b></label>
@@ -31,41 +31,43 @@
             </div>
         </div>
 
-        <button type="button" id="add-question">Добавить вопрос</button>
     </form>
 
     <div id="questions-container"></div>
-    
+    s
+    <button type="button" id="add-question" class="btn btn-light add-answer-btn">Добавить вопрос</button>
+
     <div class="commit-btns">
         <button type="button" class="btn btn-danger" id="cancel-survey" onclick="cancel_submit()">Отменить создание</button>
-        <button type="button" class="btn btn-outline-success" id="submit-survey">Подтвердить создание</button>
+        <button type="button" class="btn btn-outline-success" id="submit-survey" on_click="review_survey()">Подтвердить создание</button>
     </div>
 
     <template id="question-template">
-        <div class="question-block">
-            <input type="text" class="question-input" placeholder="Введите вопрос" required>
-
-            <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Тип ответа
-                </button>
-                <ul class="dropdown-menu">
-                    <li><button class="dropdown-item" type="button">Текст</button></li>
-                    <li><button class="dropdown-item" type="button">Один вариант</button></li>
-                    <li><button class="dropdown-item" type="button">Несколько вариантов</button></li>
-                </ul>
+        <div class="que-n-ans">
+            <div class="img-block">
+                <img id="preview" class="preview" src="" alt="Превью изображения" />
+                <div class="input-group mt-3">
+                    <input type="file" class="form-control imageInput" aria-label="Загрузить изображение" id="imageInput" accept="image/*">
+                    <button class="btn btn-outline-danger remove-image" type="button" on_click="removeImage()">Удалить изображение</button>
+                </div>
             </div>
 
-            <div class="answers-container">
-                <!-- Answer options will be added here -->
-            </div>
+            <div class="question-block">
+                <input type="text" class="question-input" placeholder="Введите вопрос" required>
 
-            <button type="button" class="btn btn-outline-primary add-answer">Добавить вариант ответа</button>
-            <button type="button" class="btn btn-outline-danger remove-question">Удалить вопрос</button>
+                <div class="answer-type-selector">
+                    <label class="answer-lb">Ответ вида</label>
+                    <select class="form-select" aria-label="answer-type">
+                        <option selected value="text">Текст</option>
+                        <option value="one">Единичный</option>
+                        <option value="many">Множественный</option>
+                    </select>
+                </div>
 
-            <div class="input-group mt-3">
-                <input type="file" class="form-control" aria-label="Загрузить изображение">
-                <button class="btn btn-outline-secondary" type="button">Удалить изображение</button>
+                <div class="answers-container"></div>
+
+                <button type="button" class="btn btn-outline-primary add-answer">Добавить вариант ответа</button>
+                <button type="button" class="btn btn-outline-danger remove-question">Удалить вопрос</button>
             </div>
         </div>
     </template>

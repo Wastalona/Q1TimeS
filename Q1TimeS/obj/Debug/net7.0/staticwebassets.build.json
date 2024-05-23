@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "F0y0X3VbpULM/p2mCvLzCL0lIOnd0JEhQNFgSvC4TYw=",
+  "Hash": "aUipdy/inICAM2sYLaCZP/YU9PFeaSI34SS3IDUt1Zk=",
   "Source": "Q1TimeS",
   "BasePath": "_content/Q1TimeS",
   "Mode": "Default",
@@ -185,6 +185,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\fav.png"
+    },
+    {
+      "Identity": "D:\\@college\\Project\\Q1TimeS\\Q1TimeS\\wwwroot\\fav-2.png",
+      "SourceId": "Q1TimeS",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\@college\\Project\\Q1TimeS\\Q1TimeS\\wwwroot\\",
+      "BasePath": "_content/Q1TimeS",
+      "RelativePath": "fav-2.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\fav-2.png"
     },
     {
       "Identity": "D:\\@college\\Project\\Q1TimeS\\Q1TimeS\\wwwroot\\favicon.ico",
