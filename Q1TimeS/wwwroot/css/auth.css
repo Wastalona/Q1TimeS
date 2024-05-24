@@ -92,7 +92,7 @@ i{
     content: '';
     height: 180%;
     width: 50%;
-    background: #fcfe37;
+    background: #2ef18b;
     border-radius: 20px;
     transform: rotate(45deg);
     transition: all 0.5s ease;
@@ -102,18 +102,18 @@ i{
 @media(hover:hover) {
     .action-block:hover {
         transform: translateY(-20px);
-        box-shadow: #15d1e5 10px 10px;
+        box-shadow: #adadad 10px 10px;
     }
 
     .action-block:hover::before {
         animation: animate 4s linear infinite;
-        background: #fcfe37;
+        background: #2ef18b;
     }
 }
 
 @media(hover:none) {
     .action-block:active {
-        background: #fcfe37;
+        background: #2ef18b;
     }
 }
 

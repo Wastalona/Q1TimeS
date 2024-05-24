@@ -1,0 +1,74 @@
+﻿@{
+    ViewData["Title"] = "Конструктор опросов";
+    ViewData["StyleName"] = "admin/surveys_designer.css";
+    ViewData["ScriptName"] = "surveys_designer.js";
+}
+
+<div id="survey-builder">
+    <form id="survey-form">
+        <div class="com-set">
+            <label for="s-title" class="fi"><b>Название опроса *</b></label>
+            <input type="text" class="s-title" id="s-title" required>
+
+            <label for="s-id" class="fi"><b>ID опроса:</b></label><br>
+
+            <label for="s-description" class="fi"><b>Описание опроса</b></label>
+            <textarea id="s-description"></textarea>
+
+            <div class="set-row">
+                <div class="set-item">
+                    <label for="s-timeout" class="fi"><b>Таймаут</b></label>
+                    <input type="text" class="small-input" id="s-timeout" maxlength="5" required>
+                </div>
+                <div class="set-item">
+                    <label for="s-limit" class="fi"><b>Лимит человек</b></label>
+                    <input type="text" class="small-input" id="s-limit" maxlength="4" required>
+                </div>
+                <div class="set-item">
+                    <label for="s-limit" class="fi"><b>Пароль</b></label>
+                    <input type="text" class="small-input" id="s-limit" required>
+                </div>
+            </div>
+        </div>
+
+    </form>
+
+    <div id="questions-container"></div>
+    s
+    <button type="button" id="add-question" class="btn btn-light add-answer-btn">Добавить вопрос</button>
+
+    <div class="commit-btns">
+        <button type="button" class="btn btn-danger" id="cancel-survey" onclick="cancel_submit()">Отменить создание</button>
+        <button type="button" class="btn btn-outline-success" id="submit-survey" on_click="review_survey()">Подтвердить создание</button>
+    </div>
+
+    <template id="question-template">
+        <div class="que-n-ans">
+            <div class="img-block">
+                <img id="preview" class="preview" src="" alt="Превью изображения" />
+                <div class="input-group mt-3">
+                    <input type="file" class="form-control imageInput" aria-label="Загрузить изображение" id="imageInput" accept="image/*">
+                    <button class="btn btn-outline-danger remove-image" type="button" on_click="removeImage()">Удалить изображение</button>
+                </div>
+            </div>
+
+            <div class="question-block">
+                <input type="text" class="question-input" placeholder="Введите вопрос" required>
+
+                <div class="answer-type-selector">
+                    <label class="answer-lb">Ответ вида</label>
+                    <select class="form-select" aria-label="answer-type">
+                        <option selected value="text">Текст</option>
+                        <option value="one">Единичный</option>
+                        <option value="many">Множественный</option>
+                    </select>
+                </div>
+
+                <div class="answers-container"></div>
+
+                <button type="button" class="btn btn-outline-primary add-answer">Добавить вариант ответа</button>
+                <button type="button" class="btn btn-outline-danger remove-question">Удалить вопрос</button>
+            </div>
+        </div>
+    </template>
+</div>

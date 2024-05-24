@@ -71,3 +71,9 @@ function togglePasswordVisibility() {
 }
 
 window.addEventListener('load', checkAuthorization);
+
+$(document).keydown(function (e) {
+    if (e.keyCode === 13) {
+        $("#admin-complete-block").click();
+    }
+});
