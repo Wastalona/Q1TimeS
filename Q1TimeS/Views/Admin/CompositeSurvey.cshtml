@@ -1,0 +1,73 @@
+﻿@{
+    ViewData["Title"] = "Конструктор опросов";
+    ViewData["StyleName"] = "admin/surveys_designer.css";
+    ViewData["ScriptName"] = "surveys_designer.js";
+}
+
+<div id="survey-builder">
+    <h1 class="form__title">Создание составного опроса</h1>
+
+    <form id="survey-form">
+        <div class="com-set">
+            <div class="form__group">
+                <input class="form__input s-title" type="text" placeholder="&nbsp;" id="s-title" required data-bs-toggle="tooltip" data-bs-placement="top" title="Введите название, которое вам подойдёт.">
+                <label class="form__label">Название опроса *</label>
+            </div>
+            <div class="form__group">
+                <input class="form__input s-description" type="text" placeholder="&nbsp;" id="s-description" maxlength="99">
+                <label class="form__label">Описание опроса</label>
+            </div>
+            <div class="row">
+                <div class="form__group col">
+                    <input class="form__input s-timeout" type="text" placeholder="&nbsp;" id="s-timeout" maxlength="5" data-bs-toggle="tooltip" data-bs-placement="top" title="Время, через которое опрос перестанет быть доступным для пользователей. Указывается в секундах.">
+                    <label class="form__label">Таймаут</label>
+                </div>
+                <div class="form__group col">
+                    <input class="form__input s-limit" type="text" placeholder="&nbsp;" id="s-limit" maxlength="3" data-bs-toggle="tooltip" data-bs-placement="top" title="Лимит человек, которые смогут принять участие в опросе.">
+                    <label class="form__label">Лимит</label>
+                </div>
+            </div>
+            <div class="form-check form-switch s-switch" data-bs-toggle="tooltip" data-bs-placement="top" title="Данный режим подразумевает проведение опроса в виде теста, с правильными вариантами ответа.">
+                <input class="form-check-input" type="checkbox" id="test_mode">
+                <label class="form-check-label" for="test_mode">Режим "Зачёт"</label>
+            </div>
+        </div>
+    </form>
+
+    <div id="questions-container"></div>
+    
+    <button type="button" id="add-question" class="btn btn-light add-answer-btn">Добавить вопрос</button>
+
+    <div class="commit-btns">
+        <button type="button" class="btn btn-danger" id="cancel-survey" onclick="cancel_submit()">Отменить создание</button>
+        <button type="button" class="btn btn-outline-success" id="submit-survey" on_click="review_survey()">Подтвердить создание</button>
+    </div>
+
+    <template id="question-template">
+        <div class="que-n-ans">
+            <div class="img-block">
+                <img id="preview" class="preview" src="" alt="Превью изображения" />
+                <div class="input-group mt-3">
+                    <input type="file" class="form-control imageInput" aria-label="Загрузить изображение" id="imageInput" accept="image/*">
+                    <button class="btn btn-outline-danger remove-image" type="button" on_click="removeImage()">Удалить изображение</button>
+                </div>
+            </div>
+
+            <div class="question-block">
+                <div class="form__group">
+                    <input class="form__input question-input" type="text" placeholder="&nbsp;" id="s-question" required>
+                    <label class="form__label">Введите вопрос *</label>
+                </div>
+
+                <div class="answers-container"></div>
+
+                <div class="form-check form-switch multianswer-switch" data-bs-toggle="tooltip" data-bs-placement="top" title="Добавляет возможность выбора нескольких вариантов ответа.">
+                    <input class="form-check-input" type="checkbox" id="multianswer_mode">
+                    <label class="form-check-label" for="multianswer_mode">Несколько ответов</label>
+                </div>
+                <button type="button" class="btn btn-outline-primary add-answer">Добавить вариант ответа</button>
+                <button type="button" class="btn btn-outline-danger remove-question">Удалить вопрос</button>
+            </div>
+        </div>
+    </template>
+</div>
