@@ -70,3 +70,70 @@ body {
 .container{
     margin-top: 10vh;
 }
+
+/* Custom common styles */
+/* title, group, label and button*/
+.form__title {
+    text-align: center;
+    margin: 0 0 32px 0;
+    font-weight: normal;
+}
+
+.form__group {
+    position: relative;
+    margin: 32px 0px;
+}
+
+.form__label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 0 10px;
+    font-size: 1.3rem;
+    color: #000;
+    pointer-events: none;
+    transition: 0.3s;
+    transform-origin: top left;
+}
+
+.form__input,
+.form__button {
+    font-family: 'Alegreya', sans-serif;
+    letter-spacing: 1px;
+    font-size: 1.5rem;
+}
+
+.form__input {
+    width: 100%;
+    padding: 10px 10px 10px 0;
+    border: none;
+    border-bottom: 1px solid #e0e0e0;
+    background-color: transparent;
+    outline: none;
+    transition: 0.3s;
+}
+
+.form__input:focus {
+    border-bottom: 1px solid #2ef18b;
+}
+
+.form__button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    background-color: #2ef18b;
+    outline: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.form__button:focus,
+.form__button:hover {
+    background: rgba(0, 113, 240, 0.7);
+}
+
+.form__input:focus ~ .form__label,
+.form__input:not(:placeholder-shown) ~ .form__label {
+    transform: translateY(-50%) translateX(0) scale(0.9);
+}

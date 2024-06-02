@@ -19,8 +19,15 @@ namespace Q1TimeS.Controllers
         }
 
         [Authorize]
-        public IActionResult CreateSurvey()
-        /* Page used to create a new survey */
+        public IActionResult CompositeSurvey()
+        /* Page used to create a new composite survey */
+        {
+            return View();
+        }
+
+        [Authorize]
+        public IActionResult SimpleSurvey()
+        /* Page used to create a new simple survey */
         {
             return View();
         }
