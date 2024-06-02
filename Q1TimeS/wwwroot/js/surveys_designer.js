@@ -1,21 +1,32 @@
-﻿document.addEventListener('DOMContentLoaded', () => {
+﻿var questionCount = 0; // Question counter for unique radio button names
+const testModeSwitch = document.getElementById('test_mode');
+
+document.addEventListener('DOMContentLoaded', () => {
     const addQuestionButton = document.getElementById('add-question');
     const questionsContainer = document.getElementById('questions-container');
     const submitSurveyButton = document.getElementById('submit-survey');
-    const testModeSwitch = document.getElementById('test_mode');
+
+    const timeoutInput = document.getElementById('s-timeout');
+    const limitInput = document.getElementById('s-limit');
 
     loadSurvey(); // Loading the survey when the page loads
+
+    /* Event binding */
+    timeoutInput.addEventListener('input', validateIntegerInput);
+    limitInput.addEventListener('input', validateIntegerInput);
+
+    timeoutInput.addEventListener('blur', validateOnBlur);
+    limitInput.addEventListener('blur', validateOnBlur);
 
     addQuestionButton.addEventListener('click', () => {
         addQuestion();
         saveSurvey();
     });
 
-    submitSurveyButton.addEventListener('click', () => {
-        submitSurvey();
-    });
+    submitSurveyButton.addEventListener('click', () => { submitSurvey(); }); // Send a survey
 
     testModeSwitch.addEventListener('change', () => {
+        //
         toggleTestMode(testModeSwitch.checked);
         saveSurvey();
     });
@@ -27,19 +38,24 @@
     }, true);
 
     questionsContainer.addEventListener('click', (event) => {
+        // Remove
         if (event.target.matches('.remove-question')) {
             const questionBlock = event.target.closest('.que-n-ans');
             questionsContainer.removeChild(questionBlock);
             saveSurvey();
+        // Add answer
         } else if (event.target.matches('.add-answer')) {
             const questionBlock = event.target.closest('.question-block');
             const answersContainer = questionBlock.querySelector('.answers-container');
-            addAnswer(answersContainer, "", testModeSwitch.checked);
+            const questionIndex = questionBlock.dataset.questionIndex;
+            addAnswer(answersContainer, "", testModeSwitch.checked, questionIndex);
             saveSurvey();
+        // Remove answer
         } else if (event.target.matches('.remove-answer')) {
             const answerDiv = event.target.closest('.answer-div');
             answerDiv.remove();
             saveSurvey();
+        // Remove image
         } else if (event.target.matches('.remove-image')) {
             const imgBlock = event.target.closest('.img-block');
             const preview = imgBlock.querySelector('.preview');
@@ -69,8 +85,30 @@
     });
 });
 
+/* Checking the correctness of the fields */
+function validateIntegerInput(event) {
+    const input = event.target;
+    const value = input.value;
+    if (!/^\d*$/.test(value)) {
+        input.classList.add('is-invalid');
+    } else {
+        input.classList.remove('is-invalid');
+    }
+}
+
+function validateOnBlur(event) {
+    const input = event.target;
+    if (input.value === '') {
+        input.classList.remove('is-invalid');
+    } else if (!/^\d+$/.test(input.value)) {
+        input.classList.add('is-invalid');
+    } else {
+        input.classList.remove('is-invalid');
+    }
+}
+
 function saveSurvey() {
-/* Functions for saving, downloading and collecting survey data */
+    /* Functions for saving, downloading and collecting survey data */
     try {
         const surveyData = collectSurveyData();
         const options = collectSurveyOptions();
@@ -82,38 +120,46 @@ function saveSurvey() {
 }
 
 function loadSurvey() {
-    const savedSurvey = localStorage.getItem('surveyData');
+    /* Functions for receiving saves */
     const savedOptions = localStorage.getItem('surveyOptions');
-    if (savedSurvey) {
-        const surveyData = JSON.parse(savedSurvey);
-        renderSurveyData(surveyData);
-    }
+    const savedSurvey = localStorage.getItem('surveyData');
     if (savedOptions) {
         const options = JSON.parse(savedOptions);
         renderSurveyOptions(options);
     }
+    if (savedSurvey) {
+        const surveyData = JSON.parse(savedSurvey);
+        renderSurveyData(surveyData);
+    }
 }
 
+/* Getting data from a page */
 function collectSurveyData() {
     const questionsContainer = document.getElementById('questions-container');
     const questions = questionsContainer.querySelectorAll('.que-n-ans');
     const surveyData = [];
 
-    questions.forEach((question) => {
-        const questionInput = question.querySelector('.question-input');
-        const multianswerSwitch = question.querySelector('.multianswer-switch input');
-        const answersContainer = question.querySelector('.answers-container');
-        const answers = answersContainer.querySelectorAll('.answer-div');
-        const imageInput = question.querySelector('.imageInput');
-        const imageSrc = question.querySelector('.preview').src;
+    // Проходимся по каждому вопросу
+    questions.forEach((question, index) => {
+        const questionInput = question.querySelector('.question-input'); // Question input field 
+        const multianswerSwitch = question.querySelector('.multianswer-switch input'); // The "Multiple answers" switch
+        const answersContainer = question.querySelector('.answers-container'); // Сontainer for answers
+        const answers = answersContainer.querySelectorAll('.answer-div'); // All possible answers
+        const imageInput = question.querySelector('.imageInput'); // The input field for uploading an image
+        const imageSrc = question.querySelector('.preview').src; // Image source
+        const trueAnswer = answersContainer.querySelector(`input[name="test-answer-${index}"]:checked`); // True answer
 
+        // Creating an object for the current question
         const questionData = {
-            question: questionInput.value,
+            question: questionInput.value, 
             multianswer: multianswerSwitch.checked,
-            answers: [],
-            image: imageSrc || imageInput || ''
+            answers: [], 
+            trueAnswerIndex: trueAnswer ? [...answers].indexOf(trueAnswer.closest('.answer-div')) : null, // Save the index of the correct answer or null if the correct answer is not selected
+            image: imageSrc || imageInput || '', // Save the image source or an empty string if there is no image
+            questionIndex: index 
         };
 
+        // Adding answers
         answers.forEach(answer => {
             const answerInput = answer.querySelector('.form-control');
             questionData.answers.push(answerInput.value);
@@ -122,7 +168,7 @@ function collectSurveyData() {
         surveyData.push(questionData);
     });
 
-    return surveyData;
+    return surveyData; 
 }
 
 function collectSurveyOptions() {
@@ -139,13 +185,13 @@ function collectSurveyOptions() {
         description: description,
         timeout: timeout,
         limit: limit,
-        mode: mode
+        test_mode: mode
     };
 }
 
+/* Displaying data on a page */
 function renderSurveyData(surveyData) {
     const questionsContainer = document.getElementById('questions-container');
-    const testModeSwitch = document.getElementById('test_mode');
     questionsContainer.innerHTML = '';
 
     surveyData.forEach(questionData => {
@@ -157,13 +203,17 @@ function renderSurveyData(surveyData) {
         const answersContainer = newQuestion.querySelector('.answers-container');
         const preview = newQuestion.querySelector('.preview');
 
+        newQuestion.querySelector('.question-block').dataset.questionIndex = questionData.questionIndex; // Set index
+
         questionInput.value = questionData.question;
         multianswerSwitch.checked = questionData.multianswer;
         preview.src = questionData.image;
 
-        questionData.answers.forEach(answerText => {
-            addAnswer(answersContainer, answerText, testModeSwitch.checked);
+        questionData.answers.forEach((answerText, answerIndex) => {
+            addAnswer(answersContainer, answerText, testModeSwitch.checked, questionData.questionIndex, answerIndex === questionData.trueAnswerIndex);
         });
+
+        change_multianswer(newQuestion.querySelector('.multianswer-switch input'));
 
         questionsContainer.appendChild(newQuestion);
     });
@@ -176,33 +226,47 @@ function renderSurveyOptions(options) {
     optionsContainer.querySelector('.s-description').value = options.description;
     optionsContainer.querySelector('.s-timeout').value = options.timeout;
     optionsContainer.querySelector('.s-limit').value = options.limit;
-    optionsContainer.querySelector('.s-switch input').checked = options.mode;
+    optionsContainer.querySelector('.s-switch input').checked = options.test_mode;
+
+    toggleTestMode(options.mode); // Updating the interface when loading options
 }
 
 function addQuestion() {
     const questionsContainer = document.getElementById('questions-container');
     const questionTemplate = document.getElementById('question-template').content;
     const newQuestion = document.importNode(questionTemplate, true);
+
+    newQuestion.querySelector('.question-block').dataset.questionIndex = questionCount;
+    const multianswerSwitch = newQuestion.querySelector('.question-block .multianswer-switch input');
+
     questionsContainer.appendChild(newQuestion);
+    questionCount++; // Increasing the question counter
+
+    change_multianswer(multianswerSwitch);
 }
 
-function addAnswer(container, answerText = '', isTestMode = false) {
+function addAnswer(container, answerText = '', isTestMode = false, questionIndex, isChecked = false) {
     /**
     * Adds a new response to the response container.
-     * If test mode is enabled, adds a text field with a radio button.
-     * @param {HTMLElement} container - Container for responses.
-     * @* @param {string} answer Text - The response text (empty by default).
-     * @param {boolean} isTestMode - Flag indicating whether the test mode is enabled.
-     */
+    * If test mode is enabled, adds a text field with a radio button.
+    * @param {HTMLElement} container - Container for responses.
+    * @param {string} answerText - Response text (empty by default).
+    * @param {boolean} isTestMode - Flag indicating whether the test mode is enabled.
+    * @param {number} questionIndex - The index of the question for the uniqueness of the radio buttons.
+    * @param {boolean} isChecked - Flag indicating whether the radio button should be checked.
+    */
     const answerDiv = document.createElement('div');
     answerDiv.setAttribute('class', 'input-group answer-div');
 
+    // Adding a radio button for the test mode
     if (isTestMode) {
-        // Adding a radio button for the test mode
         const radioInput = document.createElement('input');
         radioInput.setAttribute('type', 'radio');
-        radioInput.setAttribute('name', 'test-answer');
+        radioInput.setAttribute('name', `test-answer-${questionIndex}`);
         radioInput.setAttribute('class', 'form-check-input mt-0');
+        if (isChecked) 
+            radioInput.checked = true;
+
         answerDiv.appendChild(radioInput);
     }
 
@@ -210,9 +274,9 @@ function addAnswer(container, answerText = '', isTestMode = false) {
     answerInput.setAttribute('type', 'text');
     answerInput.setAttribute('class', 'form-control');
     answerInput.setAttribute('placeholder', 'Введите вариант ответа');
-    if (answerText) {
+
+    if (answerText) 
         answerInput.value = answerText;
-    }
 
     answerDiv.appendChild(answerInput);
 
@@ -226,45 +290,80 @@ function addAnswer(container, answerText = '', isTestMode = false) {
 function toggleTestMode(isTestMode) {
     /**
     * Switches the test mode.
-     * If test mode is enabled, adds radio buttons to existing answers.
-     * If test mode is disabled, removes radio buttons from existing answers.
-     * @param {boolean} isTestMode - Flag indicating whether the test mode is enabled.
-     */
+    * If test mode is enabled, adds radio buttons to existing answers and disables the "Multiple Answers" switches.
+    * If the test mode is disabled, removes the radio buttons from the existing answers and turns on the "Multiple answers" switches.
+    * @param {boolean} isTestMode - Flag indicating whether the test mode is enabled.
+    */
     const questionsContainer = document.getElementById('questions-container');
-    const answers = questionsContainer.querySelectorAll('.answers-container .answer-div');
+    const questions = questionsContainer.querySelectorAll('.question-block');
 
-    answers.forEach(answerDiv => {
-        if (isTestMode) {
-            // Adding a radio button
-            const radioInput = document.createElement('input');
-            radioInput.setAttribute('type', 'radio');
-            radioInput.setAttribute('name', 'test-answer');
-            radioInput.setAttribute('class', 'form-check-input mt-0');
-            answerDiv.insertBefore(radioInput, answerDiv.firstChild);
-        } else {
-            // Delete a radio button
-            const radioInput = answerDiv.querySelector('input[type="radio"]');
-            if (radioInput) {
-                radioInput.remove();
+    questions.forEach(questionBlock => {
+        const answers = questionBlock.querySelectorAll('.answers-container .answer-div');
+        const multianswerSwitch = questionBlock.querySelector('.multianswer-switch input');
+
+        answers.forEach(answer => {
+            const radioInput = answer.querySelector('.form-check-input');
+            if (isTestMode) {
+                // If the test mode is enabled and the radio button is missing, add it
+                if (!radioInput) {
+                    const radioInput = document.createElement('input');
+                    const questionIndex = questionBlock.dataset.questionIndex;
+                    radioInput.setAttribute('type', 'radio');
+                    radioInput.setAttribute('name', `test-answer-${questionIndex}`);
+                    radioInput.setAttribute('class', 'form-check-input mt-0');
+                    answer.insertBefore(radioInput, answer.firstChild);
+                }
+            } else {
+                // If the test mode is disabled and the radio button is present, delete it
+                if (radioInput) {
+                    radioInput.remove();
+                }
             }
-        }
+        });
+        change_multianswer(multianswerSwitch);
     });
 }
 
+/* General funcions */
+function change_multianswer(multianswerSwitch) {
+    // Disable or enable the "Multiple answers" switch
+    const questionBlock = multianswerSwitch.closest('.question-block');
+    multianswerSwitch.disabled = testModeSwitch.checked;
+    if (testModeSwitch.checked) 
+        multianswerSwitch.checked = false;
+    
+
+    const radioButtons = questionBlock.querySelectorAll('.form-check-input[type="radio"]');
+    radioButtons.forEach(radio => {
+        radio.disabled = !testModeSwitch.checked;
+    });
+}
+
+/* Control functions */
 function submitSurvey() {
-    const surveyData = collectSurveyData();
-    console.log('Survey submitted:', surveyData);
-    alert('Опрос успешно сохранен и отправлен.');
-    localStorage.removeItem('surveyData');
+    if (review_survey()) {
+        const surveyData = collectSurveyData();
+        const surveyOptions = collectSurveyOptions();
+        console.log('Survey submitted:', surveyData);
+        console.log('Survey submitted:', surveyOptions);
+        alert('Опрос успешно сохранен и отправлен.');
+        localStorage.removeItem('surveyData');
+        localStorage.removeItem('surveyOptions');
+        alert("Создание опроса подтверждено.");
+    }
+    else {
+        alert("Создание опроса отменено.");
+    }
 }
 
 function cancel_submit() {
     if (confirm("Вы действительно хотите уничтожить свою работу?")) {
         window.location.href = "/admin/workshop";
         localStorage.removeItem('surveyData');
+        localStorage.removeItem('surveyOptions');
     }
 }
 
 function review_survey() {
-    alert("Создание опроса подтверждено.");
+    return true;
 }

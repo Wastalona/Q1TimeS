@@ -21,10 +21,12 @@
                 <div class="form__group col">
                     <input class="form__input s-timeout" type="text" placeholder="&nbsp;" id="s-timeout" maxlength="5" data-bs-toggle="tooltip" data-bs-placement="top" title="Время, через которое опрос перестанет быть доступным для пользователей. Указывается в секундах.">
                     <label class="form__label">Таймаут</label>
+                    <div class="invalid-feedback">Только целое число</div>
                 </div>
                 <div class="form__group col">
                     <input class="form__input s-limit" type="text" placeholder="&nbsp;" id="s-limit" maxlength="3" data-bs-toggle="tooltip" data-bs-placement="top" title="Лимит человек, которые смогут принять участие в опросе.">
                     <label class="form__label">Лимит</label>
+                    <div class="invalid-feedback">Только целое число</div>
                 </div>
             </div>
             <div class="form-check form-switch s-switch" data-bs-toggle="tooltip" data-bs-placement="top" title="Данный режим подразумевает проведение опроса в виде теста, с правильными вариантами ответа.">
