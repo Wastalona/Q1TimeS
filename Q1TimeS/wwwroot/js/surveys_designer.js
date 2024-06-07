@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const questionsContainer = document.getElementById('questions-container');
     const submitSurveyButton = document.getElementById('submit-survey');
 
-    const timeoutInput = document.getElementById('s-timeout');
+    const timeoutInput = document.getElementById('s-cutofftime');
     const limitInput = document.getElementById('s-limit');
 
     // Load the survey when the page loads
@@ -108,32 +108,7 @@ function validateOnBlur(event) {
     else input.classList.remove('is-invalid');
 }
 
-function saveSurvey() {
-    /*Saves survey data to local storage.*/
-    try {
-        const surveyData = collectSurveyData();
-        const options = collectSurveyOptions();
-        localStorage.setItem('surveyData', JSON.stringify(surveyData));
-        localStorage.setItem('surveyOptions', JSON.stringify(options));
-    } catch (DOMException) {
-        alert("An error occurred while saving data. Some data may be lost after reloading the page.");
-    }
-}
-
-function loadSurvey() {
-    /*Loads survey data from local storage and renders it.*/
-    const savedOptions = localStorage.getItem('surveyOptions');
-    const savedSurvey = localStorage.getItem('surveyData');
-    if (savedOptions) {
-        const options = JSON.parse(savedOptions);
-        renderSurveyOptions(options);
-    }
-    if (savedSurvey) {
-        const surveyData = JSON.parse(savedSurvey);
-        renderSurveyData(surveyData);
-    }
-}
-
+/* Work with survey payload */
 function collectSurveyData() {
     /**
      * Collects survey data from the page.
@@ -153,7 +128,7 @@ function collectSurveyData() {
         const trueAnswer = answersContainer.querySelector(`input[name="test-answer-${index}"]:checked`);
 
         const questionData = {
-            question: questionInput.value,
+            questionText: questionInput.value,
             multianswer: multianswerSwitch.checked,
             answers: [],
             trueAnswerIndex: trueAnswer ? [...answers].indexOf(trueAnswer.closest('.answer-div')) : null,
@@ -181,7 +156,7 @@ function collectSurveyOptions() {
     return {
         survey_title: optionsContainer.querySelector('.s-title').value,
         description: optionsContainer.querySelector('.s-description').value,
-        timeout: optionsContainer.querySelector('.s-timeout').value,
+        cutofftime: optionsContainer.querySelector('.s-cutofftime').value,
         limit: optionsContainer.querySelector('.s-limit').value,
         test_mode: optionsContainer.querySelector('.s-switch input').checked
     };
@@ -228,7 +203,7 @@ function renderSurveyOptions(options) {
     const optionsContainer = document.getElementById('survey-form');
     optionsContainer.querySelector('.s-title').value = options.survey_title;
     optionsContainer.querySelector('.s-description').value = options.description;
-    optionsContainer.querySelector('.s-timeout').value = options.timeout;
+    optionsContainer.querySelector('.s-cutofftime').value = options.cutofftime;
     optionsContainer.querySelector('.s-limit').value = options.limit;
     optionsContainer.querySelector('.s-switch input').checked = options.test_mode;
 
@@ -333,22 +308,66 @@ function changeMultiAnswer(multianswerSwitch) {
     });
 }
 
+/* Control functions */
 function submitSurvey() {
-    /*Submits the survey.*/
+    /* Submits the survey. */
     const alertContainer = document.getElementById('alert-container');
+    const alertMessage = document.getElementById('alert-message');
+    goUp();
 
     if (validateSurvey()) {
+        const surveyData = collectSurveyData();
+        const surveyOptions = collectSurveyOptions();
+        const token = getTokenFromCookie();
+
         alertContainer.classList.add('d-none');
 
-        localStorage.removeItem('surveyData');
-        localStorage.removeItem('surveyOptions');
+        const surveyModel = {
+            title: surveyOptions.survey_title,
+            description: surveyOptions.description,
+            cutofftime: parseInt(surveyOptions.cutofftime),
+            limit: parseInt(surveyOptions.limit),
+            isQuizMode: surveyOptions.test_mode,
+            questions: surveyData
+        };
 
-        // Display the success message
-        alertContainer.classList.remove('d-none');
-        alert("Good");
+        // POST
+        fetch('https://localhost:5000/admin/compositesurvey', {
+            method: 'POST',
+            headers: {
+                "Accept": "application/json",
+                'Content-Type': 'application/json',
+                "Authorization": `Bearer ${token}`
+            },
+            body: JSON.stringify(surveyModel)
+        })
+        .then(response => {
+            console.log("here");
+            if (response.ok) {
+                // If the server returns a redirect, redirect the browser to the new URL
+                if (response.redirected) {
+                    localStorage.removeItem('surveyData');
+                    localStorage.removeItem('surveyOptions');
+
+                    // Display the success message
+                    alert("Опрос успешно создан)");
+                    window.location.href = response.url;
+                } else {
+                    return response.json();
+                }
+            } else {
+                throw new Error("Произошла ошибка при отправке опроса.");
+            }
+        })
+        .catch(() => {
+            // Display the error message
+            alertContainer.classList.remove('d-none');
+            alertContainer.classList.remove('alert-success');
+            alertContainer.classList.add('alert-danger');
+            alertMessage.innerHTML = "Произошла ошибка при отправке опроса.";
+        });
     } else {
         // Display the error message
-        goUp();
         alertContainer.classList.remove('d-none');
     }
 }
@@ -371,18 +390,21 @@ function validateSurvey() {
 
     // Validate survey options
     const surveyTitle = document.querySelector('.s-title').value.trim();
-    const timeout = document.querySelector('.s-timeout').value.trim();
-    const limit = document.querySelector('.s-limit').value.trim();
+    let cutofftime = document.querySelector('.s-cutofftime').value.trim();
+    let limit = document.querySelector('.s-limit').value.trim();
     const isTestMode = testModeSwitch.checked;
 
+    if (cutofftime === '') cutofftime = '3600';
+    if (limit === '') limit = '10';
+
     if (surveyTitle === '') isValid = false;
-    if (timeout === '' || !/^\d+$/.test(timeout)) isValid = false;
-    if (limit === '' || !/^\d+$/.test(limit)) isValid = false;
+    if (!/^\d+$/.test(cutofftime)) isValid = false;
+    if (!/^\d+$/.test(limit)) isValid = false;
 
     // Validate questions
     const questions = document.querySelectorAll('.que-n-ans');
 
-    if (questions.length < 1 || questions.length > 20)  isValid = false;
+    if (questions.length < 1 || questions.length > 20) isValid = false;
 
     questions.forEach((question, questionIndex) => {
         const questionText = question.querySelector('.question-input').value.trim();
@@ -404,4 +426,30 @@ function validateSurvey() {
     });
 
     return isValid;
+}
+
+function saveSurvey() {
+    /*Saves survey data to local storage.*/
+    try {
+        const surveyData = collectSurveyData();
+        const options = collectSurveyOptions();
+        localStorage.setItem('surveyData', JSON.stringify(surveyData));
+        localStorage.setItem('surveyOptions', JSON.stringify(options));
+    } catch (DOMException) {
+        alert("An error occurred while saving data. Some data may be lost after reloading the page.");
+    }
+}
+
+function loadSurvey() {
+    /*Loads survey data from local storage and renders it.*/
+    const savedOptions = localStorage.getItem('surveyOptions');
+    const savedSurvey = localStorage.getItem('surveyData');
+    if (savedOptions) {
+        const options = JSON.parse(savedOptions);
+        renderSurveyOptions(options);
+    }
+    if (savedSurvey) {
+        const surveyData = JSON.parse(savedSurvey);
+        renderSurveyData(surveyData);
+    }
 }
