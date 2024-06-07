@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Q1TimeS.Models;
 
 namespace Q1TimeS.Controllers
 {
@@ -19,10 +20,20 @@ namespace Q1TimeS.Controllers
         }
 
         [Authorize]
+        [HttpGet]
         public IActionResult CompositeSurvey()
         /* Page used to create a new composite survey */
         {
             return View();
+        }
+        
+        [Authorize]
+        [HttpPost]
+        public IActionResult CompositeSurvey([FromBody] SurveyModel model)
+        /* Page used to create a new composite survey */
+        {
+            if (ModelState.IsValid) return Redirect("Workshop");
+            else return BadRequest(ModelState);
         }
 
         [Authorize]

@@ -4,22 +4,26 @@
     ViewData["ScriptName"] = "surveys_designer.js";
 }
 
+<div id="alert-container" class="alert alert-danger d-none" role="alert">
+    <span id="alert-message">Создание опроса отменено из-за ошибок. Проверьте все поля.</span>
+</div>
+
 <div id="survey-builder">
     <h1 class="form__title">Создание составного опроса</h1>
 
     <form id="survey-form">
         <div class="com-set">
             <div class="form__group">
-                <input class="form__input s-title" type="text" placeholder="&nbsp;" id="s-title" required data-bs-toggle="tooltip" data-bs-placement="top" title="Введите название, которое вам подойдёт.">
+                <input class="form__input s-title" type="text" placeholder="&nbsp;" id="s-title" required data-bs-toggle="tooltip" data-bs-placement="top" title="Введите название, которое вам подойдёт. Макс.длина 99" maxlength="99">
                 <label class="form__label">Название опроса *</label>
             </div>
             <div class="form__group">
-                <input class="form__input s-description" type="text" placeholder="&nbsp;" id="s-description" maxlength="99">
+                <input class="form__input s-description" type="text" placeholder="&nbsp;" id="s-description" maxlength="200">
                 <label class="form__label">Описание опроса</label>
             </div>
             <div class="row">
                 <div class="form__group col">
-                    <input class="form__input s-timeout" type="text" placeholder="&nbsp;" id="s-timeout" maxlength="5" data-bs-toggle="tooltip" data-bs-placement="top" title="Время, через которое опрос перестанет быть доступным для пользователей. Указывается в секундах.">
+                    <input class="form__input s-cutofftime" type="text" placeholder="&nbsp;" id="s-cutofftime" maxlength="5" data-bs-toggle="tooltip" data-bs-placement="top" title="Время, через которое опрос перестанет быть доступным для пользователей. Указывается в секундах.">
                     <label class="form__label">Таймаут</label>
                     <div class="invalid-feedback">Только целое число</div>
                 </div>
@@ -41,8 +45,8 @@
     <button type="button" id="add-question" class="btn btn-light add-answer-btn">Добавить вопрос</button>
 
     <div class="commit-btns">
-        <button type="button" class="btn btn-danger" id="cancel-survey" onclick="cancel_submit()">Отменить создание</button>
-        <button type="button" class="btn btn-outline-success" id="submit-survey" on_click="review_survey()">Подтвердить создание</button>
+        <button type="button" class="btn btn-danger" id="cancel-survey" onclick="cancelSubmit()">Отменить создание</button>
+        <button type="button" class="btn btn-outline-success" id="submit-survey">Подтвердить создание</button>
     </div>
 
     <template id="question-template">
