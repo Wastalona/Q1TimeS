@@ -2,12 +2,10 @@
     white-space: normal;
     text-align: center;
     word-break: break-all;
-    background-color: #e8d5b0;
+    background-color: #12001B;
 }
 
-a {
-    color: #e8d5b0;
-}
+a { color: whitesmoke; }
 
 .btn-primary {
   color: #fff;
@@ -35,24 +33,4 @@ a {
 button.accept-policy {
   font-size: 1rem;
   line-height: inherit;
-}
-
-.footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    white-space: nowrap;
-    background-color: #222;
-    color: #fff;
-    text-align: center;
-    font-size: 1.2rem;
-}
-
-footer a {
-    color: #fff;
-    text-decoration: none;
-}
-
-footer a:hover {
-    text-decoration: underline;
 }
