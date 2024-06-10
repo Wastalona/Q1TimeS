@@ -1,1 +1,90 @@
-﻿
+﻿.survey-list{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.survey-block {
+    background-color: #12001B;
+    color: white;
+    border: whitesmoke 8px solid;
+    width: 600px;
+    height: 350px;
+    padding: 20px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    position: relative;
+    font-family: 'Comfortaa';
+    transition: all 0.4s ease;
+    margin-left: 40px;
+    margin-bottom: 40px;
+}
+
+.survey-block:hover {
+    transform: translateY(-20px);
+    box-shadow: #EC0355 10px 10px;
+    cursor: pointer;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 10px;
+}
+
+
+.card-title{
+    display: flex;
+    justify-content: center;
+    padding-right: 20%; 
+}
+
+.card-title h2 {
+    margin: 0;
+    font-size: 1.5em;
+}
+
+.info-item i {
+    font-size: 40px;
+    margin-left: 10px;
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+.card-content {
+    padding-top: 10px;
+    display: flex;
+    justify-content:center;
+    flex-direction: row;
+}
+
+.card-content p { 
+    text-align: center;
+    margin: 10px 0;
+    font-size: 1.4rem;
+    padding: 10px;
+}
+
+.card-info {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 40px 10px;
+    border-left: 2px solid #fff;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+.info-item .i {
+    margin-right: 5px;
+    font-size: 1.2em;
+}
+
+.add-new{
+    display: flex;
+    justify-content: right;
+}

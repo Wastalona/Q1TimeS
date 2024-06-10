@@ -4,51 +4,90 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"]</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/@ViewData["StyleName"]" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/Q1TimeS.styles.css" asp-append-version="true" />
-    <link type="Image/x-icon" href="/fav.ico" rel="icon" asp-append-version="true" />
+    
+    <!-- From inet -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;700&family=Irish+Grover&display=swap" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <!-- From project -->
+    <link type="Image/x-icon" href="/fav.ico" rel="icon" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Q1TimeS.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/@ViewData["StyleName"]" asp-append-version="true" />
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
+        <nav class="navbar navbar-expand-lg fixed-top">
             <div class="container-fluid">
                 <a class="navbar-brand me-auto" asp-area="" asp-controller="Home" asp-action="Index">Q1Times</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler bg-light text-black" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav justify-content-center flex-grow-1 pe-3">
                         <li class="nav-item">
-                            <a class="nav-link mx-lg-2 text-light" asp-area="" asp-controller="Home" asp-action="Index">Главная</a>
+                            <a class="nav-link mx-lg-2 text-light" asp-area="" asp-controller="Admin" asp-action="Statistics">Статистика</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link mx-lg-2 text-light" asp-area="" asp-controller="General" asp-action="SurveysPage">Опросы</a>
+                            <a class="nav-link mx-lg-2 text-light" asp-area="" asp-controller="Home" asp-action="Index">Опросы</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link mx-lg-2 text-light" asp-area="" asp-controller="General" asp-action="About">Об приложении</a>
+                            <a class="nav-link mx-lg-2 text-light" asp-area="" asp-controller="General" asp-action="SurveysPage">Документация</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link mx-lg-2 text-light" asp-area="" asp-controller="General" asp-action="About">О проекте</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
+    
+    <main role="main" class="pb-3 container">
+        @RenderBody()
+    </main>
 
     <footer class="footer">
-        <div class="container">
-            <p>&copy; <span id="year"></span> QuizCompany. Все права защищены.</p>
+        <div class="social-media-row">
+            <div class="social-title">
+                <h1>Follow us</h1>
+            </div>
+            <div class="social-media">
+                <div class="social-block">
+                    <a href="https://github.com" target="_blank">
+                        <i class='bx bxl-github'></i>
+                    </a>
+                </div>
+                <div class="social-block">
+                    <a href="https://www.instagram.com" target="_blank">
+                        <i class='bx bxl-instagram'></i>
+                    </a>
+                </div>
+                <div class="social-block">
+                    <a href="https://vk.com" target="_blank">
+                        <i class='bx bxl-vk'></i>
+                    </a>
+                </div>
+                <div class="social-block">
+                    <a href="https://www.reddit.com/" target="_blank">
+                        <i class='bx bxl-reddit'></i>
+                    </a>
+                </div>
+            </div>
+            <div class="scroll-to-top">
+                <div class="fill-btn" onclick="goUp()">
+                    <i class='bx bxs-hand-up'></i>
+                    <span class="fill-btn-text">К началу</span>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; <span id="year"></span> Q1TimeS</p>
         </div>
     </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

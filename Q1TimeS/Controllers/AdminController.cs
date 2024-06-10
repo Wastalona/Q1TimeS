@@ -37,15 +37,10 @@ namespace Q1TimeS.Controllers
         }
 
         [Authorize]
-        public IActionResult SimpleSurvey()
-        /* Page used to create a new simple survey */
+        [HttpGet]
+        public IActionResult Statistics(string key)
         {
-            return View();
-        }
-
-        public IActionResult SurveyPage()
-        /* Basic survey page used for the template */
-        {
+            ViewBag.Key = key;
             return View();
         }
     }

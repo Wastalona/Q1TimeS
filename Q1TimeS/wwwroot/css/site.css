@@ -1,16 +1,9 @@
 html {
+    padding: 0;
+    margin: 0;
     font-size: 14px;
-    background: #fffaf5;
-}
-
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+    background: #12001B;
+    overflow-x: hidden;
 }
 
 html {
@@ -18,30 +11,42 @@ html {
     min-height: 100%;
 }
 
+@media (min-width: 768px) {
+    html {font-size: 16px; }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+/* Body Styling*/
 body {
     margin-bottom: 60px;
-    background: #fffaf5;
-    color: #302833;
-    font-family: "Alegreya", serif;
+    background: #12001B;
     font-size: 1.5rem;
 }
 
+.navbar { background: #12001B; }
+
 .navbar-brand {
     font-weight: 500;
-    color: #2ef18b;
-    font-size: 24px;
+    font-size: 3rem;
     transition: 0.3s color;
+    font-family: 'Irish Grover';
+    margin-left: 160px;
+    color: whitesmoke;
 }
 
 .nav-link {
     color: #00bfff;
     font-weight: 500;
     position: relative;
+    margin-top: 10px;
+    color: whitesmoke;
+    font-family: 'Comfortaa';
 }
 
-.nav-link:hover, .nav-link.active {
-    color: #2ef18b;
-}
+.nav-link:hover, .nav-link.active { color: #EC0355; }
 
 @media(min-width: 991px){
     .nav-link::before {
@@ -52,31 +57,162 @@ body {
         transform: translateX(-50%);
         width: 0;
         height: 2px;
-        background-color: #2ef18b;
+        background-color: #EC0355;
         visibility: hidden;
-        transition: 0.3s ease-in-out;
+        transition: 0.5s ease-in-out;
     }
 
     .nav-link:hover::before, .nav-link.active::before {
         width: 100%;
         visibility: visible;
     }
+
+    .navbar-brand:hover {
+        color: whitesmoke;
+        cursor: default;
+    }
 }
 
-.gb-black {
-    background-color: #222;
+.container{ margin-top: 15vh; }
+
+p{
+    padding: 0px;
+    margin: 0px;
+}
+/* --- body end --- */
+
+/* Footer */
+footer {
+    text-align: center;
+    font-family: 'Irish Grover';
+    color: whitesmoke;
+    padding: 20px;
+    padding-bottom: 0;
 }
 
-.container{
-    margin-top: 10vh;
+.footer {
+    background: #12001B;
 }
+
+footer a {
+    color: whitesmoke;
+    text-decoration: none;
+}
+
+.social-media-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 20px;
+}
+
+.social-title {
+    display: flex;
+    justify-content: flex-start;
+    margin-left: 60px;
+    flex-basis: 100%;
+}
+
+.social-title h1 {
+    font-size: 4rem;
+    margin-bottom: 20px;
+}
+
+.social-media {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+    max-width: 70%;
+    padding-left: 30px;
+    flex-grow: 1;
+}
+
+.social-block {
+    border: 6px solid whitesmoke;
+    width: 70px;
+    height: 70px;
+    min-width: 40px;
+    min-height: 40px;
+    margin-left: 30px;
+    padding: 0;
+    transition: all 0.3s ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    text-decoration: none;
+}
+
+.social-block i {
+    font-size: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    transition: all 0.3s ease-in-out;
+}
+
+.social-block:hover {
+    transform: rotateZ(45deg);
+    border-color: #FFC54F;
+}
+
+.social-block:hover i {
+    transform: rotateZ(-45deg);
+    color: #FFC54F;
+}
+
+.scroll-to-top { margin-right: 100px; }
+
+.fill-btn {
+    width: 220px;
+    height: 70px;
+    border: 6px solid whitesmoke;
+    background: transparent;
+    color: whitesmoke;
+    padding: 10px 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.fill-btn i {
+    font-size: 40px;
+    display: flex;
+    align-items: center;
+}
+
+.fill-btn-text {
+    font-family: 'Irish Grover', cursive;
+    font-size: 1.5rem;
+}
+
+.fill-btn:hover {
+    color: #12001B;
+    background: whitesmoke;
+}
+
+/* copyright */
+.copyright {
+    display: flex;
+    justify-content: flex-start;
+    margin-left: 70px;
+    margin-top: 20px;
+    color: whitesmoke;
+}
+/* --- footer end --- */
 
 /* Custom common styles */
 /* title, group, label and button*/
 .form__title {
     text-align: center;
     margin: 0 0 32px 0;
+    font-family: 'Comfortaa';
     font-weight: normal;
+    color: whitesmoke;
 }
 
 .form__group {
@@ -90,7 +226,7 @@ body {
     left: 0;
     padding: 0 10px;
     font-size: 1.3rem;
-    color: #000;
+    color: whitesmoke;
     pointer-events: none;
     transition: 0.3s;
     transform-origin: top left;
@@ -98,7 +234,7 @@ body {
 
 .form__input,
 .form__button {
-    font-family: 'Alegreya', sans-serif;
+    font-family: 'Comfortaa';
     letter-spacing: 1px;
     font-size: 1.5rem;
 }
@@ -111,6 +247,7 @@ body {
     background-color: transparent;
     outline: none;
     transition: 0.3s;
+    color: whitesmoke;
 }
 
 .form__input:focus {
