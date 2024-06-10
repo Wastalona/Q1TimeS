@@ -53,60 +53,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const answerDiv = event.target.closest('.answer-div');
             answerDiv.remove();
             saveSurvey();
-        } else if (event.target.matches('.remove-image')) {
-            const imgBlock = event.target.closest('.img-block');
-            const preview = imgBlock.querySelector('.preview');
-            const imageInput = imgBlock.querySelector('.imageInput');
-            preview.src = '';
-            imageInput.value = '';
-            saveSurvey();
-        }
-    });
-
-    // Save survey data when image inputs change
-    questionsContainer.addEventListener('change', (event) => {
-        if (event.target.matches('.imageInput')) {
-            const imgBlock = event.target.closest('.img-block');
-            const preview = imgBlock.querySelector('.preview');
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = (e) => {
-                    preview.src = e.target.result;
-                    saveSurvey();
-                };
-                reader.readAsDataURL(file);
-            }
-        } else {
-            saveSurvey();
         }
     });
 });
-
-function validateIntegerInput(event) {
-    /**
-     * Validates integer input fields to ensure they contain only digits.
-     * @param {Event} event - The input event.
-    */
-    const input = event.target;
-    const value = input.value;
-    if (!/^\d*$/.test(value)) {
-        input.classList.add('is-invalid');
-    } else {
-        input.classList.remove('is-invalid');
-    }
-}
-
-function validateOnBlur(event) {
-    /**
-     * Validates input fields on blur event.
-     * @param {Event} event - The blur event.
-    */
-    const input = event.target;
-    if (input.value === '') input.classList.remove('is-invalid');
-    else if (!/^\d+$/.test(input.value)) input.classList.add('is-invalid');
-    else input.classList.remove('is-invalid');
-}
 
 /* Work with survey payload */
 function collectSurveyData() {
@@ -123,8 +72,6 @@ function collectSurveyData() {
         const multianswerSwitch = question.querySelector('.multianswer-switch input');
         const answersContainer = question.querySelector('.answers-container');
         const answers = answersContainer.querySelectorAll('.answer-div');
-        const imageInput = question.querySelector('.imageInput');
-        const imageSrc = question.querySelector('.preview').src;
         const trueAnswer = answersContainer.querySelector(`input[name="test-answer-${index}"]:checked`);
 
         const questionData = {
@@ -132,7 +79,6 @@ function collectSurveyData() {
             multianswer: multianswerSwitch.checked,
             answers: [],
             trueAnswerIndex: trueAnswer ? [...answers].indexOf(trueAnswer.closest('.answer-div')) : null,
-            image: imageSrc || imageInput.value || '',
             questionIndex: index
         };
 
@@ -177,13 +123,11 @@ function renderSurveyData(surveyData) {
         const questionInput = newQuestion.querySelector('.question-input');
         const multianswerSwitch = newQuestion.querySelector('.multianswer-switch input');
         const answersContainer = newQuestion.querySelector('.answers-container');
-        const preview = newQuestion.querySelector('.preview');
 
         newQuestion.querySelector('.question-block').dataset.questionIndex = questionData.questionIndex;
 
-        questionInput.value = questionData.question;
+        questionInput.value = questionData.questioText != null ? questionData.questionText : "";
         multianswerSwitch.checked = questionData.multianswer;
-        preview.src = questionData.image;
 
         questionData.answers.forEach((answerText, answerIndex) => {
             addAnswer(answersContainer, answerText, testModeSwitch.checked, questionData.questionIndex, answerIndex === questionData.trueAnswerIndex);
@@ -251,12 +195,12 @@ function addAnswer(container, answerText = '', isTestMode = false, questionIndex
     const answerInput = document.createElement('input');
     answerInput.setAttribute('type', 'text');
     answerInput.setAttribute('class', 'form-control');
-    answerInput.setAttribute('placeholder', 'Enter answer option');
+    answerInput.setAttribute('placeholder', 'Ответ');
     if (answerText) answerInput.value = answerText;
     answerDiv.appendChild(answerInput);
 
     const removeAnswerButton = document.createElement('i');
-    removeAnswerButton.setAttribute('class', 'remove-answer bx bxs-trash');
+    removeAnswerButton.setAttribute('class', 'remove-answer bx bx-x');
     answerDiv.appendChild(removeAnswerButton);
 
     container.appendChild(answerDiv);
@@ -374,10 +318,36 @@ function submitSurvey() {
 
 function cancelSubmit() {
     /*Cancels the survey submission.*/
-    if (confirm("Do you really want to destroy your work?")) {
+    if (confirm("Вы действительно хотите уничтожить свою работу?")) {
         window.location.href = "/admin/workshop";
         localStorage.removeItem('surveyData');
         localStorage.removeItem('surveyOptions');
+    }
+}
+
+function saveSurvey() {
+    /*Saves survey data to local storage.*/
+    try {
+        const surveyData = collectSurveyData();
+        const options = collectSurveyOptions();
+        localStorage.setItem('surveyData', JSON.stringify(surveyData));
+        localStorage.setItem('surveyOptions', JSON.stringify(options));
+    } catch (DOMException) {
+        alert("Произошла ошибка при сохранении данных. Некоторые данные могут быть утеряны после перезагрузки страницы.");
+    }
+}
+
+function loadSurvey() {
+    /*Loads survey data from local storage and renders it.*/
+    const savedOptions = localStorage.getItem('surveyOptions');
+    const savedSurvey = localStorage.getItem('surveyData');
+    if (savedOptions) {
+        const options = JSON.parse(savedOptions);
+        renderSurveyOptions(options);
+    }
+    if (savedSurvey) {
+        const surveyData = JSON.parse(savedSurvey);
+        renderSurveyData(surveyData);
     }
 }
 
@@ -428,28 +398,27 @@ function validateSurvey() {
     return isValid;
 }
 
-function saveSurvey() {
-    /*Saves survey data to local storage.*/
-    try {
-        const surveyData = collectSurveyData();
-        const options = collectSurveyOptions();
-        localStorage.setItem('surveyData', JSON.stringify(surveyData));
-        localStorage.setItem('surveyOptions', JSON.stringify(options));
-    } catch (DOMException) {
-        alert("An error occurred while saving data. Some data may be lost after reloading the page.");
+function validateIntegerInput(event) {
+    /**
+     * Validates integer input fields to ensure they contain only digits.
+     * @param {Event} event - The input event.
+    */
+    const input = event.target;
+    const value = input.value;
+    if (!/^\d*$/.test(value)) {
+        input.classList.add('is-invalid');
+    } else {
+        input.classList.remove('is-invalid');
     }
 }
 
-function loadSurvey() {
-    /*Loads survey data from local storage and renders it.*/
-    const savedOptions = localStorage.getItem('surveyOptions');
-    const savedSurvey = localStorage.getItem('surveyData');
-    if (savedOptions) {
-        const options = JSON.parse(savedOptions);
-        renderSurveyOptions(options);
-    }
-    if (savedSurvey) {
-        const surveyData = JSON.parse(savedSurvey);
-        renderSurveyData(surveyData);
-    }
+function validateOnBlur(event) {
+    /**
+     * Validates input fields on blur event.
+     * @param {Event} event - The blur event.
+    */
+    const input = event.target;
+    if (input.value === '') input.classList.remove('is-invalid');
+    else if (!/^\d+$/.test(input.value)) input.classList.add('is-invalid');
+    else input.classList.remove('is-invalid');
 }

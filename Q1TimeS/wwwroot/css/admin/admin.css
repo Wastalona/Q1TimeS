@@ -19,6 +19,12 @@
     margin-bottom: 40px;
 }
 
+.survey-block:hover {
+    transform: translateY(-20px);
+    box-shadow: #EC0355 10px 10px;
+    cursor: pointer;
+}
+
 .card-header {
     display: flex;
     justify-content: space-between;
@@ -73,14 +79,9 @@
     text-align: center;
 }
 
-.info-item .icon {
+.info-item .i {
     margin-right: 5px;
     font-size: 1.2em;
-}
-
-.survey-block:hover {
-    transform: translateY(-20px);
-    box-shadow: #EC0355 10px 10px;
 }
 
 .add-new{

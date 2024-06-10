@@ -210,7 +210,9 @@ footer a {
 .form__title {
     text-align: center;
     margin: 0 0 32px 0;
+    font-family: 'Comfortaa';
     font-weight: normal;
+    color: whitesmoke;
 }
 
 .form__group {
@@ -224,7 +226,7 @@ footer a {
     left: 0;
     padding: 0 10px;
     font-size: 1.3rem;
-    color: #000;
+    color: whitesmoke;
     pointer-events: none;
     transition: 0.3s;
     transform-origin: top left;
@@ -245,6 +247,7 @@ footer a {
     background-color: transparent;
     outline: none;
     transition: 0.3s;
+    color: whitesmoke;
 }
 
 .form__input:focus {
