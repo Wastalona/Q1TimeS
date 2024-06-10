@@ -1,31 +1,40 @@
 ﻿@{
     ViewData["Title"] = "Мастерская администратора";
     ViewData["StyleName"] = "admin/admin.css";
+    ViewData["ScriptName"] = "admin.js";
 }
 
-<div class="card" style="width: 18rem;">
-    <img src="..." class="card-img-top" alt="...">
-    <div class="card-body">
-        <h4 class="card-title"><b>Card title</b></h4>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        <a href="#" class="btn btn-primary">Edit</a>
+<div class="survey-list">
+    <div class="survey-block" onclick="go_stats('8a4f7b3c-030c-96be-3414-71373569db49')" id="8a4f7b3c-030c-96be-3414-71373569db49">
+        <div class="card-header">
+            <div class="card-title col">
+                <h2>Тестирование</h2>
+            </div>
+            <div class="card-actions">
+                <div onclick="delete_survey()">
+                    <i class='bx bxs-trash-alt' style="color:#EC0355;"></i>
+                </div>
+            </div>
+        </div>
+        <div class="card-content">
+            <p>Какое-нибудь описание опроса, соответствующее (или нет) его тематике ЖЖЖЖЖЖЖЖЖЖЖЖЖЖ ЖЖЖЖЖЖЖЖЖ ЖЖЖЖ</p>
+            <div class="card-info">
+                <div class="info-item">
+                    <i class='bx bx-time-five'></i>
+                    <span>90мин</span>
+                </div>
+                <div class="info-item">
+                    <i class='bx bxs-group'></i>
+                    <span>0/20</span>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
-<div class="card" style="width: 18rem;">
-    <img src="..." class="card-img-top" alt="...">
-    <div class="card-body">
-        <h4 class="card-title"><b>Card title</b></h4>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        <a href="#" class="btn btn-primary">Edit</a>
-    </div>
-</div>
-
-<div class="card" style="width: 18rem;">
-    <img src="..." class="card-img-top" alt="...">
-    <div class="card-body">
-        <h4 class="card-title"><b>Card title</b></h4>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        <a href="#" class="btn btn-primary">Edit</a>
+<div class="add-new">
+    <div class="fill-btn" onclick="go_create()">
+        <i class='bx bxs-layer-plus'></i>
+        <span class="fill-btn-text">Добавить</span>
     </div>
 </div>

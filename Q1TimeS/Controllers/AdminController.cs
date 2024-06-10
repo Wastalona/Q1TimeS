@@ -43,9 +43,11 @@ namespace Q1TimeS.Controllers
             return View();
         }
 
-        public IActionResult SurveyPage()
-        /* Basic survey page used for the template */
+        [Authorize]
+        [HttpGet]
+        public IActionResult Statistics(string key)
         {
+            ViewBag.Key = key;
             return View();
         }
     }

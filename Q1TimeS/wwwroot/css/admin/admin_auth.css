@@ -29,4 +29,12 @@
     justify-content:center;
     align-items: center;
     flex-direction: column;
+    padding-bottom: 250px;
+}
+
+.auth-title {
+    text-align: center;
+    margin-top: 10vh;
+    color: whitesmoke;
+    font-family: 'Comfortaa';
 }
