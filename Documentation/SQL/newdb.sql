@@ -1,8 +1,9 @@
+DROP DATABASE q1times_test;
 CREATE DATABASE q1times_test;
 
 USE q1times_test;
 
-CREATE TABLE Survey (
+CREATE TABLE Surveys (
     SurveyID INT AUTO_INCREMENT PRIMARY KEY,
     Title VARCHAR(20) NOT NULL,
     Description VARCHAR(99),
@@ -11,49 +12,49 @@ CREATE TABLE Survey (
     IsQuizMode BOOLEAN NOT NULL
 );
 
-CREATE TABLE Question (
+CREATE TABLE Questions (
     QuestionID INT AUTO_INCREMENT PRIMARY KEY,
     SurveyID INT,
     QuestionText TEXT NOT NULL,
     MultiAnswer BOOLEAN NOT NULL,
     TrueAnswerIndex INT,
-    FOREIGN KEY (SurveyID) REFERENCES Survey(SurveyID)
+    FOREIGN KEY (SurveyID) REFERENCES Surveys(SurveyID)
 );
 
-CREATE TABLE Answer (
+CREATE TABLE Answers (
     AnswerID INT AUTO_INCREMENT PRIMARY KEY,
     QuestionID INT,
     AnswerText TEXT NOT NULL,
     IsCorrect BOOLEAN NOT NULL,
-    FOREIGN KEY (QuestionID) REFERENCES Question(QuestionID)
+    FOREIGN KEY (QuestionID) REFERENCES Questions(QuestionID)
 );
 
-CREATE TABLE UserSurvey (
+CREATE TABLE Users (
     UserID INT AUTO_INCREMENT PRIMARY KEY,
     SurveyID INT,
     SessionKey TEXT,
-    FOREIGN KEY (SurveyID) REFERENCES Survey(SurveyID)
+    FOREIGN KEY (SurveyID) REFERENCES Surveys(SurveyID)
 );
 
 DELIMITER $$
 
 CREATE TRIGGER before_answer_insert
-BEFORE INSERT ON Answer
+BEFORE INSERT ON Answers
 FOR EACH ROW
 BEGIN
     DECLARE total_answers INT;
-    SELECT COUNT(*) INTO total_answers FROM Answer WHERE QuestionID = NEW.QuestionID;
+    SELECT COUNT(*) INTO total_answers FROM Answers WHERE QuestionID = NEW.QuestionID;
     IF total_answers >= 10 THEN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Cannot insert more than 10 answers for a question';
     END IF;
 END$$
 
 CREATE TRIGGER before_question_insert
-BEFORE INSERT ON Question
+BEFORE INSERT ON Questions
 FOR EACH ROW
 BEGIN
     DECLARE total_questions INT;
-    SELECT COUNT(*) INTO total_questions FROM Question WHERE SurveyID = NEW.SurveyID;
+    SELECT COUNT(*) INTO total_questions FROM Questions WHERE SurveyID = NEW.SurveyID;
     IF total_questions >= 20 THEN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Cannot insert more than 20 questions for a survey';
     END IF;
@@ -63,14 +64,14 @@ DELIMITER ;
 
 -- Example data to verify the structure (optional)
 
-INSERT INTO Survey (Title, Description, CutOffTime, `Limit`, IsQuizMode)
+INSERT INTO Surveys (Title, Description, CutOffTime, `Limit`, IsQuizMode)
 VALUES ('Sample Survey', 'This is a sample survey description', 3600, 100, FALSE);
 
-INSERT INTO Question (SurveyID, QuestionText, MultiAnswer, TrueAnswerIndex)
+INSERT INTO Questions (SurveyID, QuestionText, MultiAnswer, TrueAnswerIndex)
 VALUES (1, 'Sample Question 1', FALSE, NULL),
        (1, 'Sample Question 2', TRUE, 1);
 
-INSERT INTO Answer (QuestionID, AnswerText, IsCorrect)
+INSERT INTO Answers (QuestionID, AnswerText, IsCorrect)
 VALUES (1, 'Sample Answer 1 for Question 1', FALSE),
        (1, 'Sample Answer 2 for Question 1', TRUE),
        (2, 'Sample Answer 1 for Question 2', FALSE),

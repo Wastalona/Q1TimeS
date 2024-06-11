@@ -2,10 +2,16 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Q1TimeS.Controllers;
 using Q1TimeS.Models;
+using System.Data.Entity.Infrastructure;
+using System.Data.Entity;
+using Microsoft.EntityFrameworkCore;
 
 
 /* Builder settings */
 var builder = WebApplication.CreateBuilder(args);
+
+// Connection string
+var connection = builder.Configuration.GetConnectionString("DefaultConnection");
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -29,7 +35,7 @@ builder.Services.AddAuthentication(options =>
         ValidateIssuerSigningKey = true,// security key validation
     };
 });
-
+builder.Services.AddDbContext<MySqlContext>(options => options.UseMySql(connection, ServerVersion.AutoDetect(connection)));
 builder.Services.AddRazorPages();
 builder.Services.AddSession();
 

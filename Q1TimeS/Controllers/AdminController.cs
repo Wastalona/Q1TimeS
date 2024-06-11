@@ -1,11 +1,19 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Q1TimeS.Models;
 
 namespace Q1TimeS.Controllers
 {
     public class AdminController : Controller
     {
+        private readonly MySqlContext _dbcontext;
+
+        public AdminController(MySqlContext dbcontext)
+        {
+            _dbcontext = dbcontext;
+        }
+
         [HttpGet, HttpPost]
         public IActionResult Auth()
         {
@@ -32,7 +40,11 @@ namespace Q1TimeS.Controllers
         public IActionResult CompositeSurvey([FromBody] SurveyModel model)
         /* Page used to create a new composite survey */
         {
-            if (ModelState.IsValid) return Redirect("Workshop");
+            if (ModelState.IsValid)
+            {
+                Console.WriteLine();
+                return Redirect("Workshop");
+            }
             else return BadRequest(ModelState);
         }
 
