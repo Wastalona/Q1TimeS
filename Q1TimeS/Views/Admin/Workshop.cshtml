@@ -1,35 +1,39 @@
-﻿@{
+﻿@model List<Q1TimeS.Models.Db.Survey>
+@{
     ViewData["Title"] = "Мастерская администратора";
     ViewData["StyleName"] = "admin/admin.css";
     ViewData["ScriptName"] = "admin.js";
 }
 
 <div class="survey-list">
-    <div class="survey-block" onclick="go_stats('8a4f7b3c-030c-96be-3414-71373569db49')" id="8a4f7b3c-030c-96be-3414-71373569db49">
-        <div class="card-header">
-            <div class="card-title col">
-                <h2>Тестирование</h2>
+    @foreach (var survey in Model)
+    {
+        <div class="survey-block" id="@survey.SurveyId">
+            <div class="card-header">
+                <div class="card-title col" onclick="go_stats('@survey.SurveyId')">
+                    <h2>@survey.Title</h2>
+                </div>
+                <div class="card-actions">
+                    <div onclick="delete_survey('@survey.SurveyId')">
+                        <i class='bx bxs-trash-alt' style="color:#EC0355;"></i>
+                    </div>
+                </div>
             </div>
-            <div class="card-actions">
-                <div onclick="delete_survey()">
-                    <i class='bx bxs-trash-alt' style="color:#EC0355;"></i>
+            <div class="card-content" onclick="go_stats('@survey.SurveyId')">
+                <p>@survey.Description</p>
+                <div class="card-info">
+                    <div class="info-item">
+                        <i class='bx bx-time-five'></i>
+                        <span>@(survey.CutOffTime / 60)мин</span>
+                    </div>
+                    <div class="info-item">
+                        <i class='bx bxs-group'></i>
+                        <span>0/@survey.Limit</span>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="card-content">
-            <p>Какое-нибудь описание опроса, соответствующее (или нет) его тематике ЖЖЖЖЖЖЖЖЖЖЖЖЖЖ ЖЖЖЖЖЖЖЖЖ ЖЖЖЖ</p>
-            <div class="card-info">
-                <div class="info-item">
-                    <i class='bx bx-time-five'></i>
-                    <span>90мин</span>
-                </div>
-                <div class="info-item">
-                    <i class='bx bxs-group'></i>
-                    <span>0/20</span>
-                </div>
-            </div>
-        </div>
-    </div>
+    }
 </div>
 
 <div class="add-new">

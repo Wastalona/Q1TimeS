@@ -1,12 +1,6 @@
 const AUTH_URL = "/admin/auth";
 const WORKSHOP_URL = "/admin/workshop";
 
-// Function for obtaining a token from a cookie
-function getTokenFromCookie() {
-    const tokenRow = document.cookie.split('; ').find(row => row.startsWith('token='));
-    return tokenRow ? tokenRow.split('=')[1] : null;
-}
-
 // Function for authorization verification
 async function checkAuthorization() {
     try {
