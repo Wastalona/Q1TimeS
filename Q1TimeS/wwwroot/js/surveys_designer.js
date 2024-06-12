@@ -75,6 +75,7 @@ function collectSurveyData() {
         const trueAnswer = answersContainer.querySelector(`input[name="test-answer-${index}"]:checked`);
 
         const questionData = {
+            //questionId: generateUniqueId(),
             questionText: questionInput.value,
             multianswer: multianswerSwitch.checked,
             answers: [],
@@ -84,7 +85,10 @@ function collectSurveyData() {
 
         answers.forEach(answer => {
             const answerInput = answer.querySelector('.form-control');
-            questionData.answers.push(answerInput.value);
+            questionData.answers.push({
+                answerText: answerInput.value
+                //questionId: questionData.questionId
+            });
         });
 
         surveyData.push(questionData);
@@ -126,11 +130,11 @@ function renderSurveyData(surveyData) {
 
         newQuestion.querySelector('.question-block').dataset.questionIndex = questionData.questionIndex;
 
-        questionInput.value = questionData.questioText != null ? questionData.questionText : "";
+        questionInput.value = questionData.questionText != null ? questionData.questionText : "";
         multianswerSwitch.checked = questionData.multianswer;
 
-        questionData.answers.forEach((answerText, answerIndex) => {
-            addAnswer(answersContainer, answerText, testModeSwitch.checked, questionData.questionIndex, answerIndex === questionData.trueAnswerIndex);
+        questionData.answers.forEach((obj, answerIndex) => {
+            addAnswer(answersContainer, obj.answerText, testModeSwitch.checked, questionData.questionIndex, answerIndex === questionData.trueAnswerIndex);
         });
 
         changeMultiAnswer(newQuestion.querySelector('.multianswer-switch input'));
@@ -267,13 +271,22 @@ function submitSurvey() {
         alertContainer.classList.add('d-none');
 
         const surveyModel = {
-            title: surveyOptions.survey_title,
-            description: surveyOptions.description,
-            cutofftime: parseInt(surveyOptions.cutofftime),
-            limit: parseInt(surveyOptions.limit),
-            isQuizMode: surveyOptions.test_mode,
-            questions: surveyData
+            Title: surveyOptions.survey_title,
+            Description: surveyOptions.description,
+            CutOffTime: parseInt(surveyOptions.cutofftime),
+            Limit: parseInt(surveyOptions.limit),
+            IsQuizMode: surveyOptions.test_mode,
+            Questions: surveyData.map(question => ({
+                QuestionText: question.questionText,
+                MultiAnswer: question.multiAnswer,
+                TrueAnswerIndex: question.trueAnswerIndex,
+                Answers: question.answers.map(answer => ({
+                    AnswerText: answer.answerText,
+                    QuestionId: answer.questionId
+                }))
+            }))
         };
+
 
         // POST
         fetch('https://localhost:5000/admin/compositesurvey', {
@@ -286,7 +299,6 @@ function submitSurvey() {
             body: JSON.stringify(surveyModel)
         })
         .then(response => {
-            console.log("here");
             if (response.ok) {
                 // If the server returns a redirect, redirect the browser to the new URL
                 if (response.redirected) {
@@ -349,8 +361,9 @@ function loadSurvey() {
         const surveyData = JSON.parse(savedSurvey);
         renderSurveyData(surveyData);
     }
-}
+}   
 
+/* Validations */
 function validateSurvey() {
     /**
      * Reviews the survey before submission.

@@ -10,3 +10,8 @@ function getTokenFromCookie() {
     const tokenRow = document.cookie.split('; ').find(row => row.startsWith('token='));
     return tokenRow ? tokenRow.split('=')[1] : null;
 }
+
+function generateUniqueId() {
+    // A simple function for generating small unique numbers
+    return Math.floor(Math.random() * 1000000); 
+}

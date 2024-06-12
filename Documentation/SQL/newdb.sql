@@ -25,7 +25,6 @@ CREATE TABLE Answers (
     AnswerID INT AUTO_INCREMENT PRIMARY KEY,
     QuestionID INT,
     AnswerText TEXT NOT NULL,
-    IsCorrect BOOLEAN NOT NULL,
     FOREIGN KEY (QuestionID) REFERENCES Questions(QuestionID)
 );
 
@@ -71,9 +70,9 @@ INSERT INTO Questions (SurveyID, QuestionText, MultiAnswer, TrueAnswerIndex)
 VALUES (1, 'Sample Question 1', FALSE, NULL),
        (1, 'Sample Question 2', TRUE, 1);
 
-INSERT INTO Answers (QuestionID, AnswerText, IsCorrect)
-VALUES (1, 'Sample Answer 1 for Question 1', FALSE),
-       (1, 'Sample Answer 2 for Question 1', TRUE),
-       (2, 'Sample Answer 1 for Question 2', FALSE),
-       (2, 'Sample Answer 2 for Question 2', TRUE);
+INSERT INTO Answers (QuestionID, AnswerText)
+VALUES (1, 'Sample Answer 1 for Question 1'),
+       (1, 'Sample Answer 2 for Question 1'),
+       (2, 'Sample Answer 1 for Question 2'),
+       (2, 'Sample Answer 2 for Question 2');
 

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Q1TimeS.Models;
+using Q1TimeS.Models.Db;
 
 namespace Q1TimeS.Controllers
 {
