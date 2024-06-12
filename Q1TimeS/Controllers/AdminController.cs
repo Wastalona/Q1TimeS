@@ -90,10 +90,34 @@ namespace Q1TimeS.Controllers
 
         [Authorize]
         [HttpGet]
-        public IActionResult Statistics(string key)
+        public IActionResult Statistics(int key)
         {
             ViewBag.Key = key;
             return View();
+        }
+
+        [Authorize]
+        [HttpDelete]
+        public async Task<IActionResult> DeleteSurvey(int key)
+        {
+            // Find the survey by key
+            var survey = await _dbcontext.Surveys
+                                         .Include(s => s.Questions)
+                                         .ThenInclude(q => q.Answers)
+                                         .FirstOrDefaultAsync(s => s.SurveyId == key);
+            if (survey == null)
+                return NotFound();
+
+            // Deleting all dependent questions and answers
+            foreach (var question in survey.Questions)
+                _dbcontext.Answers.RemoveRange(question.Answers);
+            
+            _dbcontext.Questions.RemoveRange(survey.Questions);
+            _dbcontext.Surveys.Remove(survey); //Deleting the survey itself
+
+            await _dbcontext.SaveChangesAsync(); // Save changes
+
+            return Ok();
         }
     }
 }

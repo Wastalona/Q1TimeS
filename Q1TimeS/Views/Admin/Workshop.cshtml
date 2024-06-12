@@ -8,9 +8,9 @@
 <div class="survey-list">
     @foreach (var survey in Model)
     {
-        <div class="survey-block" onclick="go_stats('@survey.SurveyId')" id="@survey.SurveyId">
+        <div class="survey-block" id="@survey.SurveyId">
             <div class="card-header">
-                <div class="card-title col">
+                <div class="card-title col" onclick="go_stats('@survey.SurveyId')">
                     <h2>@survey.Title</h2>
                 </div>
                 <div class="card-actions">
@@ -19,7 +19,7 @@
                     </div>
                 </div>
             </div>
-            <div class="card-content">
+            <div class="card-content" onclick="go_stats('@survey.SurveyId')">
                 <p>@survey.Description</p>
                 <div class="card-info">
                     <div class="info-item">

@@ -6,14 +6,16 @@ function go_create() {
     window.location.href = "/admin/compositesurvey";
 }
 
-function delete_survey(){
+function delete_survey(surveyId) {
     if (confirm("Вы уверены, что хотите удалить этот опрос?")) {
+        const token = getTokenFromCookie();
+
         // Отправка запроса на сервер для удаления опроса
-        fetch(`/survey/delete/${surveyId}`, {
+        fetch(`/admin/deletesurvey/${surveyId}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': document.querySelector('input[name="__RequestVerificationToken"]').value
+                'Authorization': `Bearer ${token}`
             }
         })
         .then(response => {
@@ -22,6 +24,10 @@ function delete_survey(){
             } else {
                 alert('Произошла ошибка при удалении опроса');
             }
+        })
+        .catch(error => {
+            console.error('Ошибка:', error);
+            alert('Произошла ошибка при удалении опроса');
         });
     }
 }
