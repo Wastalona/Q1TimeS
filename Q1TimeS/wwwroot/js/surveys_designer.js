@@ -1,4 +1,4 @@
-﻿let questionCount = 0; // Question counter for unique radio button names
+let questionCount = 0; // Question counter for unique radio button names
 const testModeSwitch = document.getElementById('test_mode');
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -324,6 +324,7 @@ function submitSurvey() {
         });
     } else {
         // Display the error message
+        alertMessage.innerHTML = "Форма заполнена неправильно";
         alertContainer.classList.remove('d-none');
     }
 }

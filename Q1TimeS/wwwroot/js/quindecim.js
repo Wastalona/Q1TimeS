@@ -23,11 +23,11 @@ async function checkAuthorization() {
         else if (response.status === 401)
             window.location.href = AUTH_URL;
         else
-            throw new Error("Îøèáêà ïðîâåðêè àâòîðèçàöèè.");
+            throw new Error("ÐžÑˆÐ¸Ð±ÐºÐ° Ð¿Ñ€Ð¾Ð²ÐµÑ€ÐºÐ¸ Ð°Ð²Ñ‚Ð¾Ñ€Ð¸Ð·Ð°Ñ†Ð¸Ð¸.");
         
     } catch (error) {
         // Handle authorization errors
-        alert("Ïðè ïðîâåðêå àâòîðèçàöèè ïðîèçîøëà îøèáêà.");
+        alert("ÐŸÑ€Ð¸ Ð¿Ñ€Ð¾Ð²ÐµÑ€ÐºÐµ Ð°Ð²Ñ‚Ð¾Ñ€Ð¸Ð·Ð°Ñ†Ð¸Ð¸ Ð¿Ñ€Ð¾Ð¸Ð·Ð¾ÑˆÐ»Ð° Ð¾ÑˆÐ¸Ð±ÐºÐ°.");
     }
 }
 
@@ -36,15 +36,19 @@ function addClickHandler(elementId, url) {
     const element = document.getElementById(elementId);
     if (element) {
         element.addEventListener("click", () => {
-            if (elementId === "admin-block") {
+            if (elementId === "admin-block")
                 checkAuthorization();
-            } else {
+            else
                 window.location.href = url;
-            }
         });
     }
 }
 
 // Adding click event handlers
 addClickHandler("admin-block", AUTH_URL);
-addClickHandler("general-block", "/general/surveyspage");
+addClickHandler("user-block", "/user/surveyslist");
+
+function logout() {
+    let token = getTokenFromCookie();
+    window.location.href = `/home/logout?token=${token}`;
+}

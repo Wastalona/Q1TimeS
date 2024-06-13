@@ -1,30 +1,14 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Q1TimeS.Models.Db;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace Q1TimeS.Controllers
 {
     public class GeneralController : Controller
     {
-        public IActionResult SurveysPage()
-        /* Display of all surveys */
-        {
-            HttpContext.Session.SetString("user_session_key", HttpContext.Session.Id);
-
-            List<Survey> surveys = new List<Survey>();
-
-            return View(surveys);
-        }
-
-        public IActionResult SurveyInfoPage()
-        /* Display info about the selected survey */
-        {
+        public IActionResult Documenation (){
             return View();
         }
 
-        // GET: GeneralController
-        public ActionResult Index()
-        {
+        public IActionResult About(){
             return View();
         }
     }

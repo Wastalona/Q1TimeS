@@ -2,18 +2,33 @@
     ViewData["Title"] = "За гранью";
     ViewData["StyleName"] = "auth.css";
     ViewData["ScriptName"] = "quindecim.js";
+    string activeCard = ViewBag.ActiveCard as string;
 }
 
-<form class="text-center" method="post">
+<form class="text-center decim" method="post">
     <h1 class="choose-title">Потребитель или создатель?</h1>
     <div class="choose-action-block">
-        <div class="action-block" id="general-block" name="general-block">
-            <i class='bx bx-server'></i>
-            <div class="block-description"><p>Подключитесь к <br>опросу и помогите вашим коллегам принять верное решение</p></div>
-        </div>
-        <div class="action-block" id="admin-block" name="admin-block">
-            <i class='bx bx-shield-quarter'></i>
-            <div class="block-description"><p>Быстро и просто создайте опрос для решения вашего вопроса</p></div>
-        </div>
+        @if (activeCard != "admin"){
+            <div class="action-block" id="user-block" name="user-block">
+                <i class='bx bx-server'></i>
+                <div class="block-description"><p>Подключитесь к <br>опросу и помогите вашим коллегам принять верное решение</p></div>
+            </div>
+        }
+        @if (activeCard != "user"){
+            //Disabling the admin block
+            <div class="action-block" id="admin-block" name="admin-block">
+                <i class='bx bx-shield-quarter'></i>
+                <div class="block-description"><p>Быстро и просто создайте опрос для решения вашего вопроса</p></div>
+            </div>
+        }
     </div>
 </form>
+
+@if (activeCard == "user" || activeCard == "admin"){
+    <div class="logout">
+        <div class="fill-btn" onclick="logout()">
+            <i class='bx bx-log-out-circle'></i>
+            <span class="fill-btn-text">Выйти</span>
+        </div>
+    </div>
+}
