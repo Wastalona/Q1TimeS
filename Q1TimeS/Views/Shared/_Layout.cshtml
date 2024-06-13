@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -27,14 +30,12 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav justify-content-center flex-grow-1 pe-3">
+                        @if (User.IsInRole("Admin"))
+                            @Html.Partial("_AdminPartial")
+                        else if (HttpContextAccessor.HttpContext.Session.GetString("user_session_key") != null)
+                            @Html.Partial("_UserPartial")
                         <li class="nav-item">
-                            <a class="nav-link mx-lg-2 text-light" asp-area="" asp-controller="Admin" asp-action="Statistics">Статистика</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link mx-lg-2 text-light" asp-area="" asp-controller="Home" asp-action="Index">Опросы</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link mx-lg-2 text-light" asp-area="" asp-controller="General" asp-action="SurveysPage">Документация</a>
+                            <a class="nav-link mx-lg-2 text-light" asp-area="" asp-controller="General" asp-action="Documentation">Документация</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link mx-lg-2 text-light" asp-area="" asp-controller="General" asp-action="About">О проекте</a>

@@ -46,7 +46,7 @@ function addClickHandler(elementId, url) {
 
 // Adding click event handlers
 addClickHandler("admin-block", AUTH_URL);
-addClickHandler("general-block", "/general/surveyspage");
+addClickHandler("user-block", "/user/surveyslist");
 
 function logout() {
     let token = getTokenFromCookie();

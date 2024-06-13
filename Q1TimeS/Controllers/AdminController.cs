@@ -21,7 +21,7 @@ namespace Q1TimeS.Controllers
             return View();
         }
 
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         [HttpGet, HttpPost]
         public IActionResult Workshop()
         {
@@ -29,7 +29,7 @@ namespace Q1TimeS.Controllers
             return View(survey);
         }
 
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public IActionResult CompositeSurvey()
         /* Page used to create a new composite survey */
@@ -37,7 +37,7 @@ namespace Q1TimeS.Controllers
             return View();
         }
         
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public IActionResult CompositeSurvey([FromBody] Survey model)
         /* Page used to create a new composite survey */
@@ -88,7 +88,7 @@ namespace Q1TimeS.Controllers
             }
         }
 
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public IActionResult Statistics(int key)
         {
@@ -96,7 +96,7 @@ namespace Q1TimeS.Controllers
             return View();
         }
 
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         [HttpDelete]
         public async Task<IActionResult> DeleteSurvey(int key)
         {

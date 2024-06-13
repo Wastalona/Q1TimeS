@@ -38,6 +38,7 @@ builder.Services.AddAuthentication(options =>
 builder.Services.AddDbContext<MySqlContext>(options => options.UseMySql(connection, ServerVersion.AutoDetect(connection)));
 builder.Services.AddRazorPages();
 builder.Services.AddSession();
+builder.Services.AddHttpContextAccessor();
 
 
 /* App settings */
