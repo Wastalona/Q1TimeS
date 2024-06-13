@@ -7,10 +7,9 @@ function go_create() {
 }
 
 function delete_survey(surveyId) {
-    if (confirm("Вы уверены, что хотите удалить этот опрос?")) {
+    if (confirm("Р’С‹ СѓРІРµСЂРµРЅС‹ РІ СЃРІРѕРёС… РґРµР№СЃС‚РІРёСЏС…?")) {
         const token = getTokenFromCookie();
 
-        // Отправка запроса на сервер для удаления опроса
         fetch(`/admin/deletesurvey/${surveyId}`, {
             method: 'DELETE',
             headers: {
@@ -19,15 +18,14 @@ function delete_survey(surveyId) {
             }
         })
         .then(response => {
-            if (response.ok) {
+            if (response.ok)
                 document.getElementById(surveyId).remove();
-            } else {
-                alert('Произошла ошибка при удалении опроса');
-            }
+            else
+                alert('РћРїСЂРѕСЃ СЃС‚С‘СЂС‚');
         })
         .catch(error => {
-            console.error('Ошибка:', error);
-            alert('Произошла ошибка при удалении опроса');
+            console.error('РћС€РёР±РєР°:', error);
+            alert('РџСЂРё СѓРґР°Р»РµРЅРёРё РїСЂРѕРёР·РѕС€Р»Р° РѕС€РёР±РєР°');
         });
     }
 }

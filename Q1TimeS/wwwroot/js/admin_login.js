@@ -38,11 +38,10 @@ async function submitLogin() {
             })
         });
 
-        if (response.ok) {
+        if (response.ok)
             window.location.href = "/admin/workshop";
-        } else {
+        else
             throw new Error("Неверный пароль");
-        }
     } catch (error) {
         alert("Произошла ошибка при аутентификации.");
     }
@@ -67,7 +66,6 @@ function togglePasswordVisibility() {
 window.addEventListener('load', checkAuthorization);
 
 $(document).keydown(function (e) {
-    if (e.keyCode === 13) {
+    if (e.keyCode === 13)
         $("#admin-complete-block").click();
-    }
 });

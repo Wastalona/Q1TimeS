@@ -36,11 +36,10 @@ function addClickHandler(elementId, url) {
     const element = document.getElementById(elementId);
     if (element) {
         element.addEventListener("click", () => {
-            if (elementId === "admin-block") {
+            if (elementId === "admin-block")
                 checkAuthorization();
-            } else {
+            else
                 window.location.href = url;
-            }
         });
     }
 }
@@ -48,3 +47,8 @@ function addClickHandler(elementId, url) {
 // Adding click event handlers
 addClickHandler("admin-block", AUTH_URL);
 addClickHandler("general-block", "/general/surveyspage");
+
+function logout() {
+    let token = getTokenFromCookie();
+    window.location.href = `/home/logout?token=${token}`;
+}
