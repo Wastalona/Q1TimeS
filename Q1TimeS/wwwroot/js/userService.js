@@ -1,5 +1,5 @@
 async function connect(surveyId) {
-    if (confirm("Подключиться к опросу?")) {
+    if (confirm("РџРѕРґРєР»СЋС‡РёС‚СЊСЃСЏ Рє РѕРїСЂРѕСЃСѓ?")) {
         try {
             await fetch(`connecttosurvey?surveyId=${surveyId}`, {
                 method: "GET",
@@ -9,8 +9,7 @@ async function connect(surveyId) {
             });
         }
         catch (error) {
-            console.error("Error: " + error);
-            alert("Произошла ошибка при подключении к опросу");
+            alert("РџСЂРѕРёР·РѕС€Р»Р° РѕС€РёР±РєР° РїСЂРё РїРѕРґРєР»СЋС‡РµРЅРёРё Рє РѕРїСЂРѕСЃСѓ");
         }
     }
 }

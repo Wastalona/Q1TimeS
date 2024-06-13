@@ -23,11 +23,11 @@ async function checkAuthorization() {
         else if (response.status === 401)
             window.location.href = AUTH_URL;
         else
-            throw new Error("Ошибка проверки авторизации.");
+            throw new Error("РћС€РёР±РєР° РїСЂРѕРІРµСЂРєРё Р°РІС‚РѕСЂРёР·Р°С†РёРё.");
         
     } catch (error) {
         // Handle authorization errors
-        alert("При проверке авторизации произошла ошибка.");
+        alert("РџСЂРё РїСЂРѕРІРµСЂРєРµ Р°РІС‚РѕСЂРёР·Р°С†РёРё РїСЂРѕРёР·РѕС€Р»Р° РѕС€РёР±РєР°.");
     }
 }
 
