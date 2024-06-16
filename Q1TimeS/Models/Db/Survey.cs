@@ -4,6 +4,10 @@ namespace Q1TimeS.Models.Db
 {
     public class Survey
     {
+        public Survey(){
+            CCode = Guid.NewGuid().ToString().Substring(0, 8);
+        }
+
         [Key]
         public int SurveyId { get; set; }
         
@@ -21,6 +25,7 @@ namespace Q1TimeS.Models.Db
         public int Limit { get; set; }
 
         public bool IsQuizMode { get; set; }
+        public string CCode { get; set; }
         public ICollection<Question> Questions { get; set; }
     }
 }

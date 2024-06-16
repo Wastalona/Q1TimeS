@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Q1TimeS.Models.Db;
+//using System.Data.Entity;
 using System.Diagnostics.Eventing.Reader;
 
 namespace Q1TimeS.Controllers
@@ -51,7 +52,7 @@ namespace Q1TimeS.Controllers
                 {
                     // Add surveys
                     _dbcontext.Surveys.Add(model);
-                    _dbcontext.SaveChangesAsync();
+                    _dbcontext.SaveChanges();
 
                     // Add question and answers
                     foreach (var question in model.Questions)
@@ -59,7 +60,7 @@ namespace Q1TimeS.Controllers
                         question.QuestionId = 0;  // Reset id
                         question.SurveyId = model.SurveyId;
                         _dbcontext.Questions.Add(question);
-                        _dbcontext.SaveChangesAsync();
+                        _dbcontext.SaveChanges();
 
                         foreach (var answer in question.Answers)
                         {
@@ -69,7 +70,7 @@ namespace Q1TimeS.Controllers
                         }
                     }
 
-                    _dbcontext.SaveChangesAsync();
+                    _dbcontext.SaveChanges();
 
                     // Commit transaction
                     transaction.Commit();
@@ -79,7 +80,7 @@ namespace Q1TimeS.Controllers
                 catch (Exception)
                 {
                     // In case of an error, we roll back the transaction
-                    transaction.RollbackAsync();
+                    transaction.Rollback();
                     return StatusCode(500, "Внутренняя ошибка сервера.");
                 }
             }
@@ -90,10 +91,13 @@ namespace Q1TimeS.Controllers
 
         [Authorize(Roles = "Admin")]
         [HttpGet]
-        public IActionResult Statistics(int key)
+        public async Task<IActionResult> Statistics(int key)
         {
-            ViewBag.Key = key;
-            return View();
+            Survey survey = await _dbcontext.Surveys.FirstOrDefaultAsync(s => s.SurveyId == key);
+            if (survey == null)
+                return NotFound();
+
+            return View(survey);
         }
 
         [Authorize(Roles = "Admin")]
@@ -113,9 +117,9 @@ namespace Q1TimeS.Controllers
                 _dbcontext.Answers.RemoveRange(question.Answers);
             
             _dbcontext.Questions.RemoveRange(survey.Questions);
-            _dbcontext.Surveys.Remove(survey); //Deleting the survey itself
+            _dbcontext.Surveys.Remove(survey);
 
-            await _dbcontext.SaveChangesAsync(); // Save changes
+            await _dbcontext.SaveChangesAsync(); 
 
             return Ok();
         }
