@@ -39,6 +39,7 @@ builder.Services.AddDbContext<MySqlContext>(options => options.UseMySql(connecti
 builder.Services.AddRazorPages();
 builder.Services.AddSession();
 builder.Services.AddHttpContextAccessor();
+builder.Services.AddSignalR();
 
 
 /* App settings */
@@ -101,10 +102,16 @@ app.UseEndpoints(endpoints => {
     endpoints.MapControllerRoute(
         name: "deleteSurvey",
         pattern: "{controller=Admin}/{action=DeleteSurvey}/{key?}");
+    
+    endpoints.MapControllerRoute(
+        name: "connectWithCode",
+        pattern: "{controller=User}/{action=ConnectWithCode}");
 
     endpoints.MapControllerRoute(
-        name: "connectToSurvey",
-        pattern: "{controller=General}/{action=ConnectToSurvey}/{surveyId?}");
+        name: "surveyHub",
+        pattern: "{controller=User}/{action=SurveyHub}");
 });
+
+app.MapHub<SurveyHub>("/surveyHub");
 
 app.Run();

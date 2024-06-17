@@ -1,0 +1,65 @@
+﻿.stats-container {
+    color: whitesmoke;
+    overflow-x: hidden;
+    background: #12001B;
+    font-family: "Comfortaa";
+    padding: 4px;
+}
+
+.stats-container h1, .connected, .results-block h3, .people-block h3 {
+    text-align: center;
+}
+
+.connected{
+    margin-top: 50px;
+}
+
+.results-block h3, .people-block h3 {
+    margin-top: 15px;
+    color: #8f8f8f;
+}
+
+.info-block {
+    font-family: "Comfortaa";
+    color: whitesmoke;
+}
+
+/* Clock */
+.results-block, .survey-control-block {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.clock {
+    margin: 0 auto;
+}
+
+.clock-checkbox {
+    display: none;
+}
+
+.clock-label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    background-color: #13001c;
+    color: whitesmoke;
+    border: 3px solid #5BBDE3;
+    font-size: 2rem;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.clock-label:hover {
+    background-color: #1D002C;
+    border: 3px solid red;
+}
+
+.clock-label span {
+    margin-right: 5px;
+    font-family: 'Irish Grover', cursive;
+}

@@ -1,7 +1,6 @@
-﻿.survey-list{
+﻿.survey-list {
     display: flex;
     justify-content: center;
-    flex-wrap: wrap;
 }
 
 .survey-block {
@@ -87,4 +86,45 @@
 .add-new{
     display: flex;
     justify-content: right;
+}
+
+/* Connect form */
+.survey-connect-block {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.connect-container {
+    color: whitesmoke;
+    font-family: "Comfortaa";
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(255, 255, 255, 0.3);
+    width: 90%;
+    max-width: 500px;
+    text-align: center;
+}
+
+.connect-container h2 {
+    margin-bottom: 50px;
+}
+
+.connect-container button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #12001B;
+    color: #fff;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.connect-container button:hover {
+    background-color: #2ef18b;
+}
+
+.s-code, .s-nickname{
+    text-align: center;
 }

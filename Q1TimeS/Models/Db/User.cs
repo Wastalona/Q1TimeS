@@ -8,6 +8,8 @@ namespace Q1TimeS.Models.Db
         public int UserId { get; set; }
         public int SurveyId { get; set; }
         [Required]
-        public string SessionKey { get; set; } = string.Empty;
+        public string SessionKey { get; set; }
+        [Required]
+        public string NickName { get; set; }
     }
 }

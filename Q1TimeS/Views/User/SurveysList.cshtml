@@ -1,38 +1,27 @@
-﻿@model List<Q1TimeS.Models.Db.Survey>
-@{
+﻿@{
     ViewData["Title"] = "Опросы";
     ViewData["StyleName"] = "admin/admin.css";
-    ViewData["ScriptName"] = "userService.js";
+    ViewData["ScriptName"] = "user/userService.js";
     string clientSessionValue = Context.Session.GetString("user_session_key");
 }
 
-<div class="survey-list">
-    @foreach (var survey in Model)
-    {
-        <div class="survey-block" id="@survey.SurveyId">
-            <div class="card-header">
-                <div class="card-title col">
-                    <h2>@survey.Title</h2>
-                </div>
-                <div class="card-actions">
-                    <div onclick="connect(@survey.SurveyId)">
-                        <i class='bx bxs-plug' style="color:#EC0355;"></i>
-                    </div>
-                </div>
+<div id="alert-container" class="alert alert-danger d-none" role="alert">
+    <span id="alert-message"></span>
+</div>
+
+<div class="survey-connect-block">
+    <div class="connect-container">
+        <h2>Подключение к опросу</h2>
+        <form id="connect-form" method="POST" onsubmit="connectSurvey(event)">
+            <div class="form__group">
+                <input class="form__input s-code" type="text" placeholder="&nbsp;" id="s-code" maxlength="8" autocomplete="off" required>
+                <label class="form__label" for="s-code">Код</label>
             </div>
-            <div class="card-content">
-                <p>@survey.Description</p>
-                <div class="card-info">
-                    <div class="info-item">
-                        <i class='bx bx-time-five'></i>
-                        <span>@(survey.CutOffTime / 60)мин</span>
-                    </div>
-                    <div class="info-item">
-                        <i class='bx bxs-group'></i>
-                        <span>0/@survey.Limit</span>
-                    </div>
-                </div>
+            <div class="form__group">
+                <input class="form__input s-nickname" type="text" placeholder="&nbsp;" id="s-nickname" maxlength="20" autocomplete="off" required>
+                <label class="form__label" for="s-nickname">Никнейм</label>
             </div>
-        </div>
-    }
+            <button type="submit">Подключиться</button>
+        </form>
+    </div>
 </div>
