@@ -6,7 +6,7 @@
     padding: 4px;
 }
 
-.stats-container h1, .connected, .results-block h3 {
+.stats-container h1, .connected, .results-block h3, .people-block h3 {
     text-align: center;
 }
 
@@ -14,7 +14,7 @@
     margin-top: 50px;
 }
 
-.results-block h3 {
+.results-block h3, .people-block h3 {
     margin-top: 15px;
     color: #8f8f8f;
 }

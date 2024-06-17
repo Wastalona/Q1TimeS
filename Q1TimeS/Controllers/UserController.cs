@@ -16,12 +16,11 @@ namespace Q1TimeS.Controllers
         /* Display of all surveys */
         {
             HttpContext.Session.SetString("user_session_key", HttpContext.Session.Id);
-            var surveys = _dbcontext.Surveys.ToList();
-            return View(surveys);
+            return View();
         }
 
         [HttpGet]
-        public IActionResult ConnectToSurvey(int surveyId)
+        public IActionResult ConnectWithCode(string code, string nickname)
         {
             using var transaction = _dbcontext.Database.BeginTransaction();
 
@@ -29,30 +28,48 @@ namespace Q1TimeS.Controllers
             {
                 string sessionKey = HttpContext.Session.GetString("user_session_key");
                 if (string.IsNullOrEmpty(sessionKey))
+                {
                     HttpContext.Session.SetString("user_session_key", HttpContext.Session.Id);
+                    sessionKey = HttpContext.Session.Id;
+                }
+
+                var survey = _dbcontext.Surveys.FirstOrDefault(s => s.CCode == code);
+                if (survey == null)
+                    return BadRequest("Не удалось найти опрос.");
 
                 var existingUser = _dbcontext.Users.FirstOrDefault(u =>
-                    u.SessionKey == sessionKey && u.SurveyId == surveyId);
+                    u.SessionKey == sessionKey && u.SurveyId == survey.SurveyId);
 
                 if (existingUser != null)
-                    return Redirect("Workshop");
+                    return BadRequest("Вы уже подключены к опросу.");
 
                 _dbcontext.Users.Add(new User
                 {
-                    SurveyId = surveyId,
-                    SessionKey = sessionKey
+                    SurveyId = survey.SurveyId,
+                    SessionKey = sessionKey,
+                    NickName = nickname
                 });
 
                 _dbcontext.SaveChanges();
                 transaction.Commit();
 
-                return Redirect("Workshop");
+                return RedirectToAction("SurveyPage", "User", new { code });
             }
             catch (Exception)
             {
                 transaction.Rollback();
                 return StatusCode(500, "Внутренняя ошибка сервера.");
             }
+        }
+
+        [HttpGet]
+        public IActionResult SurveyPage(string code)
+        {
+            var survey = _dbcontext.Surveys.FirstOrDefault(s => s.CCode == code);
+            if (survey == null)
+                return NotFound("Survey not found.");
+            
+            return View();
         }
     }
 }

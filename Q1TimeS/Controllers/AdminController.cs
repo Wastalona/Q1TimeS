@@ -2,8 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Q1TimeS.Models.Db;
-//using System.Data.Entity;
-using System.Diagnostics.Eventing.Reader;
+using Q1TimeS.Models;
 
 namespace Q1TimeS.Controllers
 {
@@ -91,14 +90,21 @@ namespace Q1TimeS.Controllers
 
         [Authorize(Roles = "Admin")]
         [HttpGet]
-        public async Task<IActionResult> Statistics(int key)
+        public IActionResult Statistics(int key)
         {
-            Survey survey = await _dbcontext.Surveys.FirstOrDefaultAsync(s => s.SurveyId == key);
+            var survey = _dbcontext.Surveys.FirstOrDefault(s => s.SurveyId == key);
             if (survey == null)
-                return NotFound();
+                return NotFound("Survey not found.");
 
-            return View(survey);
+            List<User> users;
+            try { users = _dbcontext.Users.Where(u => u.SurveyId == key).ToList(); }
+            catch {  users = new List<User> { };}
+
+            ViewBag.UserCount = SurveyHub.GetUserCount(survey.CCode);
+            ViewBag.Limit = survey.Limit;
+            return View(new SurveyStatisticsViewModel { Survey = survey, Users = users });
         }
+
 
         [Authorize(Roles = "Admin")]
         [HttpDelete]

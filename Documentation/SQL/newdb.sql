@@ -32,7 +32,8 @@ CREATE TABLE Answers (
 CREATE TABLE Users (
     UserID INT AUTO_INCREMENT PRIMARY KEY,
     SurveyID INT,
-    SessionKey TEXT,
+    SessionKey TEXT NOT NULL,
+    NickName VARCHAR(20) NOT NULL,
     FOREIGN KEY (SurveyID) REFERENCES Surveys(SurveyID)
 );
 

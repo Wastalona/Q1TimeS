@@ -1,26 +1,43 @@
-﻿@model Q1TimeS.Models.Db.Survey
+﻿@model SurveyStatisticsViewModel
 @{
     ViewData["Title"] = "Статистика по опросу";
     ViewData["StyleName"] = "admin/stats.css";
-    ViewData["ScriptName"] = "stats.js";
+    ViewData["ScriptName"] = "admin/stats.js";
 }
 
 <div class="stats-container">
     <h1>Сводка по опросу</h1>
     <hr>
     <div class="info-block">
-        <p>Название: @Model.Title</p>
-        <p>Описание: @Model.Description</p>
+        <p>Название: @Model.Survey.Title</p>
+        <p>Описание: @Model.Survey.Description</p>
     </div>
     <hr>
     <div class="survey-control-block">
         <div class="clock">
             <input type="checkbox" id="clock-checkbox" class="clock-checkbox">
             <label for="clock-checkbox" class="clock-label" onclick="toggleRun()">
-                <span id="timer-text">@Model.CCode</span>
+                <span id="timer-text">@Model.Survey.CCode</span>
             </label>
         </div>
-        <h3 class="connected">Подключено 0 из @Model.Limit</h3>
+        <h3 class="connected">Подключено @ViewBag.UserCount из @Model.Survey.Limit</h3>
+    </div>
+    <hr>
+    <div class="people-block">
+        <h1>Участники</h1>
+        @if (Model.Users != null && Model.Users.Count > 0)
+        {
+            <ul>
+                @foreach (var user in Model.Users)
+                {
+                    <li>@user.NickName : @user.SessionKey</li>
+                }
+            </ul>
+        }
+        else
+        {
+            <h3>Нет подключений</h3>
+        }
     </div>
     <hr>
     <div class="results-block">
