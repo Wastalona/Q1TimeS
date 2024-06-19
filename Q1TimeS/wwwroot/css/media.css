@@ -1,0 +1,143 @@
+﻿@media(min-width: 991px) {
+    .nav-link::before {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0;
+        height: 2px;
+        background-color: #EC0355;
+        visibility: hidden;
+        transition: 0.5s ease-in-out;
+    }
+
+    .nav-link:hover::before, .nav-link.active::before {
+        width: 100%;
+        visibility: visible;
+    }
+
+    .navbar-brand:hover {
+        color: whitesmoke;
+        cursor: default;
+    }
+}
+
+@media (max-width: 992px) {
+    .action-block {
+        width: 260px;
+        height: 370px;
+    }
+
+    .action-block i {
+        font-size: 130px;
+    }
+
+    .block-description p {
+        font-size: 1.3rem;
+    }
+}
+
+@media(max-width: 875px){
+    .social-media-row{
+        flex-direction: column;
+        justify-content: left;
+        align-content: flex-start;
+    }
+
+    .social-title{
+        margin: 0;
+    }
+
+    .scroll-to-top {
+        justify-content: flex-end;
+        margin-top: 30px;
+    }
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 780px) {
+    .choose-title {
+        margin-bottom: 60px;
+    }
+
+    .choose-action-block {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-height: 70vh;
+        margin-left: 45px;
+    }
+
+    .action-block {
+        margin-bottom: 5vh;
+    }
+}
+
+@media(max-width: 712px){
+    .footer, .social-media-row {
+        padding: 0;
+        padding-top: 20px;
+    }
+}
+
+@media(max-width: 626px) {
+    .scroll-to-top{
+        padding: 0;
+    }
+
+    .fill-btn {
+        padding-top: 14%;
+        width: 190px;
+        height: 50px;
+        padding-bottom: 30px;
+    }
+
+    .fill-btn i{
+        font-size: 30px;
+    }
+
+    .fill-btn-text {
+        font-size: 20px;
+    }
+
+    .social-block {
+        min-width: 25px;
+        min-height: 25px;
+        width: 50px;
+        height: 50px;
+    }
+
+    .social-block i {
+        font-size: 30px;
+    }
+}
+
+@media(max-width: 517px){
+
+}
+
+@media(max-width: 310px) {
+    .action-block {
+        width: 150px;
+        height: 300px;
+    }
+}
+
+/* Disabling hover if it is not supported */
+@media (hover:hover) {
+    .action-block:hover {
+        transform: translateY(-20px);
+        box-shadow: #5BBDE3 10px 10px;
+    }
+
+    .action-block:hover i {
+        color: #5BBDE3;
+    }
+}

@@ -15,12 +15,13 @@
     <hr>
     <div class="survey-control-block">
         <div class="clock">
-            <input type="checkbox" id="clock-checkbox" class="clock-checkbox">
-            <label for="clock-checkbox" class="clock-label" onclick="toggleRun()">
+            <input type="checkbox" id="clock-checkbox" class="clock-checkbox" @(Model.Survey.IsRunning ? "checked" : "")>
+            <label for="clock-checkbox" class="clock-label" onclick="toggleRun(@Model.Survey.SurveyId)">
                 <span id="timer-text">@Model.Survey.CCode</span>
             </label>
         </div>
         <h3 class="connected">Подключено @ViewBag.UserCount из @Model.Survey.Limit</h3>
+        <div id="remaining-time" data-cutoff-time="@Model.Survey.CutOffTime"></div>
     </div>
     <hr>
     <div class="people-block">
@@ -36,7 +37,7 @@
         }
         else
         {
-            <h3>Нет подключений</h3>
+            <h3>Ответы отсутствуют</h3>
         }
     </div>
     <hr>

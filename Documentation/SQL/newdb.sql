@@ -10,7 +10,8 @@ CREATE TABLE Surveys (
     CutOffTime INT CHECK (CutOffTime > 0),
     `Limit` INT CHECK (`Limit` > 0),
     IsQuizMode BOOLEAN NOT NULL,
-    CCode TEXT NOT NULL
+    CCode TEXT NOT NULL,
+    IsRunning BOOL NOT NULL DEFAULT FALSE
 );
 
 CREATE TABLE Questions (

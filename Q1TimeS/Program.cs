@@ -110,6 +110,14 @@ app.UseEndpoints(endpoints => {
     endpoints.MapControllerRoute(
         name: "surveyHub",
         pattern: "{controller=User}/{action=SurveyHub}");
+
+    endpoints.MapControllerRoute(
+        name: "toggleTimer",
+        pattern: "{controller=Admin}/{action=ToggleTimer}/{surveyId?}");
+
+    endpoints.MapControllerRoute(
+        name: "clearSurveyUsers",
+        pattern: "{controller=Admin}/{action=ClearSurveyUsers}/{surveyId?}");
 });
 
 app.MapHub<SurveyHub>("/surveyHub");
