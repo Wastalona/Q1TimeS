@@ -55,12 +55,6 @@
     }
 }
 
-@media (min-width: 768px) {
-    html {
-        font-size: 16px;
-    }
-}
-
 @media (max-width: 780px) {
     .choose-title {
         margin-bottom: 60px;
@@ -80,7 +74,47 @@
     }
 }
 
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
 @media(max-width: 712px){
+    .survey-block {
+        width: 400px;
+        height: 250px;
+        padding: 20px;
+    }
+
+    .card-title h2 {
+        font-size: 1.2em;
+    }
+
+    .info-item i {
+        font-size: 20px;
+        margin-left: 10px;
+        margin-right: 10px;
+        cursor: pointer;
+    }
+
+    .card-content p {
+        text-align: center;
+        margin: 10px 0;
+        font-size: 1.4rem;
+        padding: 10px;
+    }
+
+    .card-info {
+        padding: 30px 5px;
+        border-left: 1px solid #fff;
+    }
+
+    .info-item .i {
+        margin-right: 0px;
+        font-size: 0.7em;
+    }
+
     .footer, .social-media-row {
         padding: 0;
         padding-top: 20px;
