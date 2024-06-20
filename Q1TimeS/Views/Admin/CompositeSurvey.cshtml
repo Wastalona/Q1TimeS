@@ -57,14 +57,14 @@
         <div class="que-n-ans">
             <div class="question-block">
                 <div class="form__group">
-                    <input class="form__input question-input" type="text" placeholder="&nbsp;" id="s-question" maxlenght="20" required autocomplete="off">
+                    <input class="form__input question-input" type="text" placeholder="&nbsp;" id="s-question" maxlenght="20" onchange="saveSurvey()" required autocomplete="off">
                     <label class="form__label">Введите вопрос *</label>
                 </div>
 
                 <div class="answers-container"></div>
 
                 <div class="form-check form-switch multianswer-switch" data-bs-toggle="tooltip" data-bs-placement="top" title="Добавляет возможность выбора нескольких вариантов ответа.">
-                    <input class="form-check-input" type="checkbox" id="multianswer_mode" autocomplete="off">
+                    <input class="form-check-input" type="checkbox" id="multianswer_mode" autocomplete="off" onchange="saveSurvey()">
                     <label class="form-check-label" for="multianswer_mode">Несколько ответов</label>
                 </div>
                 <button type="button" class="btn btn-outline-primary add-answer">Добавить ответа</button>

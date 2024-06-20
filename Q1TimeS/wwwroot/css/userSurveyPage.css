@@ -1,0 +1,106 @@
+﻿.cssload-flex-container {
+    margin-left: 0;
+    padding-left: 0;
+}
+
+.waiting-block {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 70%;
+    margin: 0 auto;
+    background: #1D002C;
+    color: whitesmoke;
+    font-family: 'Comfortaa';
+    border-bottom: 4px solid #FFC54F;
+    position: relative;
+    overflow: hidden;
+    border-radius: 5rem;
+}
+
+#waiting-message {
+    font-size: 2rem;
+    text-align: center;
+    padding: 30px;
+}
+
+#surveyForm {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.ques-card {
+    background: #1D002C;
+    border-radius: 15px;
+    color: whitesmoke;
+    margin-bottom: 20px;
+    padding: 20px;
+    transition: transform 0.3s ease;
+}
+
+.ques-card:hover {
+    transform: translateY(-10px);
+}
+
+.ques-card-body {
+    padding-left: 10px;
+}
+
+.ques-card-title {
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+    color: #FFC54F;
+}
+
+.answers-group {
+    list-style: none;
+    padding: 0;
+}
+
+.answers-group-item {
+    margin-bottom: 10px;
+    position: relative;
+    padding-left: 35px;
+}
+
+.answers-group-item input[type="checkbox"],
+.answers-group-item input[type="radio"] {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.answers-group-item label {
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.answers-group-item input[type="checkbox"]:checked + label,
+.answers-group-item input[type="radio"]:checked + label {
+    color: #FFC54F;
+}
+
+.form-group .btn {
+    width: 70px;
+    height: 70px;
+    background-color: transparent;
+    border: 2px solid #FFC54F;
+    color: whitesmoke;
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 5rem;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+.form-group .btn i {
+    font-size: 30px;
+}
+
+.form-group .btn:hover {
+    background-color: #FFC54F;
+    color: #1D002C;
+    width: 160px;
+}

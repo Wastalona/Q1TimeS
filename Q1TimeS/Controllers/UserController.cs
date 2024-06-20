@@ -65,11 +65,28 @@ namespace Q1TimeS.Controllers
         [HttpGet]
         public IActionResult SurveyPage(string code)
         {
-            var survey = _dbcontext.Surveys.FirstOrDefault(s => s.CCode == code);
-            if (survey == null)
-                return NotFound("Survey not found.");
-            
-            return View();
+            var view_model = _dbcontext.Surveys
+                .Where(s => s.CCode == code)
+                .Select(s => new Survey
+                {
+                    Title = s.Title,
+                    Description = s.Description,
+                    IsRunning = s.IsRunning,
+                    Questions = s.Questions.Select(q => new Question
+                    {
+                        QuestionText = q.QuestionText,
+                        MultiAnswer = q.MultiAnswer,
+                        Answers = q.Answers.Select(a => new Answer
+                        {
+                            AnswerText = a.AnswerText
+                        }).ToList()
+                    }).ToList()
+                }).FirstOrDefault();
+
+            if (view_model == null)
+                return NotFound("Опрос не найден");
+
+            return View(view_model);
         }
     }
 }

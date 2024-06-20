@@ -1,6 +1,63 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model Q1TimeS.Models.Db.Survey
 @{
+    ViewData["Title"] = "Прохождение опроса";
+    ViewData["StyleName"] = "userSurveyPage.css";
+    ViewData["ScriptName"] = "surveyPage.js";
 }
-<h1>Survey Page</h1>
+
+<div id="alert-container" class="alert alert-danger d-none" role="alert">
+    <span id="alert-message">Создание опроса отменено из-за ошибок. Проверьте все поля.</span>
+</div>
+
+@if (Model.IsRunning)
+{
+    <div class="container mt-5">
+        <h1 class="form__title">@Model.Title</h1>
+
+        <form id="surveyForm">
+            @for (int i = 0; i < Model.Questions.Count; i++)
+            {
+                var question = Model.Questions.ToArray()[i];
+                <div class="ques-card mb-3">
+                    <div class="ques-card-body">
+                        <h3 class="ques-card-title">@question.QuestionText</h3>
+                        <ul class="answers-group">
+                            @for (int j = 0; j < question.Answers.Count; j++)
+                            {
+                                var answer = question.Answers[j];
+                                <li class="answers-group-item">
+                                    @if (question.MultiAnswer)
+                                    {
+                                        <input type="checkbox" name="question_@i" value="@answer.AnswerText" id="answer_@i-@j" />
+                                    }
+                                    else
+                                    {
+                                        <input type="radio" name="question_@i" value="@answer.AnswerText" id="answer_@i-@j" />
+                                    }
+                                    <label for="answer_@i-@j">@answer.AnswerText</label>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            }
+            <div class="form-group text-center">
+                <button type="submit" class="btn btn-primary"><i class='bx bx-send'></i></button>
+            </div>
+        </form>
+    </div>
+}
+else{
+    <div id="waiting-block" class="waiting-block">
+        <span id="waiting-message">Ожидайте запуска</span>
+        <div class="cssload-container">
+            <ul class="cssload-flex-container">
+                <li>
+                    <span class="cssload-loading cssload-one"></span>
+                    <span class="cssload-loading cssload-two"></span>
+                    <span class="cssload-loading-center"></span>
+                </li>
+            </ul>
+        </div>
+    </div>
+}

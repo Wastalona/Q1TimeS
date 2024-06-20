@@ -3,15 +3,18 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Q1TimeS.Models.Db;
 using Q1TimeS.Models;
+using Microsoft.AspNetCore.SignalR;
 
 namespace Q1TimeS.Controllers
 {
     public class AdminController : Controller
     {
+        private readonly IHubContext<SurveyHub> _hubContext;
         private readonly MySqlContext _dbcontext;
 
-        public AdminController(MySqlContext dbcontext)
+        public AdminController(IHubContext<SurveyHub> hubContext, MySqlContext dbcontext)
         {
+            _hubContext = hubContext;
             _dbcontext = dbcontext;
         }
 
@@ -51,7 +54,6 @@ namespace Q1TimeS.Controllers
                 {
                     // Add surveys
                     _dbcontext.Surveys.Add(model);
-                    _dbcontext.SaveChanges();
 
                     // Add question and answers
                     foreach (var question in model.Questions)
@@ -59,7 +61,6 @@ namespace Q1TimeS.Controllers
                         question.QuestionId = 0;  // Reset id
                         question.SurveyId = model.SurveyId;
                         _dbcontext.Questions.Add(question);
-                        _dbcontext.SaveChanges();
 
                         foreach (var answer in question.Answers)
                         {
@@ -88,13 +89,14 @@ namespace Q1TimeS.Controllers
             }
         }
 
+        /* Survey options */
         [Authorize(Roles = "Admin")]
         [HttpGet]
         public IActionResult Statistics(int key)
         {
             var survey = _dbcontext.Surveys.FirstOrDefault(s => s.SurveyId == key);
             if (survey == null)
-                return NotFound("Survey not found.");
+                return NotFound("Опрос не найден");
 
             List<User> users;
             try { users = _dbcontext.Users.Where(u => u.SurveyId == key).ToList(); }
@@ -105,6 +107,44 @@ namespace Q1TimeS.Controllers
             return View(new SurveyStatisticsViewModel { Survey = survey, Users = users });
         }
 
+        [Authorize(Roles = "Admin")]
+        [HttpPost]
+        public async Task<IActionResult> ToggleTimer(int surveyId)
+        {
+            var survey = _dbcontext.Surveys.FirstOrDefault(s => s.SurveyId == surveyId);
+            if (survey == null)
+                return NotFound("Опрос не найден");
+
+            survey.IsRunning = !survey.IsRunning;
+            await _dbcontext.SaveChangesAsync();
+
+            return Ok(new { IsRunning = survey.IsRunning });
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpPost]
+        public async Task<IActionResult> ClearSurveyUsers(int surveyId)
+        {
+            var survey = _dbcontext.Surveys.FirstOrDefault(s => s.SurveyId == surveyId);
+            if (survey == null)
+                return NotFound("Опрос не найден");
+
+            survey.IsRunning = false;
+
+            // Get users to be removed
+            var usersToRemove = _dbcontext.Users.Where(u => u.SurveyId == surveyId).ToList();
+
+            // Remove users from SignalR groups
+            var hubClients = _hubContext.Clients;
+
+            foreach (var user in usersToRemove) 
+                await hubClients.Group(survey.CCode).SendAsync("LeaveSurvey");
+            
+            _dbcontext.Users.RemoveRange(usersToRemove);
+            await _dbcontext.SaveChangesAsync();
+            return Ok(survey.CCode);
+        }
+        /* Survey options end*/
 
         [Authorize(Roles = "Admin")]
         [HttpDelete]
@@ -115,6 +155,7 @@ namespace Q1TimeS.Controllers
                                          .Include(s => s.Questions)
                                          .ThenInclude(q => q.Answers)
                                          .FirstOrDefaultAsync(s => s.SurveyId == key);
+
             if (survey == null)
                 return NotFound();
 

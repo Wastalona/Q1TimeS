@@ -6,6 +6,7 @@ namespace Q1TimeS.Models.Db
     {
         public Survey(){
             CCode = Guid.NewGuid().ToString().Substring(0, 8);
+            IsRunning = false;
         }
 
         [Key]
@@ -26,6 +27,7 @@ namespace Q1TimeS.Models.Db
 
         public bool IsQuizMode { get; set; }
         public string CCode { get; set; }
+        public bool IsRunning { get; set; }
         public ICollection<Question> Questions { get; set; }
     }
 }

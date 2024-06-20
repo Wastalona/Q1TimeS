@@ -50,6 +50,21 @@ public class SurveyHub : Hub
         await Groups.RemoveFromGroupAsync(Context.ConnectionId, code);
         await Clients.Group(code).SendAsync("UpdateUserCount", _surveyConnections.GetValueOrDefault(code, 0));
     }
+
+    // Remove all users from the group
+    public async Task ClearConnection(string code)
+    {
+        if (_surveyConnections.TryGetValue(code, out int currentCount))
+        {
+            for (int i = 0; i < currentCount; i++)
+                await Groups.RemoveFromGroupAsync(Context.ConnectionId, code);
+
+            _surveyConnections.TryRemove(code, out _);
+        }
+
+        await Clients.Group(code).SendAsync("UpdateUserCount", _surveyConnections.GetValueOrDefault(code, 0));
+    }
+
     public static int GetUserCount(string code)
     {
         _surveyConnections.TryGetValue(code, out int userCount);
@@ -59,7 +74,8 @@ public class SurveyHub : Hub
     private Survey GetSurveyByCode(string code)
     {
         Survey survey = _dbcontext.Surveys.FirstOrDefault(s => s.CCode == code);
-        //if (survey == null)
+        if (survey == null)
+            return new Survey();
         return survey;
     }
 }

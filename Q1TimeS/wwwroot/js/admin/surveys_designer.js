@@ -75,7 +75,6 @@ function collectSurveyData() {
         const trueAnswer = answersContainer.querySelector(`input[name="test-answer-${index}"]:checked`);
 
         const questionData = {
-            //questionId: generateUniqueId(),
             questionText: questionInput.value,
             multianswer: multianswerSwitch.checked,
             answers: [],
@@ -87,7 +86,6 @@ function collectSurveyData() {
             const answerInput = answer.querySelector('.form-control');
             questionData.answers.push({
                 answerText: answerInput.value
-                //questionId: questionData.questionId
             });
         });
 
@@ -132,6 +130,10 @@ function renderSurveyData(surveyData) {
 
         questionInput.value = questionData.questionText != null ? questionData.questionText : "";
         multianswerSwitch.checked = questionData.multianswer;
+
+        if (!questionData.answers || !Array.isArray(questionData.answers)) {
+            questionData.answers = [];
+        }
 
         questionData.answers.forEach((obj, answerIndex) => {
             addAnswer(answersContainer, obj.answerText, testModeSwitch.checked, questionData.questionIndex, answerIndex === questionData.trueAnswerIndex);
@@ -200,6 +202,7 @@ function addAnswer(container, answerText = '', isTestMode = false, questionIndex
     answerInput.setAttribute('type', 'text');
     answerInput.setAttribute('class', 'form-control');
     answerInput.setAttribute('placeholder', 'Ответ');
+    answerInput.setAttribute('onchange', 'saveSurvey()');
     if (answerText) answerInput.value = answerText;
     answerDiv.appendChild(answerInput);
 
@@ -278,7 +281,7 @@ function submitSurvey() {
             IsQuizMode: surveyOptions.test_mode,
             Questions: surveyData.map(question => ({
                 QuestionText: question.questionText,
-                MultiAnswer: question.multiAnswer,
+                MultiAnswer: question.multianswer,
                 TrueAnswerIndex: question.trueAnswerIndex,
                 Answers: question.answers.map(answer => ({
                     AnswerText: answer.answerText,
