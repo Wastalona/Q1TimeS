@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <!-- From project -->
     <link type="Image/x-icon" href="/fav.ico" rel="icon" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/loadAnim.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Q1TimeS.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/@ViewData["StyleName"]" asp-append-version="true" />
@@ -30,7 +31,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav justify-content-center flex-grow-1 pe-3">
+                    <ul class="navbar-nav justify-content-end flex-grow-1">
                         @if (User.IsInRole("Admin"))
                             @Html.Partial("_AdminPartial")
                         else if (HttpContextAccessor.HttpContext.Session.GetString("user_session_key") != null)

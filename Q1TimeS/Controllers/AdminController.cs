@@ -54,7 +54,6 @@ namespace Q1TimeS.Controllers
                 {
                     // Add surveys
                     _dbcontext.Surveys.Add(model);
-                    _dbcontext.SaveChanges();
 
                     // Add question and answers
                     foreach (var question in model.Questions)
@@ -62,7 +61,6 @@ namespace Q1TimeS.Controllers
                         question.QuestionId = 0;  // Reset id
                         question.SurveyId = model.SurveyId;
                         _dbcontext.Questions.Add(question);
-                        _dbcontext.SaveChanges();
 
                         foreach (var answer in question.Answers)
                         {
@@ -111,11 +109,14 @@ namespace Q1TimeS.Controllers
 
         [Authorize(Roles = "Admin")]
         [HttpPost]
-        public IActionResult ToggleTimer(int surveyId)
+        public async Task<IActionResult> ToggleTimer(int surveyId)
         {
             var survey = _dbcontext.Surveys.FirstOrDefault(s => s.SurveyId == surveyId);
             if (survey == null)
                 return NotFound("Опрос не найден");
+
+            survey.IsRunning = !survey.IsRunning;
+            await _dbcontext.SaveChangesAsync();
 
             return Ok(new { IsRunning = survey.IsRunning });
         }
@@ -128,6 +129,7 @@ namespace Q1TimeS.Controllers
             if (survey == null)
                 return NotFound("Опрос не найден");
 
+            survey.IsRunning = false;
 
             // Get users to be removed
             var usersToRemove = _dbcontext.Users.Where(u => u.SurveyId == surveyId).ToList();
@@ -139,8 +141,9 @@ namespace Q1TimeS.Controllers
                 await hubClients.Group(survey.CCode).SendAsync("LeaveSurvey");
             
             _dbcontext.Users.RemoveRange(usersToRemove);
-            _dbcontext.SaveChanges();
-            return Ok(survey.CCode);        }
+            await _dbcontext.SaveChangesAsync();
+            return Ok(survey.CCode);
+        }
         /* Survey options end*/
 
         [Authorize(Roles = "Admin")]
@@ -152,6 +155,7 @@ namespace Q1TimeS.Controllers
                                          .Include(s => s.Questions)
                                          .ThenInclude(q => q.Answers)
                                          .FirstOrDefaultAsync(s => s.SurveyId == key);
+
             if (survey == null)
                 return NotFound();
 

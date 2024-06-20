@@ -80,6 +80,25 @@
     }
 }
 
+@media (max-width: 768px) {
+    .form-group .btn {
+        width: 160px;
+        background-color: #FFC54F;
+        border: none;
+        color: #1D002C;
+        padding: 10px 20px;
+        font-size: 1rem;
+        border-radius: 5rem;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .form-group .btn:hover {
+        background-color: transparent;
+        color: whitesmoke;
+    }
+}
+
 @media(max-width: 712px){
     .survey-block {
         width: 400px;
@@ -151,10 +170,13 @@
     .social-block i {
         font-size: 30px;
     }
+
+    #waiting-message{
+        font-size: 1.7rem;
+    }
 }
 
 @media(max-width: 517px){
-
 }
 
 @media(max-width: 310px) {

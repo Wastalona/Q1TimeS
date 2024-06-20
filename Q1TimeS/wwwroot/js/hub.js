@@ -19,6 +19,7 @@ connection.on("SurveyFull", () => {
 function joinSurvey(code) {
     try {
         connection.invoke("JoinSurvey", code);
+        window.location.href = `/user/surveypage?code=${code}`;
     } catch {
         alert("Ошибка присоединения");
     }
@@ -27,6 +28,7 @@ function joinSurvey(code) {
 function leaveSurvey(code) {
     try {
         connection.invoke("LeaveSurvey", code);
+        window.location.href = "";
     } catch {
         alert("Ошибка отсоединения");
     }
