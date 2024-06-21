@@ -15,7 +15,7 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <!-- From project -->
-    <link type="Image/x-icon" href="/fav.ico" rel="icon" asp-append-version="true" />
+    <link type="Image/x-icon" href="/favicon.ico" rel="icon" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/loadAnim.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Q1TimeS.styles.css" asp-append-version="true" />
@@ -31,22 +31,23 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav justify-content-end flex-grow-1">
+                    <ul class="navbar-nav ms-auto">
                         @if (User.IsInRole("Admin"))
                             @Html.Partial("_AdminPartial")
                         else if (HttpContextAccessor.HttpContext.Session.GetString("user_session_key") != null)
                             @Html.Partial("_UserPartial")
-                        <li class="nav-item">
-                            <a class="nav-link mx-lg-2 text-light" asp-area="" asp-controller="General" asp-action="Documentation">Документация</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link mx-lg-2 text-light" asp-area="" asp-controller="General" asp-action="About">О проекте</a>
-                        </li>
-                    </ul>
+
+                            <li class="nav-item">
+                                <a class="nav-link mx-lg-2 text-light" asp-area="" asp-controller="General" asp-action="Documentation">Документация</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link mx-lg-2 text-light" asp-area="" asp-controller="General" asp-action="About">О проекте</a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-        </nav>
-    </header>
+            </nav>
+        </header>
     
     <main role="main" class="pb-3 container">
         @RenderBody()

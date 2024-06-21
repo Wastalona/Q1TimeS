@@ -2,8 +2,6 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Q1TimeS.Controllers;
 using Q1TimeS.Models;
-using System.Data.Entity.Infrastructure;
-using System.Data.Entity;
 using Microsoft.EntityFrameworkCore;
 
 
@@ -57,7 +55,6 @@ app.Use(async (context, next) =>
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 

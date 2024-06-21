@@ -48,29 +48,39 @@ body {
 
 .nav-link:hover, .nav-link.active { color: #EC0355; }
 
-@media(min-width: 991px){
-    .nav-link::before {
-        content: "";
-        position: absolute;
-        bottom: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 0;
-        height: 2px;
-        background-color: #EC0355;
-        visibility: hidden;
-        transition: 0.5s ease-in-out;
-    }
+.navbar {
+    background: #12001B;
+    padding: 10px 20px;
+}
 
-    .nav-link:hover::before, .nav-link.active::before {
-        width: 100%;
-        visibility: visible;
-    }
+.navbar-brand {
+    font-weight: 500;
+    font-size: 2rem;
+    transition: 0.3s color;
+    font-family: 'Irish Grover';
+    color: whitesmoke;
+    margin-left: 0;
+}
 
-    .navbar-brand:hover {
-        color: whitesmoke;
-        cursor: default;
-    }
+.navbar-toggler {
+    border: none;
+}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAExJREFUSEtjZKAxYKSx+QyjFhAM4QEJov8EnYVfAYqjsfmA5hZQ6AFU7QMSBzT3Ac3jgOYW0DyIhr4FNI8Dmlsw9ONg1AcoIUDz0hQAbegGGXzv/l0AAAAASUVORK5CYII=");
+}
+
+.nav-link {
+    color: #00bfff;
+    font-weight: 500;
+    position: relative;
+    margin-top: 10px;
+    color: whitesmoke;
+    font-family: 'Comfortaa';
+}
+
+.nav-link:hover, .nav-link.active {
+    color: #EC0355;
 }
 
 .container{ margin-top: 15vh; }
@@ -114,10 +124,10 @@ footer a {
     flex-basis: 100%;
 }
 
-.social-title h1 {
-    font-size: 4rem;
-    margin-bottom: 20px;
-}
+    .social-title h1 {
+        font-size: 4rem;
+        margin-bottom: 20px;
+    }
 
 .social-media {
     display: flex;
@@ -144,26 +154,28 @@ footer a {
     text-decoration: none;
 }
 
-.social-block i {
-    font-size: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    transition: all 0.3s ease-in-out;
-}
+    .social-block i {
+        font-size: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        transition: all 0.3s ease-in-out;
+    }
 
-.social-block:hover {
-    transform: rotateZ(45deg);
-    border-color: #FFC54F;
-}
+    .social-block:hover {
+        transform: rotateZ(45deg);
+        border-color: #FFC54F;
+    }
 
-.social-block:hover i {
-    transform: rotateZ(-45deg);
-    color: #FFC54F;
-}
+        .social-block:hover i {
+            transform: rotateZ(-45deg);
+            color: #FFC54F;
+        }
 
-.scroll-to-top { margin-right: 100px; }
+.scroll-to-top {
+    margin-right: 100px;
+}
 
 .fill-btn {
     width: 220px;
@@ -179,11 +191,11 @@ footer a {
     transition: background-color 0.3s, color 0.3s;
 }
 
-.fill-btn i {
-    font-size: 40px;
-    display: flex;
-    align-items: center;
-}
+    .fill-btn i {
+        font-size: 40px;
+        display: flex;
+        align-items: center;
+    }
 
 .fill-btn-text {
     font-family: 'Irish Grover', cursive;
@@ -203,7 +215,7 @@ footer a {
     margin-top: 20px;
     color: whitesmoke;
 }
-/* --- footer end --- */
+/* Footer end*/
 
 /* Custom common styles */
 /* title, group, label and button*/
