@@ -1,0 +1,54 @@
+﻿.info {
+    font-family: 'Comfortaa', sans-serif;
+    background-color: #12001B;
+    color: whitesmoke;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    margin-top: 120px;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1, h2, h3 {
+    color: #FFC54F;
+}
+
+p, ul, ol {
+    margin-bottom: 20px;
+}
+
+ul, ol {
+    padding-left: 20px;
+}
+
+    ul li, ol li {
+        margin-bottom: 10px;
+    }
+
+/* Styles for mobile devices */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 1.75rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    h3 {
+        font-size: 1.25rem;
+    }
+
+    p, ul, ol {
+        font-size: 1rem;
+    }
+}

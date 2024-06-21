@@ -4,7 +4,7 @@ namespace Q1TimeS.Controllers
 {
     public class GeneralController : Controller
     {
-        public IActionResult Documenation (){
+        public IActionResult Documentation (){
             return View();
         }
 

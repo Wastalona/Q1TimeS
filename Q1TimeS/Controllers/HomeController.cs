@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
 using Q1TimeS.Models;
 using System.Diagnostics;
 
@@ -9,16 +8,17 @@ namespace Q1TimeS.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
-        {
+        public HomeController(ILogger<HomeController> logger){
             _logger = logger;
         }
 
+        // The method of verifying the user's session key
         private bool checkUserSessionKey(){
             return HttpContext.Session.Keys.Contains("user_session_key");
         }
-        private string getTokenCookie()
-        {
+
+
+        private string getTokenCookie(){
             return Request.Cookies["token"];
         }
 
@@ -36,6 +36,7 @@ namespace Q1TimeS.Controllers
 
         [HttpGet]
         public IActionResult Logout()
+        /* Removing user and administrator roles */
         {
             if (checkUserSessionKey())
                 HttpContext.Session.Remove("user_session_key");
@@ -46,8 +47,7 @@ namespace Q1TimeS.Controllers
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
+        public IActionResult Error(){
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
