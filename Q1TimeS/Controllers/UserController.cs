@@ -65,28 +65,82 @@ namespace Q1TimeS.Controllers
         [HttpGet]
         public IActionResult SurveyPage(string code)
         {
-            var view_model = _dbcontext.Surveys
+            var viewModel = _dbcontext.Surveys
                 .Where(s => s.CCode == code)
                 .Select(s => new Survey
                 {
+                    SurveyId = s.SurveyId,
                     Title = s.Title,
                     Description = s.Description,
                     IsRunning = s.IsRunning,
                     Questions = s.Questions.Select(q => new Question
                     {
+                        QuestionId = q.QuestionId,
                         QuestionText = q.QuestionText,
                         MultiAnswer = q.MultiAnswer,
                         Answers = q.Answers.Select(a => new Answer
                         {
+                            AnswerId = a.AnswerId,
                             AnswerText = a.AnswerText
                         }).ToList()
                     }).ToList()
                 }).FirstOrDefault();
 
-            if (view_model == null)
+            if (viewModel == null)
                 return NotFound("Опрос не найден");
 
-            return View(view_model);
+            return View(viewModel);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> SendResults()
+        {
+            try
+            {
+                // Получаем данные из формы
+                var formData = await Request.ReadFormAsync();
+                var userAnswers = new List<UserAnswer>();
+
+                // Получаем ID пользователя
+                string sessionKey = HttpContext.Session.GetString("user_session_key");
+                var user = _dbcontext.Users.FirstOrDefault(u => u.SessionKey == sessionKey);
+                if (user == null)
+                    return BadRequest("Пользователь не найден");
+
+                foreach (var key in formData.Keys){
+                    if (key.StartsWith("question_")){
+                        var questionIdString = key.Split('-')[1];
+                        if (int.TryParse(questionIdString, out int questionId)){
+                            var answerTexts = formData[key]; // StringValues
+
+                            foreach (var answerText in answerTexts){
+                                var answer = _dbcontext.Answers.FirstOrDefault(a => a.AnswerText == answerText);
+                                if (answer != null){
+                                    var userAnswer = new UserAnswer{
+                                        QuestionId = questionId,
+                                        AnswerId = answer.AnswerId,
+                                        UserId = user.UserId
+                                    };
+                                    userAnswers.Add(userAnswer);
+                                }
+                            }
+                        }
+                    }
+                }
+
+                if (userAnswers.Count == 0)
+                    return BadRequest("Достоверных ответов не найдено");
+
+                _dbcontext.UserAnswers.AddRange(userAnswers);
+                await _dbcontext.SaveChangesAsync();
+
+                return Redirect("SurveysList");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Ошибка со стороные сервера: {ex.Message}");
+            }
+        }
+
     }
 }

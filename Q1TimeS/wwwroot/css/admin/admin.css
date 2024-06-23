@@ -129,3 +129,9 @@
 .s-code, .s-nickname{
     text-align: center;
 }
+
+.none-block{
+    padding: 50px;
+    color: whitesmoke;
+    font-family: "Comfortaa";
+}

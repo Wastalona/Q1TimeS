@@ -50,6 +50,7 @@ function startTimer(surveyId) {
             } catch (error) {
                 alert("Ошибка при очистке пользователей опроса.");
             }
+            location.reload();
         } else {
             const hours = Math.floor(remainingTime / (1000 * 60 * 60));
             const minutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
@@ -64,4 +65,31 @@ function startTimer(surveyId) {
 function stopTimer() {
     clearInterval(timerInterval);
     document.getElementById("remaining-time").innerText = "";
+}
+
+function updateTable() {
+    var userId = document.getElementById("userSelect").value;
+    var userAnswers = JSON.parse(document.getElementById("userAnswersData").textContent);
+    var questions = JSON.parse(document.getElementById("questionsData").textContent);
+    var answers = JSON.parse(document.getElementById("answersData").textContent);
+
+    var tableBody = document.getElementById("answersTable").getElementsByTagName("tbody")[0];
+    tableBody.innerHTML = "";
+
+    userAnswers.forEach(function (userAnswer) {
+        if (userAnswer.UserId == userId) {
+            var question = questions.find(q => q.QuestionId == userAnswer.QuestionId);
+            var answer = answers.find(a => a.AnswerId == userAnswer.AnswerId);
+            
+            var row = tableBody.insertRow();
+            var cell1 = row.insertCell(0);
+            var cell2 = row.insertCell(1);
+
+            console.log(question ? question.QuestionText : question);
+            console.log(answer ? answer.AnswerText : answer);
+
+            cell1.innerHTML = question ? question.QuestionText : "Неизвестный вопрос";
+            cell2.innerHTML = answer ? answer.AnswerText : "Неизвестный ответ";
+        }
+    });
 }

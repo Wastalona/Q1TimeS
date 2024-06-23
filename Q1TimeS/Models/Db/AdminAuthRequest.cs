@@ -1,4 +1,4 @@
-﻿namespace Q1TimeS.Models
+﻿namespace Q1TimeS.Models.Db
 {
     public class AdminAuthRequest
     {

@@ -1,4 +1,4 @@
-﻿@model SurveyStatisticsViewModel
+﻿@model Q1TimeS.Models.Db.SurveyStatisticsViewModel
 @{
     ViewData["Title"] = "Статистика по опросу";
     ViewData["StyleName"] = "admin/stats.css";
@@ -26,24 +26,50 @@
     <hr>
     <div class="people-block">
         <h1>Участники</h1>
-        @if (Model.Users != null && Model.Users.Count > 0)
-        {
+        @if (Model.Users != null && Model.Users.Count > 0){
             <ul>
-                @foreach (var user in Model.Users)
-                {
+                @foreach (var user in Model.Users){
                     <li>@user.NickName : @user.SessionKey</li>
                 }
             </ul>
         }
-        else
-        {
+        else{
             <h3>Участники отсутствуют</h3>
         }
     </div>
     <hr>
     <div class="results-block">
         <h1>Полученные ответы</h1>
-        <h3>Ответы отсутствуют</h3>
+
+        @if (Model.Users != null && Model.Users.Count > 0){
+            <div class="form-group">
+                <label for="userSelect">Выберите пользователя:</label>
+                <select id="userSelect" class="form-control" onchange="updateTable()">
+                    <option value="" disabled selected>Выберите пользователя</option>
+                    @foreach (var user in Model.Users){
+                        <option value="@user.UserId">@user.NickName</option>
+                    }
+                </select>
+            </div>
+
+            <table class="table table-striped table-bordered" id="answersTable">
+                <thead>
+                    <tr>
+                        <th>Вопрос</th>
+                        <th>Ответ</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+
+            <!-- Hidden JSON data for JavaScript -->
+            <script type="application/json" id="userAnswersData">@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.UserAnswers))</script>
+            <script type="application/json" id="questionsData">@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.Questions))</script>
+            <script type="application/json" id="answersData">@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.Answers))</script>
+        }else{
+            <h3>Ответы отсутствуют</h3>
+        }
     </div>
     <hr>
 </div>
