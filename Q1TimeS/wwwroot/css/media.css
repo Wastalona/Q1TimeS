@@ -242,13 +242,18 @@
 }
 
 @media(max-width: 517px){
-
+    .table {
+        font-size: 1rem;
+    }
 }
 
 @media(max-width: 310px) {
     .action-block {
         width: 150px;
         height: 300px;
+    }
+    .table {
+        font-size: 0.7rem;
     }
 }
 

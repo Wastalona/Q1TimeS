@@ -20,14 +20,14 @@ CREATE TABLE Questions (
     QuestionText TEXT NOT NULL,
     MultiAnswer BOOLEAN NOT NULL,
     TrueAnswerIndex INT,
-    FOREIGN KEY (SurveyID) REFERENCES Surveys(SurveyID)
+    FOREIGN KEY (SurveyID) REFERENCES Surveys(SurveyID) ON DELETE CASCADE
 );
 
 CREATE TABLE Answers (
     AnswerID INT AUTO_INCREMENT PRIMARY KEY,
     QuestionID INT,
     AnswerText TEXT NOT NULL,
-    FOREIGN KEY (QuestionID) REFERENCES Questions(QuestionID)
+    FOREIGN KEY (QuestionID) REFERENCES Questions(QuestionID) ON DELETE CASCADE
 );
 
 CREATE TABLE Users (
@@ -35,8 +35,20 @@ CREATE TABLE Users (
     SurveyID INT,
     SessionKey TEXT NOT NULL,
     NickName VARCHAR(20) NOT NULL,
-    FOREIGN KEY (SurveyID) REFERENCES Surveys(SurveyID)
+    Completed BOOL,
+    FOREIGN KEY (SurveyID) REFERENCES Surveys(SurveyID) ON DELETE CASCADE
 );
+
+CREATE TABLE UserAnswers (
+    UserAnswerId INT AUTO_INCREMENT PRIMARY KEY,
+    QuestionId INT NOT NULL,
+    AnswerId INT NOT NULL,
+    UserId INT NOT NULL,
+    FOREIGN KEY (QuestionId) REFERENCES Questions(QuestionId) ON DELETE CASCADE,
+    FOREIGN KEY (AnswerId) REFERENCES Answers(AnswerId) ON DELETE CASCADE,
+    FOREIGN KEY (UserId) REFERENCES Users(UserId) ON DELETE CASCADE
+);
+
 
 -- INSERT INTO Surveys (SurveyId, Title, `Description`, CutOffTime, `Limit`, IsQuizMode)
 -- VALUES 

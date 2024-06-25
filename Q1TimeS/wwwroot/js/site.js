@@ -15,3 +15,8 @@ function generateUniqueId() {
     // A simple function for generating small unique numbers
     return Math.floor(Math.random() * 1000000); 
 }
+
+function clearPage() {
+    localStorage.clear();
+    location.reload();
+}

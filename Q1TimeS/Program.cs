@@ -3,6 +3,7 @@ using Microsoft.IdentityModel.Tokens;
 using Q1TimeS.Controllers;
 using Q1TimeS.Models;
 using Microsoft.EntityFrameworkCore;
+using Q1TimeS.Models.Db;
 
 
 /* Builder settings */
@@ -99,14 +100,6 @@ app.UseEndpoints(endpoints => {
     endpoints.MapControllerRoute(
         name: "deleteSurvey",
         pattern: "{controller=Admin}/{action=DeleteSurvey}/{key?}");
-    
-    endpoints.MapControllerRoute(
-        name: "connectWithCode",
-        pattern: "{controller=User}/{action=ConnectWithCode}");
-
-    endpoints.MapControllerRoute(
-        name: "surveyHub",
-        pattern: "{controller=User}/{action=SurveyHub}");
 
     endpoints.MapControllerRoute(
         name: "toggleTimer",
@@ -115,6 +108,18 @@ app.UseEndpoints(endpoints => {
     endpoints.MapControllerRoute(
         name: "clearSurveyUsers",
         pattern: "{controller=Admin}/{action=ClearSurveyUsers}/{surveyId?}");
+
+    endpoints.MapControllerRoute(
+        name: "connectWithCode",
+        pattern: "{controller=User}/{action=ConnectWithCode}");
+
+    endpoints.MapControllerRoute(
+        name: "surveyHub",
+        pattern: "{controller=User}/{action=SurveyHub}");
+    
+    endpoints.MapControllerRoute(
+        name: "sendResults",
+        pattern: "{controller=User}/{action=SendResults}");
 });
 
 app.MapHub<SurveyHub>("/surveyHub");

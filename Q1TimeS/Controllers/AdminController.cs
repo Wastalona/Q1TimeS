@@ -45,19 +45,16 @@ namespace Q1TimeS.Controllers
         public IActionResult CompositeSurvey([FromBody] Survey model)
         /* Page used to create a new composite survey */
         {
-            if (ModelState.IsValid)
-            {
+            if (ModelState.IsValid){
                 // Start transaction
                 using var transaction = _dbcontext.Database.BeginTransaction();
 
-                try
-                {
+                try{
                     // Add surveys
                     _dbcontext.Surveys.Add(model);
 
                     // Add question and answers
-                    foreach (var question in model.Questions)
-                    {
+                    foreach (var question in model.Questions){
                         question.QuestionId = 0;  // Reset id
                         question.SurveyId = model.SurveyId;
                         _dbcontext.Questions.Add(question);
@@ -76,15 +73,12 @@ namespace Q1TimeS.Controllers
                     transaction.Commit();
 
                     return Redirect("Workshop");
-                }
-                catch (Exception)
-                {
+                }catch (Exception){
                     // In case of an error, we roll back the transaction
                     transaction.Rollback();
                     return StatusCode(500, "Внутренняя ошибка сервера.");
                 }
-            }
-            else{
+            }else{
                 return BadRequest(ModelState);
             }
         }
@@ -94,18 +88,35 @@ namespace Q1TimeS.Controllers
         [HttpGet]
         public IActionResult Statistics(int key)
         {
-            var survey = _dbcontext.Surveys.FirstOrDefault(s => s.SurveyId == key);
+            var survey = _dbcontext.Surveys.Include(s => s.Questions).FirstOrDefault(s => s.SurveyId == key);
             if (survey == null)
-                return NotFound("Опрос не найден");
+                return NotFound("Опрос не найден.");
 
-            List<User> users;
-            try { users = _dbcontext.Users.Where(u => u.SurveyId == key).ToList(); }
-            catch {  users = new List<User> { };}
+            var users = _dbcontext.Users.Where(u => u.SurveyId == key).ToList();
+            var questions = _dbcontext.Questions.Where(q => q.SurveyId == key).ToList();
+            var answers = _dbcontext.Answers
+                .Where(a => questions.Select(q => q.QuestionId).Contains(a.QuestionId))
+                .ToList();
+            var userAnswers = _dbcontext.UserAnswers
+                .Where(ua => questions.Select(q => q.QuestionId).Contains(ua.QuestionId))
+                .ToList();
+
+
+            var viewModel = new SurveyStatisticsViewModel
+            {
+                Survey = survey,
+                Users = users ?? new List<User>(),
+                UserAnswers = userAnswers,
+                Questions = questions,
+                Answers = answers
+            };
 
             ViewBag.UserCount = SurveyHub.GetUserCount(survey.CCode);
             ViewBag.Limit = survey.Limit;
-            return View(new SurveyStatisticsViewModel { Survey = survey, Users = users });
+
+            return View(viewModel);
         }
+
 
         [Authorize(Roles = "Admin")]
         [HttpPost]

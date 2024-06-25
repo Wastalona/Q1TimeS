@@ -6,33 +6,38 @@
 }
 
 <div class="survey-list">
-    @foreach (var survey in Model)
-    {
-        <div class="survey-block" id="@survey.SurveyId">
-            <div class="card-header">
-                <div class="card-title col" onclick="go_stats('@survey.SurveyId')">
-                    <h2>@survey.Title</h2>
-                </div>
-                <div class="card-actions">
-                    <div onclick="delete_survey('@survey.SurveyId')">
-                        <i class='bx bxs-trash-alt' style="color:#EC0355;"></i>
-                    </div>
-                </div>
-            </div>
-            <div class="card-content" onclick="go_stats('@survey.SurveyId')">
-                <p>@survey.Description</p>
-                <div class="card-info">
-                    <div class="info-item">
-                        <i class='bx bx-time-five'></i>
-                        <span>@(survey.CutOffTime / 60)мин</span>
-                    </div>
-                    <div class="info-item">
-                        <i class='bx bxs-group'></i>
-                        <span>0/@survey.Limit</span>
-                    </div>
-                </div>
-            </div>
+    @if (Model.Count == 0){
+        <div class="none-block">
+            <h1>Опросов ещё не создано</h1>
         </div>
+    }else{
+        @foreach (var survey in Model){
+            <div class="survey-block" id="@survey.SurveyId">
+                <div class="card-header">
+                    <div class="card-title col" onclick="go_stats('@survey.SurveyId')">
+                        <h2>@survey.Title</h2>
+                    </div>
+                    <div class="card-actions">
+                        <div onclick="delete_survey('@survey.SurveyId')">
+                            <i class='bx bxs-trash-alt' style="color:#EC0355;"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-content" onclick="go_stats('@survey.SurveyId')">
+                    <p>@survey.Description</p>
+                    <div class="card-info">
+                        <div class="info-item">
+                            <i class='bx bx-time-five'></i>
+                            <span>@(survey.CutOffTime / 60)мин</span>
+                        </div>
+                        <div class="info-item">
+                            <i class='bx bxs-group'></i>
+                            <span>0/@survey.Limit</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
     }
 </div>
 
