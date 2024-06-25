@@ -1,9 +1,9 @@
-DROP DATABASE q1times_test;
-CREATE DATABASE q1times_test;
+DROP DATABASE IF EXISTS  q1times;
+CREATE DATABASE q1times;
 
-USE q1times_test;
+USE q1times;
 
-CREATE TABLE Surveys (
+CREATE TABLE IF NOT EXISTS Surveys (
     SurveyID INT AUTO_INCREMENT PRIMARY KEY,
     Title VARCHAR(20) NOT NULL,
     `Description` VARCHAR(99),
@@ -14,7 +14,7 @@ CREATE TABLE Surveys (
     IsRunning BOOL NOT NULL DEFAULT FALSE
 );
 
-CREATE TABLE Questions (
+CREATE TABLE IF NOT EXISTS Questions (
     QuestionID INT AUTO_INCREMENT PRIMARY KEY,
     SurveyID INT,
     QuestionText TEXT NOT NULL,
@@ -23,14 +23,14 @@ CREATE TABLE Questions (
     FOREIGN KEY (SurveyID) REFERENCES Surveys(SurveyID) ON DELETE CASCADE
 );
 
-CREATE TABLE Answers (
+CREATE TABLE IF NOT EXISTS Answers (
     AnswerID INT AUTO_INCREMENT PRIMARY KEY,
     QuestionID INT,
     AnswerText TEXT NOT NULL,
     FOREIGN KEY (QuestionID) REFERENCES Questions(QuestionID) ON DELETE CASCADE
 );
 
-CREATE TABLE Users (
+CREATE TABLE IF NOT EXISTS Users (
     UserID INT AUTO_INCREMENT PRIMARY KEY,
     SurveyID INT,
     SessionKey TEXT NOT NULL,
@@ -39,7 +39,7 @@ CREATE TABLE Users (
     FOREIGN KEY (SurveyID) REFERENCES Surveys(SurveyID) ON DELETE CASCADE
 );
 
-CREATE TABLE UserAnswers (
+CREATE TABLE IF NOT EXISTS UserAnswers (
     UserAnswerId INT AUTO_INCREMENT PRIMARY KEY,
     QuestionId INT NOT NULL,
     AnswerId INT NOT NULL,
@@ -48,10 +48,3 @@ CREATE TABLE UserAnswers (
     FOREIGN KEY (AnswerId) REFERENCES Answers(AnswerId) ON DELETE CASCADE,
     FOREIGN KEY (UserId) REFERENCES Users(UserId) ON DELETE CASCADE
 );
-
-
--- INSERT INTO Surveys (SurveyId, Title, `Description`, CutOffTime, `Limit`, IsQuizMode)
--- VALUES 
---    (4, 'Тестирование 1', 'Описание для первого тестирования', 90, 20, true),
---    (2, 'Тестирование 2', 'Описание для второго тестирования', 120, 30, false),
---    (3, 'Тестирование 3', 'Описание для третьего тестирования', 60, 25, true);
