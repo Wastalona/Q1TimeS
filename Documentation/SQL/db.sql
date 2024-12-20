@@ -1,0 +1,80 @@
+CREATE DATABASE IF NOT EXISTS Q1TIMES;
+USE Q1TIMES;
+CREATE TABLE IF NOT EXISTS Surveys(
+	SurveyId INT NOT NULL AUTO_INCREMENT UNIQUE,
+    Title VARCHAR (255) NOT NULL UNIQUE,
+    SurPassword  VARCHAR (255) NULL,
+    CutOffTime INT NULL,
+    PeopleLimit INT NULL,
+    SurveyStatus BOOL NOT NULL,
+    PRIMARY KEY (SurveyId)
+);
+
+CREATE TABLE IF NOT EXISTS Users(
+	UserId INT NOT NULL AUTO_INCREMENT UNIQUE,
+    SessionKey VARCHAR (255) NOT NULL UNIQUE,
+    Survey INT NULL,
+    PRIMARY KEY (UserId),
+    FOREIGN KEY (Survey) REFERENCES Surveys(SurveyId)
+);
+
+ALTER TABLE Surveys AUTO_INCREMENT = 3;
+ALTER TABLE Users AUTO_INCREMENT = 3;
+
+DROP DATABASE IF EXISTS  q1times;
+CREATE DATABASE q1times;
+
+USE q1times;
+
+CREATE TABLE IF NOT EXISTS Surveys (
+    SurveyID INT AUTO_INCREMENT PRIMARY KEY,
+    Title VARCHAR(20) NOT NULL,
+    `Description` VARCHAR(99),
+    CutOffTime INT CHECK (CutOffTime > 0),
+    `Limit` INT CHECK (`Limit` > 0),
+    IsQuizMode BOOLEAN NOT NULL,
+    CCode TEXT NOT NULL,
+    IsRunning BOOL NOT NULL DEFAULT FALSE
+);
+
+CREATE TABLE IF NOT EXISTS Questions (
+    QuestionID INT AUTO_INCREMENT PRIMARY KEY,
+    SurveyID INT,
+    QuestionText TEXT NOT NULL,
+    MultiAnswer BOOLEAN NOT NULL,
+    TrueAnswerIndex INT,
+    FOREIGN KEY (SurveyID) REFERENCES Surveys(SurveyID) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS Answers (
+    AnswerID INT AUTO_INCREMENT PRIMARY KEY,
+    QuestionID INT,
+    AnswerText TEXT NOT NULL,
+    FOREIGN KEY (QuestionID) REFERENCES Questions(QuestionID) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS Users (
+    UserID INT AUTO_INCREMENT PRIMARY KEY,
+    SurveyID INT,
+    SessionKey TEXT NOT NULL,
+    NickName VARCHAR(20) NOT NULL,
+    Completed BOOL,
+    FOREIGN KEY (SurveyID) REFERENCES Surveys(SurveyID) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS UserAnswers (
+    UserAnswerId INT AUTO_INCREMENT PRIMARY KEY,
+    QuestionId INT NOT NULL,
+    AnswerId INT NOT NULL,
+    UserId INT NOT NULL,
+    FOREIGN KEY (QuestionId) REFERENCES Questions(QuestionId) ON DELETE CASCADE,
+    FOREIGN KEY (AnswerId) REFERENCES Answers(AnswerId) ON DELETE CASCADE,
+    FOREIGN KEY (UserId) REFERENCES Users(UserId) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS IPaddress (
+	AddressId INTEGER primary key auto_increment,
+    IPaddress TEXT
+);
+
+insert into IPaddress(IPaddress) values ("178.123.206.176");
