@@ -26,6 +26,14 @@ namespace Q1TimeS.Controllers
 
         [Authorize(Roles = "Admin")]
         [HttpGet, HttpPost]
+        public IActionResult Access()
+        {
+            var IPs = _dbcontext.TrustedIP.ToList();
+            return View(IPs);
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpGet, HttpPost]
         public IActionResult Workshop()
         {
             var survey = _dbcontext.Surveys.ToList();

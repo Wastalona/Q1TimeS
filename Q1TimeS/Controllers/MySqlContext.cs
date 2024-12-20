@@ -7,6 +7,7 @@ namespace Q1TimeS.Controllers
     {
         public MySqlContext(DbContextOptions options) : base(options){}
 
+        public DbSet<TrustedIP> TrustedIP { get; set; }
         public DbSet<Survey> Surveys { get; set; }
         public DbSet<Question> Questions { get; set; }
         public DbSet<Answer> Answers { get; set; }

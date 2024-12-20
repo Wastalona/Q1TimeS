@@ -1,0 +1,19 @@
+﻿@model List<Q1TimeS.Models.Db.TrustedIP>
+@{
+    ViewData["Title"] = "Настройки доступа";
+    ViewData["StyleName"] = "admin/access.css";
+    ViewData["ScriptName"] = "admin/access.js";
+}
+
+<div class="cc">
+    <h1>Разрешённые IP-адреса</h1>
+    @if (Model != null && Model.Count > 0){
+        <ul>
+            @foreach (var ip in Model){
+                <li>@ip.IPaddress</li>
+            }
+        </ul>
+    }else{
+        <h3>Нет доверенных адресов</h3>
+    }
+</div>
