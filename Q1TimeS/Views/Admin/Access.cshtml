@@ -7,13 +7,40 @@
 
 <div class="cc">
     <h1>Разрешённые IP-адреса</h1>
-    @if (Model != null && Model.Count > 0){
-        <ul>
-            @foreach (var ip in Model){
-                <li>@ip.IPaddress</li>
-            }
-        </ul>
-    }else{
+    @if (Model != null && Model.Count > 0)
+    {
+        <form class="cc" id="delete-form" onsubmit="delete_request(event)" method="POST">
+            <ul>
+                @foreach (var ip in Model)
+                {
+                    <li>
+                        <input type="checkbox" name="SelectedIPs" value="@ip.AddressId" />
+                        <span>@ip.IPaddress</span>
+                    </li>
+                }
+            </ul>
+            <button class="fill-btn delete-btn" type="submit">
+                <i class='bx bx-trash'></i>
+                <span class="fill-btn-text">Удалить выбранные</span>
+            </button>
+        </form>
+    }
+    else
+    {
         <h3>Нет доверенных адресов</h3>
     }
+    <form class="cr" method="POST" action="Access">
+        <input name="IPAddress"
+               type="text"
+               required
+               autofocus
+               placeholder="192.168.1.1"
+               autocomplete="off"
+               pattern="^((25[0-5]|2[0-4][0-9]|[0-1]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[0-1]?[0-9][0-9]?)$"
+               title="Введите корректный IP-адрес" />
+        <button class="fill-btn" type="submit">
+            <i class='bx bx-plus-medical'></i>
+            <span class="fill-btn-text">Добавить</span>
+        </button>
+    </form>
 </div>

@@ -6,19 +6,18 @@
 }
 
 <form class="text-center decim" method="post">
-    <h1 class="choose-title">Потребитель или создатель?</h1>
     <div class="choose-action-block">
         @if (activeCard != "admin"){
             <div class="action-block" id="user-block" name="user-block">
-                <i class='bx bx-server'></i>
-                <div class="block-description"><p>Подключитесь к <br>опросу и помогите вашим коллегам принять верное решение</p></div>
+                <i class='bx bxs-plug'></i>
+                <div class="block-description"><p>Подключиться к<br>опросу</p></div>
             </div>
         }
         @if (activeCard != "user"){
             //Disabling the admin block
             <div class="action-block" id="admin-block" name="admin-block">
-                <i class='bx bx-shield-quarter'></i>
-                <div class="block-description"><p>Быстро и просто создайте опрос для решения вашего вопроса</p></div>
+                <i class='bx bxs-ghost'></i>
+                <div class="block-description"><p>Администировать</p></div>
             </div>
         }
     </div>

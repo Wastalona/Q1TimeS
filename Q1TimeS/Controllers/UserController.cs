@@ -11,17 +11,47 @@ namespace Q1TimeS.Controllers
             _dbcontext = dbcontext;
         }
 
+        private string GetClientIp()
+        {
+            var remoteIp = Request.HttpContext.Connection.RemoteIpAddress;
+            if (remoteIp == null)
+                return "Не удалось определить IP-адрес.";
+
+            // Checking IPv6
+            if (remoteIp.AddressFamily == System.Net.Sockets.AddressFamily.InterNetworkV6 &&
+                remoteIp.ToString().StartsWith("::ffff:"))
+            {
+                // to IPv4
+                return remoteIp.ToString().Substring(7);
+            }
+
+            return remoteIp.ToString();
+        }
+
+
+        private bool verificationIP()
+        {
+            var remoteIp = GetClientIp();
+            if (string.IsNullOrEmpty(remoteIp))
+                return false;
+
+            Console.WriteLine(remoteIp);
+            return !_dbcontext.TrustedIP.Any(ip => ip.IPaddress == remoteIp);
+        }
+
         [HttpGet]
         public IActionResult SurveysList()
         /* Display of all surveys */
         {
-            HttpContext.Session.SetString("user_session_key", HttpContext.Session.Id);
+            if (verificationIP()) return BadRequest("К сожалению либо ваш IP-адрес заблокирован, либо мы не смогли его распознать :(");
+            HttpContext.Session.SetString("user_session_key", HttpContext.Session.Id); 
             return View();
         }
 
         [HttpGet]
         public IActionResult ConnectWithCode(string code, string nickname)
         {
+            if (verificationIP()) return BadRequest("К сожалению либо ваш IP-адрес заблокирован, либо мы не смогли его распознать :(");
             using var transaction = _dbcontext.Database.BeginTransaction();
 
             try
@@ -65,6 +95,7 @@ namespace Q1TimeS.Controllers
         [HttpGet]
         public IActionResult SurveyPage(string code)
         {
+            if (verificationIP()) return BadRequest("К сожалению либо ваш IP-адрес заблокирован, либо мы не смогли его распознать :(");
             var viewModel = _dbcontext.Surveys
                 .Where(s => s.CCode == code)
                 .Select(s => new Survey
@@ -95,6 +126,7 @@ namespace Q1TimeS.Controllers
         [HttpPost]
         public async Task<IActionResult> SendResults()
         {
+            if (verificationIP()) return BadRequest("К сожалению либо ваш IP-адрес заблокирован, либо мы не смогли его распознать :(");
             try
             {
                 // Получаем данные из формы
