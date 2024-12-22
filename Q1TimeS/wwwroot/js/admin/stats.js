@@ -93,3 +93,29 @@ function updateTable() {
         }
     });
 }
+
+function download(extension, id) {
+    fetch(`/Admin/ExportFile?key=${id}&extension=${extension}`, {
+        method: 'GET',
+    })
+    .then((response) => {
+        console.log(response);
+    if (!response.ok) {
+        throw new Error('Ошибка при загрузке файла.');
+    }
+    return response.blob();
+    })
+    .then((blob) => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `survey_answers.${extension}`;
+        a.click();
+        window.URL.revokeObjectURL(url);
+    })
+    .catch((error) => {
+        console.error(error.message);
+        alert('Не удалось загрузить файл.');
+    });
+}
+

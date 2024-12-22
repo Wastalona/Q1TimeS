@@ -72,4 +72,12 @@
         }
     </div>
     <hr>
+    <div>
+        <button name="download-btn" id="csv-btn" class="styled-btn" onclick="download('CSV', @Model.Survey.SurveyId)">
+            Скачать CSV
+        </button>
+        <button name="download-btn" id="json-btn" class="styled-btn" onclick="download('JSON', @Model.Survey.SurveyId)">
+            Скачать JSON
+        </button>
+    </div>
 </div>
