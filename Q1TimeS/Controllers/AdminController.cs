@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Q1TimeS.Models.Db;
 using Q1TimeS.Models;
 using Microsoft.AspNetCore.SignalR;
+using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace Q1TimeS.Controllers
 {
@@ -24,13 +25,69 @@ namespace Q1TimeS.Controllers
             return View();
         }
 
+        /* ACCESS */
+        // Delete action
         [Authorize(Roles = "Admin")]
-        [HttpGet, HttpPost]
+        [HttpDelete]
+        public IActionResult DeleteAddresses(List<int> SelectedIPs)
+        {
+            if (SelectedIPs == null || !SelectedIPs.Any())
+            {
+                return BadRequest("Не выбраны адреса для удаления.");
+            }
+
+            using var transaction = _dbcontext.Database.BeginTransaction();
+            try
+            {
+                var ipsToDelete = _dbcontext.TrustedIP.Where(ip => SelectedIPs.Contains(ip.AddressId)).ToList();
+                _dbcontext.TrustedIP.RemoveRange(ipsToDelete);
+                _dbcontext.SaveChanges();
+                transaction.Commit();
+                return Ok();
+            }
+            catch (Exception)
+            {
+                transaction.Rollback();
+                return StatusCode(500, "Внутренняя ошибка сервера.");
+            }
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpGet]
         public IActionResult Access()
         {
             var IPs = _dbcontext.TrustedIP.ToList();
             return View(IPs);
         }
+
+        // Add action
+        [Authorize(Roles = "Admin")]
+        [HttpPost]
+        public IActionResult Access([FromForm] TrustedIP model)
+        {
+            if (ModelState.IsValid)
+            {
+                using var transaction = _dbcontext.Database.BeginTransaction();
+                try
+                {
+                    _dbcontext.TrustedIP.Add(model);
+                    _dbcontext.SaveChanges();
+                    transaction.Commit();
+                    return Redirect("Access");
+                }
+                catch (Exception)
+                {
+                    transaction.Rollback();
+                    return StatusCode(500, "Внутренняя ошибка сервера.");
+                }
+            }
+            else
+            {
+                return BadRequest(ModelState);
+            }
+        }
+
+        /* END ACCESS  */
 
         [Authorize(Roles = "Admin")]
         [HttpGet, HttpPost]

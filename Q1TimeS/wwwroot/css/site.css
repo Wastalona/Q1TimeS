@@ -2,7 +2,7 @@ html, body {
     padding: 0;
     margin: 0;
     font-size: 14px;
-    background: #12001B;
+    background: var(--dark);
     overflow-x: hidden;
 }
 
@@ -10,6 +10,13 @@ html {
     position: relative;
     min-height: 90%;
     height: 90%;
+}
+
+:root {
+    --primary: #a047e2;
+    --secondary: #d2c6e5;
+    --dark: #12001B;
+    --bg: #170421;
 }
 
 
@@ -24,18 +31,18 @@ html {
 /* Body Styling*/
 body {
     margin-bottom: 60px;
-    background: #12001B;
+    background: var(--dark);
     font-size: 1.5rem;
 }
 
-.navbar { background: #12001B; }
+.navbar { background: var(--dark); }
 
 .navbar-brand {
     font-weight: 500;
     font-size: 3rem;
     transition: 0.3s color;
     font-family: 'Irish Grover';
-    margin-left: 160px;
+    margin-left: 100px;
     color: whitesmoke;
 }
 
@@ -51,7 +58,7 @@ body {
 .nav-link:hover, .nav-link.active { color: #EC0355; }
 
 .navbar {
-    background: #12001B;
+    background: var(--dark);
     padding: 10px 20px;
 }
 
@@ -112,7 +119,7 @@ footer {
 }
 
 .footer {
-    background: #12001B;
+    background: var(--dark);
 }
 
 footer a {

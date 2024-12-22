@@ -30,8 +30,8 @@
                 <button class="navbar-toggler bg-light text-black" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav ms-auto">
+                <div class="collapse navbar-collapse container-fluid" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto justify-content-end">
                         @if (User.IsInRole("Admin"))
                             @Html.Partial("_AdminPartial")
                         else if (HttpContextAccessor.HttpContext.Session.GetString("user_session_key") != null)

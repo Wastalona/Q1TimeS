@@ -5,6 +5,13 @@
     flex-direction: column;
 }
 
+.cr {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
 .cc h1 {
     color: whitesmoke;
     font-family: 'Comfortaa';
@@ -13,4 +20,36 @@
 .cc ul li {
     color: whitesmoke;
     font-family: 'Comfortaa';
+}
+
+form {
+    width: 100%;
+}
+
+form ul li{
+    list-style: none;
+}
+
+form input[type="text"] {
+    width: 220px;
+    height: 70px;
+    border: 6px solid whitesmoke;
+    background: transparent;
+    color: whitesmoke;
+    padding: 10px 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: background-color 0.3s, color 0.3s;
+    font-family: 'Comfortaa';
+}
+
+.delete-btn {
+    width: 230px;
+    height: 80px;
+    gap: 5px;
+}
+
+.clear-btn {
+    color: #EC0355;
 }
