@@ -10,7 +10,7 @@ function delete_survey(surveyId) {
     if (confirm("Вы уверены в своих действиях?")) {
         const token = getTokenFromCookie();
 
-        fetch(`/admin/deletesurvey?key=${surveyId}`, {
+        fetch(`/admin/deletesurvey?key=${surveyId}&surveyDelete=true`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
@@ -20,7 +20,6 @@ function delete_survey(surveyId) {
         .then(response => {
             if (response.ok) {
                 document.getElementById(surveyId).remove();
-                alert('Опрос стёрт');
             }
             else {
                 alert('При удалении произошла ошибка');

@@ -114,8 +114,30 @@ function download(extension, id) {
         window.URL.revokeObjectURL(url);
     })
     .catch((error) => {
-        console.error(error.message);
         alert('Не удалось загрузить файл.');
     });
 }
 
+function clear_answers(surveyId) {
+    if (confirm("Вы уверены в своих действиях?")) {
+        fetch(`/admin/deletesurvey?key=${surveyId}&surveyDelete=false`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        })
+        .then(response => {
+            if (response.ok) {
+                window.location.reload();
+            }
+            else {
+                alert('При очистке произошла ошибка');
+            }
+
+        })
+        .catch(error => {
+            alert('При очистке произошла ошибка');
+        });
+    }
+}

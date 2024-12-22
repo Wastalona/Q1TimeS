@@ -238,23 +238,25 @@ namespace Q1TimeS.Controllers
         /* API */
         [Authorize(Roles = "Admin")]
         [HttpDelete]
-        public async Task<IActionResult> DeleteSurvey(int key)
+        public async Task<IActionResult> DeleteSurvey(int key, bool surveyDelete = true)
         {
             // Find the survey by key
             var survey = await _dbcontext.Surveys
                                          .Include(s => s.Questions)
                                          .ThenInclude(q => q.Answers)
                                          .FirstOrDefaultAsync(s => s.SurveyId == key);
-
             if (survey == null)
-                return NotFound();
+                return NotFound("Опрос не найден");
 
             // Deleting all dependent questions and answers
             foreach (var question in survey.Questions)
                 _dbcontext.Answers.RemoveRange(question.Answers);
             
             _dbcontext.Questions.RemoveRange(survey.Questions);
-            _dbcontext.Surveys.Remove(survey);
+            _dbcontext.Users.RemoveRange(_dbcontext.Users.Where(u => u.SurveyId == key));
+
+            if (surveyDelete)
+                _dbcontext.Surveys.Remove(survey);
 
             await _dbcontext.SaveChangesAsync(); 
 
@@ -277,6 +279,7 @@ namespace Q1TimeS.Controllers
             else
                 return ExportJSON(stats);
         }
+        
         [HttpGet]
         public IActionResult ExportCSV(SurveyStatisticsViewModel stats)
         {

@@ -150,6 +150,14 @@
     transition: background-color 0.3s;
 }
 
-    .styled-btn:hover {
-        background-color: #45a049;
-    }
+.styled-btn:hover {
+    background-color: #45a049;
+}
+
+#clear-answers-btn {
+    background-color: #EC0355;
+}
+
+#clear-answers-btn:hover {
+    background-color: #ba0042;
+}
