@@ -248,15 +248,16 @@ namespace Q1TimeS.Controllers
             if (survey == null)
                 return NotFound("Опрос не найден");
 
-            // Deleting all dependent questions and answers
-            foreach (var question in survey.Questions)
-                _dbcontext.Answers.RemoveRange(question.Answers);
-            
-            _dbcontext.Questions.RemoveRange(survey.Questions);
             _dbcontext.Users.RemoveRange(_dbcontext.Users.Where(u => u.SurveyId == key));
 
             if (surveyDelete)
+            {
+                // Deleting all dependent questions and answers
+                foreach (var question in survey.Questions)
+                    _dbcontext.Answers.RemoveRange(question.Answers);
+                _dbcontext.Questions.RemoveRange(survey.Questions);
                 _dbcontext.Surveys.Remove(survey);
+            }
 
             await _dbcontext.SaveChangesAsync(); 
 
