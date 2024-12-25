@@ -2,21 +2,23 @@
     white-space: normal;
     text-align: center;
     word-break: break-all;
-    background-color: var(--black);
+    background-color: var(--bg);
 }
 
-a { color: whitesmoke; }
+a {
+    color: var(--dark);
+}
 
 .btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+    color: var(--dark);
+    background-color: #1b6ec2;
+    border-color: #1861ac;
 }
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+    color: var(--dark);
+    background-color: #1b6ec2;
+    border-color: #1861ac;
 }
 
 .navbar-nav{

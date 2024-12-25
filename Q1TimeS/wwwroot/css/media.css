@@ -7,7 +7,7 @@
         transform: translateX(-50%);
         width: 0;
         height: 2px;
-        background-color: #EC0355;
+        background-color: var(--primary);
         visibility: hidden;
         transition: 0.5s ease-in-out;
     }
@@ -18,32 +18,19 @@
     }
 
     .navbar-brand {
-        margin-left: 160px;
+        margin-left: 30px;
         font-size: 3rem;
     }
 
     .navbar-brand:hover {
-        color: whitesmoke;
+        color: var(--primary);
         cursor: default;
     }
 }
 
 @media (max-width: 1200px) {
-    .action-block {
-        width: 260px;
-        height: 370px;
-    }
-
-    .action-block i {
-        font-size: 130px;
-    }
-
-    .block-description p {
-        font-size: 1.3rem;
-    }
-
     .navbar-brand {
-        font-size: 1.75rem;
+        font-size: 2.2rem;
     }
 
     .nav-link {
@@ -57,6 +44,21 @@
 
     #add-question i{
         color: whitesmoke;
+    }
+}
+
+@media (max-width: 991px){
+    .action-block {
+        width: 280px;
+        height: 280px;
+    }
+
+    .action-block i {
+        font-size: 120px;
+    }
+
+    .block-description p {
+        font-size: 1.1rem;
     }
 }
 
@@ -75,7 +77,7 @@
     }
 
     .action-block {
-        margin-bottom: 5vh;
+        margin-bottom: 4vh;
     }
 }
 
@@ -188,15 +190,15 @@
 @media (hover:hover) {
     .action-block:hover {
         transform: translateY(-20px);
-        box-shadow: #5BBDE3 10px 10px;
+        box-shadow: var(--primary) 10px 10px;
     }
 
     .action-block:hover i {
-        color: #5BBDE3;
+        color: var(--primary);
     }
 
     .fill-btn:hover {
-        color: #12001B;
-        background: whitesmoke;
+        color: whitesmoke;
+        background: #12001B;
     }
 }
