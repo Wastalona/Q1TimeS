@@ -26,5 +26,9 @@ async function connectSurvey(event) {
         goUp();
         alertContainer.classList.remove('d-none');
         alertMessage.innerHTML = error.message || "Ошибка при подключении к опросу.";
+
+        this.delayTimeout = setTimeout(() => {
+            alertContainer.classList.add('d-none');
+        }, 3000);
     }
 }

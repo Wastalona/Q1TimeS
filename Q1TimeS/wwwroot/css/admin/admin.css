@@ -5,9 +5,7 @@
 }
 
 .survey-block {
-    background-color: #12001B;
-    color: white;
-    border: whitesmoke 8px solid;
+    color: var(--dark);
     width: 600px;
     height: 350px;
     padding: 20px;
@@ -93,11 +91,12 @@
 .survey-connect-block {
     display: flex;
     justify-content: center;
-    margin-top: 10px;
+    margin-top: 6%;
 }
 
 .connect-container {
-    color: whitesmoke;
+    color: var(--bg);
+    background-color: var(--dark);
     font-family: "Comfortaa";
     padding: 30px;
     border-radius: 10px;
@@ -114,8 +113,8 @@
 .connect-container button {
     padding: 10px 20px;
     border: none;
-    background-color: #12001B;
-    color: #fff;
+    background-color: var(--dark);
+    color: var(--bg);
     font-size: 16px;
     border-radius: 5px;
     cursor: pointer;
@@ -123,15 +122,15 @@
 }
 
 .connect-container button:hover {
-    background-color: #2ef18b;
+    background-color: var(--success);
 }
 
 .s-code, .s-nickname{
     text-align: center;
 }
 
-.none-block{
+.none-block {
     padding: 50px;
-    color: whitesmoke;
+    color: var(--dark);
     font-family: "Comfortaa";
 }

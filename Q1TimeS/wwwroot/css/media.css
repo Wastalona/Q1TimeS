@@ -79,6 +79,10 @@
     .action-block {
         margin-bottom: 4vh;
     }
+
+    .survey-connect-block {
+        margin-top: 15%;
+    }
 }
 
 @media (min-width: 768px) {
@@ -168,6 +172,10 @@
     #waiting-message{
         font-size: 1.7rem;
     }
+
+    .survey-connect-block {
+        margin-top: 20%;
+    }
 }
 
 @media(max-width: 517px){
@@ -200,5 +208,15 @@
     .fill-btn:hover {
         color: whitesmoke;
         background: #12001B;
+    }
+
+    .ques-card:hover {
+        transform: translateY(-10px);
+    }
+
+    .form-group .btn:hover {
+        background-color: var(--secondary);
+        color: #1D002C;
+        width: 160px;
     }
 }

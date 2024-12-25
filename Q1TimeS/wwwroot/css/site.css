@@ -14,10 +14,14 @@ html {
 
 :root {
     --primary: #fc615d;
-    --secondary: #fde511;
+    --secondary: #FFC54F;
     --dark: #201112;
     --bg: #fffefc;
     --bg-contrast: #e1dee4;
+    --success: #70c503;
+    --info: #ac57d2;
+    --danger: #ff0c6c;
+    --warning: #ffca8c;
 }
 
 
@@ -170,7 +174,7 @@ footer a {
     left: 0;
     padding: 0 10px;
     font-size: 1.3rem;
-    color: var(--dark);
+    color: var(--bg);
     pointer-events: none;
     transition: 0.3s;
     transform-origin: top left;
@@ -191,11 +195,11 @@ footer a {
     background-color: transparent;
     outline: none;
     transition: 0.3s;
-    color: var(--dark);
+    color: var(--bg);
 }
 
 .form__input:focus {
-    border-bottom: 1px solid #2ef18b;
+    border-bottom: 1px solid var(--success);
 }
 
 .form__button {
