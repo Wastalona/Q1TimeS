@@ -2,7 +2,7 @@ html, body {
     padding: 0;
     margin: 0;
     font-size: 14px;
-    background: var(--dark);
+    background: var(--bg);
     overflow-x: hidden;
 }
 
@@ -13,10 +13,17 @@ html {
 }
 
 :root {
-    --primary: #a047e2;
-    --secondary: #d2c6e5;
-    --dark: #12001B;
-    --bg: #170421;
+    --primary: #fc615d;
+    --primary-contrast: #d14441;
+    --secondary: #FFC54F;
+    --dark: #201112;
+    --bg: #fffefc;
+    --bg-contrast: #e1dee4;
+    --success: #70c503;
+    --success-contrast: #45a049;
+    --info: #ac57d2;
+    --danger: #ff0c6c;
+    --warning: #ffca8c;
 }
 
 
@@ -31,34 +38,12 @@ html {
 /* Body Styling*/
 body {
     margin-bottom: 60px;
-    background: var(--dark);
+    background: var(--bg);
     font-size: 1.5rem;
 }
 
-.navbar { background: var(--dark); }
-
-.navbar-brand {
-    font-weight: 500;
-    font-size: 3rem;
-    transition: 0.3s color;
-    font-family: 'Irish Grover';
-    margin-left: 100px;
-    color: whitesmoke;
-}
-
-.nav-link {
-    color: #00bfff;
-    font-weight: 500;
-    position: relative;
-    margin-top: 10px;
-    color: whitesmoke;
-    font-family: 'Comfortaa';
-}
-
-.nav-link:hover, .nav-link.active { color: #EC0355; }
-
 .navbar {
-    background: var(--dark);
+    background: var(--bg);
     padding: 10px 20px;
 }
 
@@ -67,7 +52,7 @@ body {
     font-size: 2rem;
     transition: 0.3s color;
     font-family: 'Irish Grover';
-    color: whitesmoke;
+    color: var(--dark);
     margin-left: 0;
 }
 
@@ -80,16 +65,15 @@ body {
 }
 
 .nav-link {
-    color: #00bfff;
     font-weight: 500;
     position: relative;
     margin-top: 10px;
-    color: whitesmoke;
+    color: var(--dark);
     font-family: 'Comfortaa';
 }
 
 .nav-link:hover, .nav-link.active {
-    color: #EC0355;
+    color: var(--primary);
 }
 
 .page-container {
@@ -107,23 +91,47 @@ p{
     padding: 0px;
     margin: 0px;
 }
+
+.cc {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.styled-btn {
+    background-color: var(--success);
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+
 /* --- body end --- */
 
 /* Footer */
 footer {
     text-align: center;
     font-family: 'Irish Grover';
-    color: whitesmoke;
+    color: var(--dark);
     padding: 20px;
     padding-bottom: 0;
 }
 
 .footer {
-    background: var(--dark);
+    background: var(--bg);
 }
 
 footer a {
-    color: whitesmoke;
+    color: var(--dark);
     text-decoration: none;
 }
 
@@ -137,9 +145,9 @@ footer a {
 .fill-btn {
     width: 220px;
     height: 70px;
-    border: 6px solid whitesmoke;
+    border: 6px solid var(--dark);
     background: transparent;
-    color: whitesmoke;
+    color: var(--dark);
     padding: 10px 20px;
     cursor: pointer;
     display: flex;
@@ -148,11 +156,11 @@ footer a {
     transition: background-color 0.3s, color 0.3s;
 }
 
-    .fill-btn i {
-        font-size: 40px;
-        display: flex;
-        align-items: center;
-    }
+.fill-btn i {
+    font-size: 40px;
+    display: flex;
+    align-items: center;
+}
 
 .fill-btn-text {
     font-family: 'Irish Grover', cursive;
@@ -167,7 +175,7 @@ footer a {
 
 .copyright, .copyright p, .copyright span {
     margin: 0 0 20px 0;
-    color: whitesmoke;
+    color: var(--dark);
 }
 /* Footer end*/
 
@@ -178,7 +186,7 @@ footer a {
     margin: 0 0 32px 0;
     font-family: 'Comfortaa';
     font-weight: normal;
-    color: whitesmoke;
+    color: var(--dark);
 }
 
 .form__group {
@@ -192,7 +200,7 @@ footer a {
     left: 0;
     padding: 0 10px;
     font-size: 1.3rem;
-    color: whitesmoke;
+    color: var(--bg);
     pointer-events: none;
     transition: 0.3s;
     transform-origin: top left;
@@ -213,11 +221,11 @@ footer a {
     background-color: transparent;
     outline: none;
     transition: 0.3s;
-    color: whitesmoke;
+    color: var(--bg);
 }
 
 .form__input:focus {
-    border-bottom: 1px solid #2ef18b;
+    border-bottom: 1px solid var(--success);
 }
 
 .form__button {

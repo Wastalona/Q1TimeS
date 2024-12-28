@@ -35,6 +35,6 @@
 .auth-title {
     text-align: center;
     margin-top: 10vh;
-    color: whitesmoke;
+    color: var(--dark);
     font-family: 'Comfortaa';
 }

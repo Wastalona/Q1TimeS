@@ -5,38 +5,28 @@
 }
 
 .survey-block {
-    background-color: #12001B;
-    color: white;
-    border: whitesmoke 8px solid;
+    color: var(--dark);
     width: 600px;
     height: 350px;
     padding: 20px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
     position: relative;
     font-family: 'Comfortaa';
-    transition: all 0.4s ease;
+    transition: transform 0.4s ease, box-shadow 0.5s;
     margin-left: 40px;
     margin-bottom: 40px;
+    border: 6px solid var(--dark);
 }
 
-.survey-block:hover {
-    transform: translateY(-20px);
-    box-shadow: #EC0355 10px 10px;
-    cursor: pointer;
-}
-
-.card-header {
+.survey-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-bottom: 10px;
 }
-
 
 .card-title{
     display: flex;
     justify-content: center;
-    padding-right: 20%; 
 }
 
 .card-title h2 {
@@ -44,47 +34,30 @@
     font-size: 1.5em;
 }
 
-.info-item i {
-    font-size: 40px;
-    margin-left: 10px;
-    margin-right: 20px;
-    cursor: pointer;
+.survey-content {
+    position: relative;
+    width: 100%;
+    height: 70%;
 }
 
-.card-content {
-    padding-top: 10px;
-    display: flex;
-    justify-content:center;
-    flex-direction: row;
-}
-
-.card-content p { 
-    text-align: center;
-    margin: 10px 0;
+.survey-content p {
     font-size: 1.4rem;
-    padding: 10px;
 }
 
-.card-info {
+.survey-footer {
+    position: relative;
     display: flex;
     justify-content: center;
-    flex-direction: column;
-    padding: 40px 10px;
-    border-left: 2px solid #fff;
 }
 
-.info-item {
-    display: flex;
-    align-items: center;
-    text-align: center;
+.delete-btn {
+    width: 100%;
+    height: 45px;
+    background: var(--primary);
+    font-size: 1.3rem;
 }
 
-.info-item .i {
-    margin-right: 5px;
-    font-size: 1.2em;
-}
-
-.add-new{
+.add-new {
     display: flex;
     justify-content: right;
 }
@@ -93,11 +66,12 @@
 .survey-connect-block {
     display: flex;
     justify-content: center;
-    margin-top: 10px;
+    margin-top: 6%;
 }
 
 .connect-container {
-    color: whitesmoke;
+    color: var(--bg);
+    background-color: var(--dark);
     font-family: "Comfortaa";
     padding: 30px;
     border-radius: 10px;
@@ -114,24 +88,20 @@
 .connect-container button {
     padding: 10px 20px;
     border: none;
-    background-color: #12001B;
-    color: #fff;
+    background-color: var(--dark);
+    color: var(--bg);
     font-size: 16px;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
-.connect-container button:hover {
-    background-color: #2ef18b;
-}
-
 .s-code, .s-nickname{
     text-align: center;
 }
 
-.none-block{
+.none-block {
     padding: 50px;
-    color: whitesmoke;
+    color: var(--dark);
     font-family: "Comfortaa";
 }

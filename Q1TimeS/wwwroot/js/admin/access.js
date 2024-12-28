@@ -28,3 +28,13 @@
         });
     }
 }
+
+function toggleSelectAll(selectAllCheckbox) {
+    const checkboxes = document.querySelectorAll('#ip-list .item-checkbox');
+    const allSelected = Array.from(checkboxes).every(checkbox => checkbox.checked);
+
+    checkboxes.forEach(checkbox => {
+        checkbox.checked = !allSelected;
+        checkbox.dispatchEvent(new Event('change'));
+    });
+}

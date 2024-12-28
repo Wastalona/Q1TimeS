@@ -36,7 +36,8 @@ form {
     background: #12001B;
     transition: all 0.4s ease-out;
     overflow: hidden; /* Скрывает все, что выходит за пределы блока */
-    border: 8px solid whitesmoke;
+    border: 8px solid var(--bg-contrast);
+    border-radius: 100%;
     font-family: 'Comfortaa';
 }
 
@@ -59,43 +60,3 @@ form {
     padding-bottom: 20px;
 }
 
-@media (max-width: 992px) {
-    .action-block {
-        width: 250px;
-        height: 400px;
-    }
-}
-
-@media (max-width: 780px) {
-    .choose-action-block {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        min-height: 70vh;
-        margin-left: 45px;
-    }
-
-    .action-block {
-        margin-bottom: 5vh;
-    }
-}
-
-@media (max-width: 310px) {
-    .action-block {
-        width: 150px;
-        height: 300px;
-    }
-}
-
-/* Disabling hover if it is not supported */
-@media (hover:hover) {
-    .action-block:hover {
-        transform: translateY(-20px);
-        box-shadow: #5BBDE3 10px 10px;
-    }
-
-    .action-block:hover i {
-        color: #5BBDE3;
-    }
-}

@@ -7,7 +7,7 @@
         transform: translateX(-50%);
         width: 0;
         height: 2px;
-        background-color: #EC0355;
+        background-color: var(--primary);
         visibility: hidden;
         transition: 0.5s ease-in-out;
     }
@@ -18,32 +18,19 @@
     }
 
     .navbar-brand {
-        margin-left: 160px;
+        margin-left: 30px;
         font-size: 3rem;
     }
 
     .navbar-brand:hover {
-        color: whitesmoke;
+        color: var(--primary);
         cursor: default;
     }
 }
 
 @media (max-width: 1200px) {
-    .action-block {
-        width: 260px;
-        height: 370px;
-    }
-
-    .action-block i {
-        font-size: 130px;
-    }
-
-    .block-description p {
-        font-size: 1.3rem;
-    }
-
     .navbar-brand {
-        font-size: 1.75rem;
+        font-size: 2.2rem;
     }
 
     .nav-link {
@@ -57,6 +44,21 @@
 
     #add-question i{
         color: whitesmoke;
+    }
+}
+
+@media (max-width: 991px){
+    .action-block {
+        width: 280px;
+        height: 280px;
+    }
+
+    .action-block i {
+        font-size: 120px;
+    }
+
+    .block-description p {
+        font-size: 1.1rem;
     }
 }
 
@@ -75,7 +77,11 @@
     }
 
     .action-block {
-        margin-bottom: 5vh;
+        margin-bottom: 4vh;
+    }
+
+    .survey-connect-block {
+        margin-top: 15%;
     }
 }
 
@@ -119,6 +125,26 @@
         padding-top: 10px;
         font-size: 1.2rem;
     }
+
+    .info .container {
+        padding: 15px;
+    }
+
+    .info h1 {
+        font-size: 1.75rem;
+    }
+
+    .infoh2 {
+        font-size: 1.5rem;
+    }
+
+    .info h3 {
+        font-size: 1.25rem;
+    }
+
+    .info p, ul, ol {
+        font-size: 1rem;
+    }
 }
 
 @media(max-width: 712px){
@@ -126,6 +152,19 @@
         width: 400px;
         height: 250px;
         padding: 20px;
+        margin-left: 0;
+    }
+
+    .delete-btn {
+        margin: 0;
+        width: 30%;
+        height: 20px;
+        padding: 10px 5px 30px 5px;
+    }
+
+    .delete-btn i {
+        padding-bottom: 20px;
+        font-size: 1.5rem;
     }
 
     .card-title h2 {
@@ -166,11 +205,19 @@
     #waiting-message{
         font-size: 1.7rem;
     }
+
+    .survey-connect-block {
+        margin-top: 20%;
+    }
 }
 
 @media(max-width: 517px){
     .table {
         font-size: 1rem;
+    }
+
+    .access h1{
+        font-size: 1.4rem;
     }
 }
 
@@ -186,17 +233,95 @@
 
 /* Disabling hover if it is not supported */
 @media (hover:hover) {
-    .action-block:hover {
-        transform: translateY(-20px);
-        box-shadow: #5BBDE3 10px 10px;
-    }
-
-    .action-block:hover i {
-        color: #5BBDE3;
+    /* Common */
+    .styled-btn:hover {
+        background-color: var(--success-contrast);
     }
 
     .fill-btn:hover {
-        color: #12001B;
-        background: whitesmoke;
+        color: whitesmoke;
+        background: #12001B;
+    }
+
+    .form-group .btn:hover {
+        background-color: var(--secondary);
+        color: var(--dark);
+        width: 160px;
+    }
+
+    .delete-btn:hover {
+        background: var(--primary-contrast);
+    }
+
+    /* Index */
+    .action-block:hover {
+        transform: translateY(-20px);
+        box-shadow: var(--primary) 10px 10px;
+    }
+
+    .action-block:hover i {
+        color: var(--primary);
+    }
+
+    #clear-answers-btn:hover {
+        background-color: #ba0042;
+    }
+
+    .ques-card:hover {
+        transform: translateY(-10px);
+    }
+
+    /* About and Documentation */
+    .info ul li a:hover {
+        color: var(--primary);
+    }
+
+    /* Survey connection */
+    .connect-container button:hover {
+        background-color: var(--success);
+    }
+
+    /* Access */
+    .cc input[type="text"]:hover {
+        width: 400px;
+    }
+
+    .cc .styled-btn:hover {
+        width: 150px;
+        border-radius: 40px;
+    }
+
+    .cc .select-all-btn:hover {
+        background-color: var(--success-contrast);
+    }
+
+    .table-hover tbody tr:hover {
+        background-color: var(--secondary);
+    }
+
+    /* Workshop */
+    .survey-block:hover {
+        transform: scale(1.03);
+        box-shadow: 0px 5px 20px 7px rgba(172, 87, 210, 0.2) inset;
+        cursor: pointer;
+    }
+
+    /* Stats */
+    .clock-label:hover {
+        background-color: var(--dark);
+        border: 3px solid var(--primary);
+        color: var(--bg);
+    }
+
+    /* Add survey */
+    .add-answer-btn:hover {
+        color: var(--success);
+        transform: rotate(90deg);
+        filter: drop-shadow(5px -5px 5px rgba(0,0,0,0.3));
+    }
+
+    .remove-answer:hover {
+        background: var(--primary-contrast);
+        color: var(--bg);
     }
 }
