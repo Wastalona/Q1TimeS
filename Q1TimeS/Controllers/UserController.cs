@@ -1,10 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
+using Org.BouncyCastle.Utilities;
 using Q1TimeS.Models.Db;
 
 namespace Q1TimeS.Controllers
 {
     public class UserController : Controller
     {
+        private readonly IHubContext<SurveyHub> _hubContext;
         private readonly MySqlContext _dbcontext;
         public UserController(MySqlContext dbcontext)
         {
@@ -65,13 +68,25 @@ namespace Q1TimeS.Controllers
 
                 var survey = _dbcontext.Surveys.FirstOrDefault(s => s.CCode == code);
                 if (survey == null)
+                {
+                    transaction.Rollback();
                     return BadRequest("Не удалось найти опрос.");
+                }
+
+                if (SurveyHub.GetUserCount(survey.CCode) >= survey.Limit)
+                {
+                    transaction.Rollback();
+                    return BadRequest("Превышено максимальное количество подключений к опросу.");
+                }
 
                 var existingUser = _dbcontext.Users.FirstOrDefault(u =>
                     u.SessionKey == sessionKey && u.SurveyId == survey.SurveyId);
 
                 if (existingUser != null)
+                {
+                    transaction.Rollback();
                     return BadRequest("Вы уже подключены к опросу.");
+                }
 
                 _dbcontext.Users.Add(new User
                 {
