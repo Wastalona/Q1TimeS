@@ -1,55 +1,85 @@
-﻿.cc{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
-
-.cr {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
-}
-
-.cc h1 {
-    color: whitesmoke;
+﻿.cc h1 {
+    color: var(--black);
     font-family: 'Comfortaa';
 }
 
 .cc ul li {
-    color: whitesmoke;
+    color: var(--black);
     font-family: 'Comfortaa';
 }
 
-form {
+.cc {
     width: 100%;
 }
 
-form ul li{
+.cc ul li {
     list-style: none;
 }
 
-form input[type="text"] {
-    width: 220px;
-    height: 70px;
-    border: 6px solid whitesmoke;
-    background: transparent;
-    color: whitesmoke;
-    padding: 10px 10px;
+.cc input[type="text"] {
     display: flex;
     align-items: center;
-    gap: 10px;
-    transition: background-color 0.3s, color 0.3s;
+    text-align: center;
+    width: 300px;
+    height: auto;
+    border: 2px solid var(--dark);
+    border-radius: 100px;
+    background: transparent;
+    color: var(--black);
+    padding: 5px 5px;
+    margin-bottom: 10px;
+    transition: ease all 0.3s;
     font-family: 'Comfortaa';
 }
 
-.delete-btn {
-    width: 230px;
-    height: 80px;
-    gap: 5px;
+.action-panel {
+    display: flex;
+    justify-content:center;
+    width: 300px;
+    margin-top: 20px;
 }
 
-.clear-btn {
-    color: #EC0355;
+.styled-btn {
+    width: 100px;
+    margin-bottom: 30px;
+    transition: ease all 0.3s;
+}
+
+.styled-btn i{
+    font-size: 20px;
+}
+
+.delete-btn {
+    background: var(--primary);
+}
+
+.select-all-btn {
+    background: var(--success);
+}
+
+#ip-list {
+    list-style-type: none;
+    padding: 10px;
+    margin: 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.list-item {
+    display: flex;
+    align-items: center;
+    width: 300px;
+    padding: 5px;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 1.5rem;
+}
+
+.list-item:last-child {
+    border-bottom: none;
+}
+
+.list-item input[type="checkbox"] {
+    margin-right: 10px;
 }

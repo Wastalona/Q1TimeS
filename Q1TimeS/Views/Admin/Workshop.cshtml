@@ -13,28 +13,29 @@
     }else{
         @foreach (var survey in Model){
             <div class="survey-block" id="@survey.SurveyId">
-                <div class="card-header">
+                <div class="survey-header">
                     <div class="card-title col" onclick="go_stats('@survey.SurveyId')">
                         <h2>@survey.Title</h2>
                     </div>
-                    <div class="card-actions">
-                        <div onclick="delete_survey('@survey.SurveyId')">
-                            <i class='bx bxs-trash-alt' style="color:#EC0355;"></i>
-                        </div>
-                    </div>
                 </div>
-                <div class="card-content" onclick="go_stats('@survey.SurveyId')">
-                    <p>@survey.Description</p>
-                    <div class="card-info">
-                        <div class="info-item">
-                            <i class='bx bx-time-five'></i>
-                            <span>@(survey.CutOffTime / 60)мин</span>
-                        </div>
-                        <div class="info-item">
-                            <i class='bx bxs-group'></i>
-                            <span>0/@survey.Limit</span>
-                        </div>
-                    </div>
+                <div class="survey-content" onclick="go_stats('@survey.SurveyId')">
+                    @if (@survey.Description.Length > 0){
+                        if (@survey.Description.Length <= 246)
+                        {
+                            <p>@survey.Description</p>
+                        }
+                        else
+                        {
+                            <p>Описание слишком большое, чтобы его можно было бы отобразить</p>
+                        }
+                    }else{
+                        <p>Нет описания</p>
+                    }
+                </div>
+                <div class="survey-footer">
+                    <button name="delete-btn" id="csv-btn" class="styled-btn delete-btn" onclick="delete_survey('@survey.SurveyId')">
+                        <i class='bx bx-trash'></i>
+                    </button>
                 </div>
             </div>
         }

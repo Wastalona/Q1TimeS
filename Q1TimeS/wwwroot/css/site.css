@@ -14,11 +14,13 @@ html {
 
 :root {
     --primary: #fc615d;
+    --primary-contrast: #d14441;
     --secondary: #FFC54F;
     --dark: #201112;
     --bg: #fffefc;
     --bg-contrast: #e1dee4;
     --success: #70c503;
+    --success-contrast: #45a049;
     --info: #ac57d2;
     --danger: #ff0c6c;
     --warning: #ffca8c;
@@ -89,6 +91,30 @@ p{
     padding: 0px;
     margin: 0px;
 }
+
+.cc {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.styled-btn {
+    background-color: var(--success);
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+
 /* --- body end --- */
 
 /* Footer */
@@ -130,11 +156,11 @@ footer a {
     transition: background-color 0.3s, color 0.3s;
 }
 
-    .fill-btn i {
-        font-size: 40px;
-        display: flex;
-        align-items: center;
-    }
+.fill-btn i {
+    font-size: 40px;
+    display: flex;
+    align-items: center;
+}
 
 .fill-btn-text {
     font-family: 'Irish Grover', cursive;

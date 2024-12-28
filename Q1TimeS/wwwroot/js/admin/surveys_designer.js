@@ -329,6 +329,9 @@ function submitSurvey() {
         // Display the error message
         alertMessage.innerHTML = "Форма заполнена неправильно";
         alertContainer.classList.remove('d-none');
+        this.delayTimeout = setTimeout(() => {
+            alertContainer.classList.add('d-none');
+        }, 3000);
     }
 }
 

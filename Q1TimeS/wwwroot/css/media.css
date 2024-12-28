@@ -152,6 +152,19 @@
         width: 400px;
         height: 250px;
         padding: 20px;
+        margin-left: 0;
+    }
+
+    .delete-btn {
+        margin: 0;
+        width: 30%;
+        height: 20px;
+        padding: 10px 5px 30px 5px;
+    }
+
+    .delete-btn i {
+        padding-bottom: 20px;
+        font-size: 1.5rem;
     }
 
     .card-title h2 {
@@ -202,6 +215,10 @@
     .table {
         font-size: 1rem;
     }
+
+    .access h1{
+        font-size: 1.4rem;
+    }
 }
 
 @media(max-width: 310px) {
@@ -216,6 +233,27 @@
 
 /* Disabling hover if it is not supported */
 @media (hover:hover) {
+    /* Common */
+    .styled-btn:hover {
+        background-color: var(--success-contrast);
+    }
+
+    .fill-btn:hover {
+        color: whitesmoke;
+        background: #12001B;
+    }
+
+    .form-group .btn:hover {
+        background-color: var(--secondary);
+        color: var(--dark);
+        width: 160px;
+    }
+
+    .delete-btn:hover {
+        background: var(--primary-contrast);
+    }
+
+    /* Index */
     .action-block:hover {
         transform: translateY(-20px);
         box-shadow: var(--primary) 10px 10px;
@@ -225,22 +263,65 @@
         color: var(--primary);
     }
 
-    .fill-btn:hover {
-        color: whitesmoke;
-        background: #12001B;
+    #clear-answers-btn:hover {
+        background-color: #ba0042;
     }
 
     .ques-card:hover {
         transform: translateY(-10px);
     }
 
-    .form-group .btn:hover {
-        background-color: var(--secondary);
-        color: #1D002C;
-        width: 160px;
-    }
-
+    /* About and Documentation */
     .info ul li a:hover {
         color: var(--primary);
+    }
+
+    /* Survey connection */
+    .connect-container button:hover {
+        background-color: var(--success);
+    }
+
+    /* Access */
+    .cc input[type="text"]:hover {
+        width: 400px;
+    }
+
+    .cc .styled-btn:hover {
+        width: 150px;
+        border-radius: 40px;
+    }
+
+    .cc .select-all-btn:hover {
+        background-color: var(--success-contrast);
+    }
+
+    .table-hover tbody tr:hover {
+        background-color: var(--secondary);
+    }
+
+    /* Workshop */
+    .survey-block:hover {
+        transform: scale(1.03);
+        box-shadow: 0px 5px 20px 7px rgba(172, 87, 210, 0.2) inset;
+        cursor: pointer;
+    }
+
+    /* Stats */
+    .clock-label:hover {
+        background-color: var(--dark);
+        border: 3px solid var(--primary);
+        color: var(--bg);
+    }
+
+    /* Add survey */
+    .add-answer-btn:hover {
+        color: var(--success);
+        transform: rotate(90deg);
+        filter: drop-shadow(5px -5px 5px rgba(0,0,0,0.3));
+    }
+
+    .remove-answer:hover {
+        background: var(--primary-contrast);
+        color: var(--bg);
     }
 }
