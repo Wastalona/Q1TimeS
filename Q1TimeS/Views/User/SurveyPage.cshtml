@@ -2,6 +2,7 @@
 @{
     ViewData["Title"] = "Прохождение опроса";
     ViewData["StyleName"] = "userSurveyPage.css";
+    ViewData["ScriptName"] = "user/surveyPage.js";
 }
 
 <div id="alert-container" class="alert alert-danger d-none" role="alert">
@@ -13,7 +14,7 @@
     <div class="container mt-5">
         <h1 class="form__title">@Model.Title</h1>
 
-        <form asp-action="SendResults" method="post" id="surveyForm">
+        <form asp-action="SendResults" method="post" id="surveyForm" onsubmit="updateAnswers();">
             @for (int i = 1; i <= Model.Questions.Count; i++){
                 var question = Model.Questions.ToArray()[i-1];
                 <div class="ques-card mb-3">

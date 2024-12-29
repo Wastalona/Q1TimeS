@@ -1,5 +1,9 @@
 const token = getTokenFromCookie();
 
+connection.on("SendAnswers", () => {
+    location.reload();
+});
+
 async function toggleRun(surveyId) {
     const response = await fetch(`/admin/toggletimer?surveyId=${surveyId}`, {
         method: 'POST',
@@ -12,18 +16,19 @@ async function toggleRun(surveyId) {
 
     if (response.ok) {
         const result = await response.json();
+
         if (result.isRunning)
-            startTimer(surveyId);
-        else {
+            startTimer();
+        else 
             stopTimer();
-        }
+
     } else {
         alert("Ошибка при переключении таймера");
     }
 }
 
 let timerInterval;
-function startTimer(surveyId) {
+function startTimer() {
     const cutoffTime = document.getElementById("remaining-time").dataset.cutoffTime;
     if (!cutoffTime) 
         return;
@@ -35,8 +40,7 @@ function startTimer(surveyId) {
             clearInterval(timerInterval);
             document.getElementById("remaining-time").innerHTML = "div";
             document.getElementById("remaining-time").innerText = "Время истекло!";
-
-            await clear_answers(surveyId);
+            location.reload();
         } else {
             const hours = Math.floor(remainingTime / (1000 * 60 * 60));
             const minutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
@@ -70,9 +74,6 @@ function updateTable() {
             var row = tableBody.insertRow();
             var cell1 = row.insertCell(0);
             var cell2 = row.insertCell(1);
-
-            console.log(question ? question.QuestionText : question);
-            console.log(answer ? answer.AnswerText : answer);
 
             cell1.innerHTML = question ? question.QuestionText : "Неизвестный вопрос";
             cell2.innerHTML = answer ? answer.AnswerText : "Неизвестный ответ";

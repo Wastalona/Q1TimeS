@@ -17,6 +17,7 @@ async function connectSurvey(event) {
         });
 
         if (response.ok) {
+            connection.invoke("SendAnswers");
             await window.signalRConnection.joinSurvey(code);
         } else {
             const errorText = await response.text();

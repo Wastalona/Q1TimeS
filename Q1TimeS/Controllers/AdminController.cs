@@ -206,9 +206,10 @@ namespace Q1TimeS.Controllers
                 return NotFound("Опрос не найден");
 
             survey.IsRunning = !survey.IsRunning;
+            await _hubContext.Clients.All.SendAsync("ShowSurvey");
             await _dbcontext.SaveChangesAsync();
 
-            return Ok(new { IsRunning = survey.IsRunning });
+            return Ok(new { Code=survey.CCode, IsRunning = survey.IsRunning });
         }
 
         [Authorize(Roles = "Admin")]
