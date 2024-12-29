@@ -10,6 +10,7 @@ using System.Xml.Serialization;
 using System.Text.Json;
 using System.Linq;
 using System.Xml.Linq;
+using MySqlX.XDevAPI;
 
 namespace Q1TimeS.Controllers
 {
@@ -223,12 +224,6 @@ namespace Q1TimeS.Controllers
             // Get users to be removed
             var usersToRemove = _dbcontext.Users.Where(u => u.SurveyId == surveyId).ToList();
 
-            // Remove users from SignalR groups
-            var hubClients = _hubContext.Clients;
-
-            foreach (var user in usersToRemove) 
-                await hubClients.Group(survey.CCode).SendAsync("LeaveSurvey");
-            
             _dbcontext.Users.RemoveRange(usersToRemove);
             await _dbcontext.SaveChangesAsync();
             return Ok(survey.CCode);
@@ -238,7 +233,7 @@ namespace Q1TimeS.Controllers
         /* API */
         [Authorize(Roles = "Admin")]
         [HttpDelete]
-        public async Task<IActionResult> DeleteSurvey(int key, bool surveyDelete = true)
+        public async Task<IActionResult> DeleteSurvey(int key)
         {
             // Find the survey by key
             var survey = await _dbcontext.Surveys
@@ -246,20 +241,16 @@ namespace Q1TimeS.Controllers
                                          .ThenInclude(q => q.Answers)
                                          .FirstOrDefaultAsync(s => s.SurveyId == key);
             if (survey == null)
-                return NotFound("Опрос не найден");
+                return NotFound();
 
-            _dbcontext.Users.RemoveRange(_dbcontext.Users.Where(u => u.SurveyId == key));
+            // Deleting all dependent questions and answers
+            foreach (var question in survey.Questions)
+                _dbcontext.Answers.RemoveRange(question.Answers);
 
-            if (surveyDelete)
-            {
-                // Deleting all dependent questions and answers
-                foreach (var question in survey.Questions)
-                    _dbcontext.Answers.RemoveRange(question.Answers);
-                _dbcontext.Questions.RemoveRange(survey.Questions);
-                _dbcontext.Surveys.Remove(survey);
-            }
+            _dbcontext.Questions.RemoveRange(survey.Questions);
+            _dbcontext.Surveys.Remove(survey);
 
-            await _dbcontext.SaveChangesAsync(); 
+            await _dbcontext.SaveChangesAsync();
 
             return Ok();
         }

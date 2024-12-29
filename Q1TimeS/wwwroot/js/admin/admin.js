@@ -10,7 +10,7 @@ function delete_survey(surveyId) {
     if (confirm("Вы уверены в своих действиях?")) {
         const token = getTokenFromCookie();
 
-        fetch(`/admin/deletesurvey?key=${surveyId}&surveyDelete=true`, {
+        fetch(`/admin/deletesurvey?key=${surveyId}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',

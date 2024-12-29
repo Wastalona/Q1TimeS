@@ -36,21 +36,7 @@ function startTimer(surveyId) {
             document.getElementById("remaining-time").innerHTML = "div";
             document.getElementById("remaining-time").innerText = "Время истекло!";
 
-            try {
-                const response = await fetch(`/admin/clearsurveyusers?surveyId=${surveyId}`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`,
-                    }
-                });
-
-                if (response.ok)
-                    window.signalRConnection.clearConnection(await response.text());
-            } catch (error) {
-                alert("Ошибка при очистке пользователей опроса.");
-            }
-            location.reload();
+            await clear_answers(surveyId);
         } else {
             const hours = Math.floor(remainingTime / (1000 * 60 * 60));
             const minutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
@@ -118,26 +104,24 @@ function download(extension, id) {
     });
 }
 
-function clear_answers(surveyId) {
-    if (confirm("Вы уверены в своих действиях?")) {
-        fetch(`/admin/deletesurvey?key=${surveyId}&surveyDelete=false`, {
-            method: 'DELETE',
+async function clear_answers(surveyId) {
+    if (!confirm("Вы уверены в своих действиях?"))
+        return;
+
+    try {
+        const response = await fetch(`/admin/clearsurveyusers?surveyId=${surveyId}`, {
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
+                'Authorization': `Bearer ${token}`,
             }
-        })
-        .then(response => {
-            if (response.ok) {
-                window.location.reload();
-            }
-            else {
-                alert('При очистке произошла ошибка');
-            }
-
-        })
-        .catch(error => {
-            alert('При очистке произошла ошибка');
         });
+        if (response.ok) {
+            const surveyCode = await response.text();
+            window.signalRConnection.clearConnection(surveyCode);
+        }
+    } catch (error) {
+        alert("Ошибка при очистке пользователей опроса.");
     }
+    location.reload();
 }
