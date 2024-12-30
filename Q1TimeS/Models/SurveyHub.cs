@@ -65,6 +65,16 @@ public class SurveyHub : Hub
         await Clients.Group(code).SendAsync("UpdateUserCount", _surveyConnections.GetValueOrDefault(code, 0));
     }
 
+    public async Task NotifyTimerChange(String code)
+    {
+        await Clients.Group(code).SendAsync("ShowSurvey");
+    }
+
+    public async Task SendAnswers()
+    {
+        await Clients.All.SendAsync("SendAnswers", true);
+    }
+
     public static int GetUserCount(string code)
     {
         _surveyConnections.TryGetValue(code, out int userCount);

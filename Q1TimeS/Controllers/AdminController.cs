@@ -11,6 +11,7 @@ using System.Text.Json;
 using System.Linq;
 using System.Xml.Linq;
 using MySqlX.XDevAPI;
+using Microsoft.Identity.Client;
 
 namespace Q1TimeS.Controllers
 {
@@ -205,11 +206,35 @@ namespace Q1TimeS.Controllers
             if (survey == null)
                 return NotFound("Опрос не найден");
 
-            survey.IsRunning = !survey.IsRunning;
+            if (survey.IsRunning)
+            {
+                survey.IsRunning = false;
+                survey.EndTime = null;
+            }
+            else
+            {
+                survey.IsRunning = true;
+                survey.EndTime = DateTime.Now.AddSeconds(survey.CutOffTime);
+            }
+
+            await _hubContext.Clients.All.SendAsync("UpdateTimer", survey.SurveyId, survey.IsRunning, survey.EndTime);
+            await _hubContext.Clients.All.SendAsync("ShowSurvey");
             await _dbcontext.SaveChangesAsync();
 
-            return Ok(new { IsRunning = survey.IsRunning });
+            return Ok(new { Code=survey.CCode, IsRunning = survey.IsRunning });
         }
+
+        [Authorize(Roles = "Admin")]
+        [HttpGet]
+        public IActionResult getTimerData(int surveyId)
+        {
+            var survey = _dbcontext.Surveys.FirstOrDefault(s => s.SurveyId == surveyId);
+            if (survey == null)
+                return Ok(new {});
+
+            return Ok(new { endTime = survey.EndTime });
+        }
+
 
         [Authorize(Roles = "Admin")]
         [HttpPost]
@@ -310,10 +335,12 @@ namespace Q1TimeS.Controllers
                 })
             };
 
-            var json = JsonSerializer.Serialize(jsonResult, new JsonSerializerOptions
+            var options = new JsonSerializerOptions
             {
-                WriteIndented = true
-            });
+                WriteIndented = true,
+                Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping
+            };
+            var json = JsonSerializer.Serialize(jsonResult, options);
 
             return File(Encoding.UTF8.GetBytes(json), "application/json", "json_answers.json");
         }
