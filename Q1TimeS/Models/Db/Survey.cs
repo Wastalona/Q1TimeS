@@ -21,6 +21,7 @@ namespace Q1TimeS.Models.Db
 
         [Range(1, int.MaxValue, ErrorMessage = "Таймаут должен быть положительным числом.")]
         public int CutOffTime { get; set; }
+        public DateTime? EndTime { get; set; }
 
         [Range(1, 100, ErrorMessage = "Лимит должен быть положительным числом.")]
         public int Limit { get; set; }

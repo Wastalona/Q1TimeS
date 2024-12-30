@@ -1,4 +1,40 @@
 const token = getTokenFromCookie();
+const timers = {};
+const timerElement = document.getElementById("remaining-time");
+timerElement.classList.add('time-out');
+
+function updateTimer(surveyId, isRunning, endTime) {
+    if (timers[surveyId]) {
+        clearInterval(timers[surveyId]);
+        delete timers[surveyId];
+    }
+
+    if (isRunning) {
+        const end = new Date(endTime);
+        timers[surveyId] = setInterval(() => {
+            const now = new Date();
+            const remainingTime = end - now;
+
+            if (remainingTime <= 0) {
+                clearInterval(timers[surveyId]);
+                delete timers[surveyId];
+                timerElement.textContent = "Время истекло";
+                toggleRun(surveyId);
+            } else {
+                const hours = Math.floor(remainingTime / (1000 * 60 * 60));
+                const minutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
+                timerElement.textContent = `${hours}ч ${minutes}м ${seconds}с`;
+            }
+        }, 1000);
+    } else {
+        timerElement.textContent = "Таймер остановлен";
+    }
+}
+
+connection.on("UpdateTimer", (surveyId, isRunning, endTime) => {
+    updateTimer(surveyId, isRunning, endTime);
+});
 
 connection.on("SendAnswers", () => {
     location.reload();
@@ -14,47 +50,8 @@ async function toggleRun(surveyId) {
         }
     });
 
-    if (response.ok) {
-        const result = await response.json();
-
-        if (result.isRunning)
-            startTimer();
-        else 
-            stopTimer();
-
-    } else {
+    if (!response.ok)
         alert("Ошибка при переключении таймера");
-    }
-}
-
-let timerInterval;
-function startTimer() {
-    const cutoffTime = document.getElementById("remaining-time").dataset.cutoffTime;
-    if (!cutoffTime) 
-        return;
-
-    const endTime = new Date().getTime() + cutoffTime * 1000;
-    timerInterval = setInterval(async () => {
-        const remainingTime = endTime - new Date().getTime();
-        if (remainingTime <= 0) {
-            clearInterval(timerInterval);
-            document.getElementById("remaining-time").innerHTML = "div";
-            document.getElementById("remaining-time").innerText = "Время истекло!";
-            location.reload();
-        } else {
-            const hours = Math.floor(remainingTime / (1000 * 60 * 60));
-            const minutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
-            document.getElementById("remaining-time").innerText = `${hours} ч ${minutes} мин ${seconds} сек`;
-            document.getElementById("remaining-time").classList.add('time-out');
-        }
-    }, 1000);
-}
-
-
-function stopTimer() {
-    clearInterval(timerInterval);
-    document.getElementById("remaining-time").innerText = "";
 }
 
 function updateTable() {
@@ -70,7 +67,7 @@ function updateTable() {
         if (userAnswer.UserId == userId) {
             var question = questions.find(q => q.QuestionId == userAnswer.QuestionId);
             var answer = answers.find(a => a.AnswerId == userAnswer.AnswerId);
-            
+
             var row = tableBody.insertRow();
             var cell1 = row.insertCell(0);
             var cell2 = row.insertCell(1);
@@ -85,24 +82,24 @@ function download(extension, id) {
     fetch(`/Admin/ExportFile?key=${id}&extension=${extension}`, {
         method: 'GET',
     })
-    .then((response) => {
-        console.log(response);
-    if (!response.ok) {
-        throw new Error('Ошибка при загрузке файла.');
-    }
-    return response.blob();
-    })
-    .then((blob) => {
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = `survey_answers.${extension}`;
-        a.click();
-        window.URL.revokeObjectURL(url);
-    })
-    .catch((error) => {
-        alert('Не удалось загрузить файл.');
-    });
+        .then((response) => {
+            console.log(response);
+            if (!response.ok) {
+                throw new Error('Ошибка при загрузке файла.');
+            }
+            return response.blob();
+        })
+        .then((blob) => {
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `survey_answers.${extension}`;
+            a.click();
+            window.URL.revokeObjectURL(url);
+        })
+        .catch((error) => {
+            alert('Не удалось загрузить файл.');
+        });
 }
 
 async function clear_answers(surveyId) {
@@ -126,3 +123,26 @@ async function clear_answers(surveyId) {
     }
     location.reload();
 }
+
+async function checkTimer(surveyId) {
+    const response = await fetch(`/admin/getTimerData?surveyId=${surveyId}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'Authorization': `Bearer ${token}`,
+        }
+    });
+    const data = await response.json();
+
+    if (data.endTime)
+        updateTimer(surveyId, true, data.endTime);
+    else
+        timerElement.textContent = "Таймер остановлен";
+}
+
+window.addEventListener("load", () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const surveyId = urlParams.get('key');
+    checkTimer(surveyId);
+});
