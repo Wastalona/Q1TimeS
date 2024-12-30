@@ -335,10 +335,12 @@ namespace Q1TimeS.Controllers
                 })
             };
 
-            var json = JsonSerializer.Serialize(jsonResult, new JsonSerializerOptions
+            var options = new JsonSerializerOptions
             {
-                WriteIndented = true
-            });
+                WriteIndented = true,
+                Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping
+            };
+            var json = JsonSerializer.Serialize(jsonResult, options);
 
             return File(Encoding.UTF8.GetBytes(json), "application/json", "json_answers.json");
         }
