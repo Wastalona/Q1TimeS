@@ -31,7 +31,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse container-fluid" id="navbarSupportedContent">
-                    <ul class="navbar-nav ms-auto justify-content-end">
+                    <ul class="navbar-nav ms-auto">
                         @if (User.IsInRole("Admin"))
                             @Html.Partial("_AdminPartial")
                         else if (HttpContextAccessor.HttpContext.Session.GetString("user_session_key") != null)
